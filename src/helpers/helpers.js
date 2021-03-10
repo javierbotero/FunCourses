@@ -28,8 +28,8 @@ const tokenPayload = (id, token) => ({
 });
 
 const userPayload = (id, password) => ({
-  id,
-  password,
+  current_user_id: id,
+  current_user_password: password,
 });
 
 export {

@@ -17,13 +17,13 @@ const user = createSlice({
   extraReducers: {
     [getUser.pending]: state => { state.status = 'pending'; },
     [getUser.fulfilled]: (state, action) => {
-      if (typeof action.payload === 'string') {
-        state.status = 'Rejected';
-        state.error = action.payload;
-      } else {
+      if (action.payload.username) {
         state.status = 'Fulfilled';
         state.user = action.payload;
         state.error = '';
+      } else {
+        state.status = 'Rejected';
+        state.error = action.payload;
       }
     },
     [getUser.rejected]: (state, action) => {

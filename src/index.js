@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import App from './containers/App';
-import { getCourses } from './actions/retrievals';
+import { getCourses, getUser } from './actions/retrievals';
 import {
   objThunk,
   tokenPayload,
@@ -19,6 +19,7 @@ ReactDOM.render(
   <Provider store={store}>
     <App
       getCourses={getCourses}
+      getUser={getUser}
       objThunk={objThunk}
       token={TOKEN}
       id={ID}
