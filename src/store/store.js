@@ -3,8 +3,10 @@ import courses from '../reducers/courses';
 import user from '../reducers/user';
 
 const store = configureStore({
-  courses,
-  user,
+  reducer: {
+    courses,
+    user,
+  },
 });
 
 export default store;
