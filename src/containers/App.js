@@ -41,7 +41,7 @@ const App = props => {
       <div>Some picture</div>
       <div>{course.title}</div>
       <div>
-        <a href={`/${course.id}`}>More Info</a>
+        <Link to={`/${course.id}`}>More Info</Link>
       </div>
     </div>
   ));
