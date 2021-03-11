@@ -60,15 +60,15 @@ const App = props => {
       <div>Some picture</div>
       <div>{course.title}</div>
       <div>
-        <Link to={`/${course.id}`}>More Info</Link>
+        <Link to={`course/${course.id}`}>More Info</Link>
       </div>
     </div>
   ));
   const handleApiRequest = async (initCreator, verb, url, data) => {
-    const init = initCreator(verb, data);
+    const init = initCreator({ verb, data });
     const response = await fetch(url, init)
-      .then()
-      .catch();
+      .then(res => res.json().then(data => data))
+      .catch(err => err.json().then(err => err));
     return response;
   };
 
@@ -85,7 +85,7 @@ const App = props => {
             </Route>
             <Route
               exact
-              path="/:id"
+              path="course/:id"
               render={({ match }) => (
                 <div>
                   <nav>

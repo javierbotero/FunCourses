@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import history from '../helpers/history';
 import { setUserError, removeUserError } from '../reducers/user';
 
 const Form = props => {
@@ -15,6 +16,7 @@ const Form = props => {
     setCurrentUserId,
     setCurrentUserPassword,
     match,
+    setUserErr,
   } = props;
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -22,36 +24,48 @@ const Form = props => {
   const [email, setEmail] = useState('');
   const handleSubmit = async e => {
     e.preventDefault();
-    if (password.length < 5 || userName.length < 5 || email.length < 5 || password !== passConf) {
-      setUserError('Please fill the form correctly');
+    if (match.params.identifier === 'signup') {
+      if (password.length < 5 || userName.length < 5 || email.length < 5 || password !== passConf) {
+        setUserErr('Please fill the form correctly, Username and password should be more than 4 characters');
+        return;
+      }
+    } else if (password.length < 5 || userName.length < 5) {
+      setUserErr('Please fill the form correctly, Username and password should be more than 4 characters');
       return;
     }
     const tokenInfo = tokenPayload(id, token);
-    const data = {
+    const dataSignUp = {
       ...tokenInfo,
       username: userName,
       password,
       password_confirmation: passConf,
       email,
     };
+    const dataLogIn = {
+      ...tokenInfo,
+      username: userName,
+      password,
+    };
     const result = await handleApiRequest(
       initCreator,
       'POST',
-      `${url}${match.params.identifier ? 'signup' : 'login'}`,
-      data,
-    ).then(res => {
-      console.log(res);
-      return res;
-    }).catch(err => {
-      console.log(err);
-      return err;
-    });
+      `${url}${match.params.identifier === 'signup' ? 'signup' : 'login'}`,
+      match.params.identifier === 'signup' ? dataSignUp : dataLogIn,
+    );
+
     console.log(result);
     if (result.username) {
       localStorage.setItem('currentUserIdFunCourses', result.id);
       localStorage.setItem('currentUserPasswordFunCourses', password);
       setCurrentUserId(result.id);
       setCurrentUserPassword(password);
+      history.replace('/');
+    } else if (Array.isArray(result)) {
+      setUserErr(result.join(' '));
+    } else if (result.TypeError) {
+      setUserErr(result.TypeError);
+    } else {
+      setUserErr(result);
     }
   };
   const signUpFormHtml = (
@@ -61,13 +75,13 @@ const Form = props => {
         <div>
           <label htmlFor="username">
             <div>Username</div>
-            <input type="text" onChange={e => setUserName(e.target.value)} value={userName} id="username" placeholder="Juan" />
+            <input type="text" onChange={e => setUserName(e.target.value)} value={userName} id="username" placeholder="User" />
           </label>
         </div>
         <div>
           <label htmlFor="email">
             <div>Email</div>
-            <input type="email" onChange={e => setEmail(e.target.value)} value={email} id="email" placeholder="juan@mail.com" />
+            <input type="email" onChange={e => setEmail(e.target.value)} value={email} id="email" placeholder="user@mail.com" />
           </label>
         </div>
         <div>
@@ -96,7 +110,7 @@ const Form = props => {
         <div>
           <label htmlFor="username">
             <div>Username</div>
-            <input type="text" onChange={e => setUserName(e.target.value)} value={userName} id="username" placeholder="Juan" />
+            <input type="text" onChange={e => setUserName(e.target.value)} value={userName} id="username" placeholder="User" />
           </label>
         </div>
         <div>
@@ -111,8 +125,6 @@ const Form = props => {
       </form>
     </div>
   );
-
-  console.log(match.params);
 
   if (match.params.identifier === 'signup') {
     return signUpFormHtml;
@@ -130,11 +142,12 @@ Form.propTypes = {
   setCurrentUserId: PropTypes.func.isRequired,
   setCurrentUserPassword: PropTypes.func.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
+  setUserErr: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  setUserError: err => dispatch(setUserError(err)),
-  removeUserError: () => dispatch(removeUserError),
+  setUserErr: err => dispatch(setUserError(err)),
+  removeUserErr: () => dispatch(removeUserError),
 });
 
 export default connect(null, mapDispatchToProps)(Form);

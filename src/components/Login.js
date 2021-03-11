@@ -6,6 +6,7 @@ import {
   Link,
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import history from '../helpers/history';
 import Landing from './Landing';
 import Form from './Form';
 
@@ -23,7 +24,7 @@ const Login = props => {
 
   return (
     <div className="login">
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <Switch>
           <Route exact path="/">
             <div className="landing">

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const Course = props => {
   const { match, courses } = props;
+  console.log(match.params.id);
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
 
   return (
