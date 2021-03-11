@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   BrowserRouter,
@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Course from '../components/Course';
+import Login from '../components/Login';
 
 const App = props => {
   const {
@@ -19,9 +20,10 @@ const App = props => {
     id,
     tokenPayload,
     userPayload,
+    initCreator,
   } = props;
-  const currentUserId = 1;
-  const currentUserPassword = '12345';
+  const [currentUserId, setCurrentUserId] = useState(localStorage.getItem('currentUserIdFunCourses'));
+  const [currentUserPassword, setCurrentUserPassword] = useState(localStorage.getItem('currentUserPasswordFunCourses'));
   const dispatch = useDispatch();
   const courses = useSelector(state => state.courses.courses);
   const statusUser = useSelector(state => state.user.status);
@@ -44,11 +46,13 @@ const App = props => {
     },
   );
   useEffect(() => {
-    if (statusCourses === 'idle') {
-      dispatch(getCourses(dataThunkCourses));
-    }
-    if (statusUser === 'idle') {
-      dispatch(getUser(dataThunkUser));
+    if (currentUserId && currentUserPassword) {
+      if (statusCourses === 'idle') {
+        dispatch(getCourses(dataThunkCourses));
+      }
+      if (statusUser === 'idle') {
+        dispatch(getUser(dataThunkUser));
+      }
     }
   }, [statusCourses, getCourses, getUser, dispatch, dataThunkCourses, dataThunkUser, statusUser]);
   const coursesToDivs = courses => courses.map(course => (
@@ -60,35 +64,57 @@ const App = props => {
       </div>
     </div>
   ));
+  const handleApiRequest = async (initCreator, verb, url, data) => {
+    const init = initCreator(verb, data);
+    const response = await fetch(url, init)
+      .then()
+      .catch();
+    return response;
+  };
+
+  if (currentUserId && currentUserPassword) {
+    return (
+      <div>
+        <BrowserRouter>
+          <header>
+            <h1>Find a fun course!</h1>
+          </header>
+          <Switch>
+            <Route exact path="/">
+              {coursesToDivs(courses)}
+            </Route>
+            <Route
+              exact
+              path="/:id"
+              render={({ match }) => (
+                <div>
+                  <nav>
+                    <ul>
+                      <li>
+                        <Link to="/">&#60;</Link>
+                      </li>
+                    </ul>
+                  </nav>
+                  <Course match={match} courses={courses} />
+                </div>
+              )}
+            />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
   return (
-    <div>
-      <BrowserRouter>
-        <header>
-          <h1>Find a fun course!</h1>
-        </header>
-        <Switch>
-          <Route exact path="/">
-            {coursesToDivs(courses)}
-          </Route>
-          <Route
-            exact
-            path="/:id"
-            render={({ match }) => (
-              <div>
-                <nav>
-                  <ul>
-                    <li>
-                      <Link to="/">&#60;</Link>
-                    </li>
-                  </ul>
-                </nav>
-                <Course match={match} courses={courses} />
-              </div>
-            )}
-          />
-        </Switch>
-      </BrowserRouter>
-    </div>
+    <Login
+      tokenPayload={tokenPayload}
+      id={id}
+      token={token}
+      url={url}
+      initCreator={initCreator}
+      handleApiRequest={handleApiRequest}
+      setCurrentUserId={setCurrentUserId}
+      setCurrentUserPassword={setCurrentUserPassword}
+    />
   );
 };
 
@@ -101,6 +127,7 @@ App.propTypes = {
   id: PropTypes.string.isRequired,
   tokenPayload: PropTypes.func.isRequired,
   userPayload: PropTypes.func.isRequired,
+  initCreator: PropTypes.func.isRequired,
 };
 
 export default App;

@@ -5,6 +5,7 @@ import store from './store/store';
 import App from './containers/App';
 import { getCourses, getUser } from './actions/retrievals';
 import {
+  initCreator,
   objThunk,
   tokenPayload,
   userPayload,
@@ -26,6 +27,7 @@ ReactDOM.render(
       url={URL}
       tokenPayload={tokenPayload}
       userPayload={userPayload}
+      initCreator={initCreator}
     />
   </Provider>,
   document.getElementById('root'),
