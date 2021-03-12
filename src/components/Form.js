@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ReactRouterPropTypes from 'react-router-prop-types';
-import history from '../helpers/history';
 import { setUserError, removeUserError } from '../reducers/user';
 
 const Form = props => {
@@ -13,20 +12,21 @@ const Form = props => {
     token,
     url,
     handleApiRequest,
-    setCurrentUserId,
-    setCurrentUserPassword,
     match,
     setUserErr,
+    useAuth,
+    removeUserErr,
   } = props;
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passConf, setPassConf] = useState('');
   const [email, setEmail] = useState('');
+  const authObject = useAuth();
   const handleSubmit = async e => {
     e.preventDefault();
     if (match.params.identifier === 'signup') {
       if (password.length < 5 || userName.length < 5 || email.length < 5 || password !== passConf) {
-        setUserErr('Please fill the form correctly, Username and password should be more than 4 characters');
+        setUserErr('Please fill the form correctly, Username and password should be more than 4 characters, password and confirmation must be equal');
         return;
       }
     } else if (password.length < 5 || userName.length < 5) {
@@ -46,27 +46,17 @@ const Form = props => {
       username: userName,
       password,
     };
-    const result = await handleApiRequest(
+    authObject.authenticate(
+      handleApiRequest,
       initCreator,
       'POST',
       `${url}${match.params.identifier === 'signup' ? 'signup' : 'login'}`,
       match.params.identifier === 'signup' ? dataSignUp : dataLogIn,
     );
-
-    console.log(result);
-    if (result.username) {
-      localStorage.setItem('currentUserIdFunCourses', result.id);
-      localStorage.setItem('currentUserPasswordFunCourses', password);
-      setCurrentUserId(result.id);
-      setCurrentUserPassword(password);
-      history.replace('/');
-    } else if (Array.isArray(result)) {
-      setUserErr(result.join(' '));
-    } else if (result.TypeError) {
-      setUserErr(result.TypeError);
-    } else {
-      setUserErr(result);
-    }
+  };
+  const handleChange = (e, cb) => {
+    removeUserErr();
+    cb(e.target.value);
   };
   const signUpFormHtml = (
     <div className="form signup">
@@ -75,25 +65,25 @@ const Form = props => {
         <div>
           <label htmlFor="username">
             <div>Username</div>
-            <input type="text" onChange={e => setUserName(e.target.value)} value={userName} id="username" placeholder="User" />
+            <input type="text" onChange={e => handleChange(e, setUserName)} value={userName} id="username" placeholder="User" />
           </label>
         </div>
         <div>
           <label htmlFor="email">
             <div>Email</div>
-            <input type="email" onChange={e => setEmail(e.target.value)} value={email} id="email" placeholder="user@mail.com" />
+            <input type="email" onChange={e => handleChange(e, setEmail)} value={email} id="email" placeholder="user@mail.com" />
           </label>
         </div>
         <div>
           <label htmlFor="password">
             <div>password</div>
-            <input type="password" onChange={e => setPassword(e.target.value)} value={password} id="password" placeholder="password" />
+            <input type="password" onChange={e => handleChange(e, setPassword)} value={password} id="password" placeholder="password" />
           </label>
         </div>
         <div>
           <label htmlFor="passwordConfirmation">
             <div>Password confirmation</div>
-            <input type="password" onChange={e => setPassConf(e.target.value)} value={passConf} id="passwordConfirmation" placeholder="confirmation" />
+            <input type="password" onChange={e => handleChange(e, setPassConf)} value={passConf} id="passwordConfirmation" placeholder="confirmation" />
           </label>
         </div>
         <div>
@@ -110,13 +100,13 @@ const Form = props => {
         <div>
           <label htmlFor="username">
             <div>Username</div>
-            <input type="text" onChange={e => setUserName(e.target.value)} value={userName} id="username" placeholder="User" />
+            <input type="text" onChange={e => handleChange(e, setUserName)} value={userName} id="username" placeholder="User" />
           </label>
         </div>
         <div>
           <label htmlFor="password">
             <div>password</div>
-            <input type="password" onChange={e => setPassword(e.target.value)} value={password} id="password" placeholder="password" />
+            <input type="password" onChange={e => handleChange(e, setPassword)} value={password} id="password" placeholder="password" />
           </label>
         </div>
         <div>
@@ -139,10 +129,9 @@ Form.propTypes = {
   token: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   handleApiRequest: PropTypes.func.isRequired,
-  setCurrentUserId: PropTypes.func.isRequired,
-  setCurrentUserPassword: PropTypes.func.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
   setUserErr: PropTypes.func.isRequired,
+  useAuth: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
