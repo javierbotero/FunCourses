@@ -7,6 +7,7 @@ import {
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import Course from '../components/Course';
+import { useAuth } from '../helpers/authHelpers';
 
 const Main = props => {
   const {
@@ -14,6 +15,7 @@ const Main = props => {
     match,
   } = props;
   const { path, url } = match;
+  const authObject = useAuth();
   const coursesToDivs = courses => courses.map(course => (
     <div key={course.id}>
       <div>Some picture</div>
@@ -23,16 +25,23 @@ const Main = props => {
       </div>
     </div>
   ));
+  const logout = () => {
+    localStorage.removeItem('currentUserIdFunCourses');
+    localStorage.removeItem('currentUserPasswordFunCourses');
+    authObject.setUserId(null);
+    authObject.setUserPassword(null);
+  };
 
   return (
     <div>
       <header>
+        <div className="avatar">Avatar</div>
         <ul>
           <li>
             <Link to={`${url}`}>Courses</Link>
           </li>
-          FIND A FUN COURSE
         </ul>
+        <button type="button" onClick={logout}>Log out</button>
       </header>
       <Switch>
         <Route exact path={`${path}`}>

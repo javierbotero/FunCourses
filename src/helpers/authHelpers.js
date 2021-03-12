@@ -45,6 +45,8 @@ const useAuthState = () => {
     userId,
     userPassword,
     authenticate,
+    setUserId,
+    setUserPassword,
   };
 };
 

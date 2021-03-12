@@ -58,9 +58,11 @@ const Form = props => {
     removeUserErr();
     cb(e.target.value);
   };
-  const signUpFormHtml = (
-    <div className="form signup">
-      <div className="auth-title">Sign Up</div>
+
+  return (
+    <div className={`form ${match.params.identifier === 'signup' ? 'signup' : 'login'}`}>
+      <div className="auth-title">{match.params.identifier === 'signup' ? 'Sign Up' : 'Log in'}</div>
+      <p>{match.params.identifier === 'signup' ? 'Hello there! join our community and start enjoying fun courses' : 'Hello there! it\'s time to learn with fun courses'}</p>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">
@@ -68,58 +70,35 @@ const Form = props => {
             <input type="text" onChange={e => handleChange(e, setUserName)} value={userName} id="username" placeholder="User" />
           </label>
         </div>
-        <div>
-          <label htmlFor="email">
-            <div>Email</div>
-            <input type="email" onChange={e => handleChange(e, setEmail)} value={email} id="email" placeholder="user@mail.com" />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            <div>password</div>
-            <input type="password" onChange={e => handleChange(e, setPassword)} value={password} id="password" placeholder="password" />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="passwordConfirmation">
-            <div>Password confirmation</div>
-            <input type="password" onChange={e => handleChange(e, setPassConf)} value={passConf} id="passwordConfirmation" placeholder="confirmation" />
-          </label>
-        </div>
-        <div>
-          <input type="submit" value="Submit" className="btn" />
-        </div>
-      </form>
-    </div>
-  );
-
-  const logInFormHtml = (
-    <div className="form login">
-      <div className="auth-title">Log in</div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">
-            <div>Username</div>
-            <input type="text" onChange={e => handleChange(e, setUserName)} value={userName} id="username" placeholder="User" />
-          </label>
-        </div>
+        {match.params.identifier === 'signup'
+          && (
+            <div>
+              <label htmlFor="email">
+                <div>Email</div>
+                <input type="email" onChange={e => handleChange(e, setEmail)} value={email} id="email" placeholder="user@mail.com" />
+              </label>
+            </div>
+          )}
         <div>
           <label htmlFor="password">
             <div>password</div>
             <input type="password" onChange={e => handleChange(e, setPassword)} value={password} id="password" placeholder="password" />
           </label>
         </div>
+        { match.params.identifier === 'signup' && (
+          <div>
+            <label htmlFor="passwordConfirmation">
+              <div>Password confirmation</div>
+              <input type="password" onChange={e => handleChange(e, setPassConf)} value={passConf} id="passwordConfirmation" placeholder="confirmation" />
+            </label>
+          </div>
+        )}
         <div>
           <input type="submit" value="Submit" className="btn" />
         </div>
       </form>
     </div>
   );
-
-  if (match.params.identifier === 'signup') {
-    return signUpFormHtml;
-  }
-  return logInFormHtml;
 };
 
 Form.propTypes = {
@@ -132,6 +111,7 @@ Form.propTypes = {
   match: ReactRouterPropTypes.match.isRequired,
   setUserErr: PropTypes.func.isRequired,
   useAuth: PropTypes.func.isRequired,
+  removeUserErr: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

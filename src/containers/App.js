@@ -122,7 +122,7 @@ const App = props => {
           />
           <Route
             exact
-            path="/:indentifier"
+            path="/:identifier"
             render={({ location, match }) => {
               if (authObject.userId && authObject.userPassword) {
                 return (
@@ -135,16 +135,24 @@ const App = props => {
                 );
               }
               return (
-                <Form
-                  initCreator={initCreator}
-                  tokenPayload={tokenPayload}
-                  handleApiRequest={handleApiRequest}
-                  id={id}
-                  token={token}
-                  url={url}
-                  match={match}
-                  useAuth={useAuth}
-                />
+                <div>
+                  <header>
+                    <ul>
+                      <li><Link to="/signup">Sign up</Link></li>
+                      <li><Link to="/login">Log in</Link></li>
+                    </ul>
+                  </header>
+                  <Form
+                    initCreator={initCreator}
+                    tokenPayload={tokenPayload}
+                    handleApiRequest={handleApiRequest}
+                    id={id}
+                    token={token}
+                    url={url}
+                    match={match}
+                    useAuth={useAuth}
+                  />
+                </div>
               );
             }}
           />
