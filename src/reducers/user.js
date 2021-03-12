@@ -24,7 +24,7 @@ const user = createSlice({
         state.error = '';
       } else {
         state.status = 'Rejected';
-        state.error = action.payload;
+        state.error = 'Some error happened please try later';
         state.user = {};
       }
     },
