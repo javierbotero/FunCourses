@@ -21,12 +21,10 @@ const useAuthState = () => {
     data,
   ) => {
     handleApiRequest(initCreator, verb, url, data)
-      .then(resp => {
-        console.log(resp);
-        return resp.json().then(res => {
-          console.log(res);
+      .then(resp => (
+        resp.json().then(res => {
           if (res.user) {
-            localStorage.setItem('currentUserIdFunCourses', res.id);
+            localStorage.setItem('currentUserIdFunCourses', res.user.id);
             localStorage.setItem('currentUserPasswordFunCourses', data.password);
             setUserId(res.user.id);
             setUserPassword(data.password);
@@ -34,11 +32,11 @@ const useAuthState = () => {
           } else if (res.error) {
             store.dispatch(setUserError(res.error));
           } else {
-            store.dispatch(setUserError('Smething went wrong, try later'));
+            store.dispatch(setUserError('Something went wrong, try later'));
           }
           return res;
-        });
-      })
+        })
+      ))
       .catch(err => {
         store.dispatch(setUserError(`Something went wrong. ${err}`));
       });
