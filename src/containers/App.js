@@ -31,6 +31,8 @@ const App = props => {
   const courses = useSelector(state => state.courses.courses);
   const statusUser = useSelector(state => state.user.status);
   const statusCourses = useSelector(state => state.courses.status);
+  const errorCourses = useSelector(state => state.courses.error);
+  const errorUser = useSelector(state => state.user.error);
   const tokenData = tokenPayload(id, token);
   const userData = userPayload(authObject.userId, authObject.userPassword);
   const dataThunkCourses = objThunk(
@@ -75,6 +77,10 @@ const App = props => {
   return (
     <div>
       <BrowserRouter>
+        <div className={errorCourses.length > 0 || errorUser.length > 0 ? 'error' : ''}>
+          {errorCourses.length > 0 ? `${errorCourses}. ` : ''}
+          {errorUser}
+        </div>
         <Switch>
           <Route
             exact

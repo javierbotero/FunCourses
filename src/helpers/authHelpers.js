@@ -21,25 +21,26 @@ const useAuthState = () => {
     data,
   ) => {
     handleApiRequest(initCreator, verb, url, data)
-      .then(resp => resp.json().then(res => {
-        console.log(res);
-        if (res.username) {
-          localStorage.setItem('currentUserIdFunCourses', res.id);
-          localStorage.setItem('currentUserPasswordFunCourses', data.password);
-          setUserId(res.id);
-          setUserPassword(data.password);
-          store.dispatch(removeUserError());
-        } else if (Array.isArray(res)) {
-          store.dispatch(setUserError(res.join(' ')));
-        } else if (res.TypeError) {
-          store.dispatch(setUserError(res.TypeError));
-        } else {
-          store.dispatch(setUserError(res));
-        }
-        return res;
-      }))
+      .then(resp => {
+        console.log(resp);
+        return resp.json().then(res => {
+          console.log(res);
+          if (res.user) {
+            localStorage.setItem('currentUserIdFunCourses', res.id);
+            localStorage.setItem('currentUserPasswordFunCourses', data.password);
+            setUserId(res.user.id);
+            setUserPassword(data.password);
+            store.dispatch(removeUserError());
+          } else if (res.error) {
+            store.dispatch(setUserError(res.error));
+          } else {
+            store.dispatch(setUserError('Smething went wrong, try later'));
+          }
+          return res;
+        });
+      })
       .catch(err => {
-        store.dispatch(setUserError(err));
+        store.dispatch(setUserError(`Something went wrong. ${err}`));
       });
   };
   return {

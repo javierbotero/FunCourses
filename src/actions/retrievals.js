@@ -5,7 +5,7 @@ const getCourses = createAsyncThunk(
   async objThunk => {
     const payload = await fetch(`${objThunk.url}courses`, objThunk.init)
       .then(data => data.json().then(res => res))
-      .catch(err => err);
+      .catch(err => `Network error. ${err.error}`);
     return payload;
   },
 );
@@ -15,7 +15,7 @@ const getUser = createAsyncThunk(
   async objThunk => {
     const payload = await fetch(`${objThunk.url}user`, objThunk.init)
       .then(data => data.json().then(res => res))
-      .catch(err => err);
+      .catch(err => `Network error. ${err.error}`);
     return payload;
   },
 );

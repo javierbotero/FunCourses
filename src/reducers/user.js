@@ -18,13 +18,17 @@ const user = createSlice({
   extraReducers: {
     [getUser.pending]: state => { state.status = 'pending'; },
     [getUser.fulfilled]: (state, action) => {
-      if (action.payload.username) {
+      if (action.payload.user) {
         state.status = 'Fulfilled';
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.error = '';
+      } else if (action.payload.error) {
+        state.status = 'Rejected';
+        state.error = `Some error happened please try later. ${action.payload.error}`;
+        state.user = {};
       } else {
         state.status = 'Rejected';
-        state.error = 'Some error happened please try later';
+        state.error = `Some unknown error happened please try later. ${action.payload}`;
         state.user = {};
       }
     },

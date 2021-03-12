@@ -17,19 +17,23 @@ const courses = createSlice({
   extraReducers: {
     [getCourses.pending]: state => { state.status = 'pending'; },
     [getCourses.fulfilled]: (state, action) => {
-      if (Array.isArray(action.payload) && action.payload[0].title) {
+      if (action.payload.courses) {
         state.status = 'Succeded';
-        state.courses = action.payload;
+        state.courses = action.payload.courses;
         state.error = '';
+      } else if (action.payload.error) {
+        state.status = 'Rejected from error handling API';
+        state.error = `Something went wrong ${action.payload.error}`;
+        state.courses = [];
       } else {
-        state.status = 'Rejected from API';
-        state.error = 'Something went wrong, please come back later';
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong ${action.payload}`;
+        state.courses = [];
       }
     },
     [getCourses.rejected]: (state, action) => {
-      console.log('reducer courses rejected: ', action.payload);
       state.status = 'Rejected';
-      state.error = action.payload;
+      state.error = `Something went wrong ${action.payload}`;
       state.courses = [];
     },
   },
