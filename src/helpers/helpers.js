@@ -34,6 +34,7 @@ const userPayload = (id, password) => ({
 
 const handleApiRequest = async (initCreator, verb, url, data) => {
   const init = initCreator({ verb, data });
+  console.log(init);
   const response = await fetch(url, init)
     .then(res => res)
     .catch(err => err);

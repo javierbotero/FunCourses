@@ -4,15 +4,20 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import Course from '../components/Course';
 import { useAuth } from '../helpers/authHelpers';
+import { resetStateCourses } from '../reducers/courses';
+import { resetStateUser } from '../reducers/user';
 
 const Main = props => {
   const {
     courses,
     match,
+    resetCourses,
+    resetUser,
   } = props;
   const { path, url } = match;
   const authObject = useAuth();
@@ -30,6 +35,8 @@ const Main = props => {
     localStorage.removeItem('currentUserPasswordFunCourses');
     authObject.setUserId(null);
     authObject.setUserPassword(null);
+    resetUser();
+    resetCourses();
   };
 
   return (
@@ -105,6 +112,13 @@ Main.propTypes = {
       confirmed: PropTypes.bool,
     })).isRequired,
   })).isRequired,
+  resetUser: PropTypes.func.isRequired,
+  resetCourses: PropTypes.func.isRequired,
 };
 
-export default Main;
+const mapDispatchToProps = dispatch => ({
+  resetCourses: () => dispatch(resetStateCourses()),
+  resetUser: () => dispatch(resetStateUser()),
+});
+
+export default connect(null, mapDispatchToProps)(Main);

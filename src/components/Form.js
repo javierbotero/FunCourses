@@ -36,10 +36,12 @@ const Form = props => {
     const tokenInfo = tokenPayload(id, token);
     const dataSignUp = {
       ...tokenInfo,
-      username: userName,
-      password,
-      password_confirmation: passConf,
-      email,
+      user: {
+        username: userName,
+        password,
+        password_confirmation: passConf,
+        email,
+      },
     };
     const dataLogIn = {
       ...tokenInfo,

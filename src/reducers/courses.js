@@ -12,7 +12,13 @@ const courses = createSlice({
   name: 'courses',
   initialState,
   reducers: {
-    removeError: state => { state.error = ''; },
+    setCourseError: (state, action) => { state.error = action.payload; },
+    removeCourseError: state => { state.error = ''; },
+    resetStateCourses: state => {
+      state.courses = [];
+      state.status = 'idle';
+      state.error = '';
+    },
   },
   extraReducers: {
     [getCourses.pending]: state => { state.status = 'pending'; },
@@ -39,9 +45,15 @@ const courses = createSlice({
   },
 });
 
-const { removeError } = courses.actions;
+const {
+  removeError,
+  resetStateCourses,
+  setCourseError,
+} = courses.actions;
 
 export default courses.reducer;
 export {
+  setCourseError,
   removeError,
+  resetStateCourses,
 };

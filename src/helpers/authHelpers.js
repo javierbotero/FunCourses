@@ -25,9 +25,12 @@ const useAuthState = () => {
         resp.json().then(res => {
           if (res.user) {
             localStorage.setItem('currentUserIdFunCourses', res.user.id);
-            localStorage.setItem('currentUserPasswordFunCourses', data.password);
+            localStorage.setItem(
+              'currentUserPasswordFunCourses',
+              'user' in data ? data.user.password : data.password,
+            );
             setUserId(res.user.id);
-            setUserPassword(data.password);
+            setUserPassword('user' in data ? data.user.password : data.password);
             store.dispatch(removeUserError());
           } else if (res.error) {
             store.dispatch(setUserError(res.error));

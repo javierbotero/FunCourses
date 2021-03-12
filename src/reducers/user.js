@@ -14,6 +14,11 @@ const user = createSlice({
   reducers: {
     removeUserError: state => { state.error = ''; },
     setUserError: (state, action) => { state.error = action.payload; },
+    resetStateUser: state => {
+      state.user = {};
+      state.status = 'idle';
+      state.error = '';
+    },
   },
   extraReducers: {
     [getUser.pending]: state => { state.status = 'pending'; },
@@ -39,10 +44,15 @@ const user = createSlice({
   },
 });
 
-const { removeUserError, setUserError } = user.actions;
+const {
+  removeUserError,
+  setUserError,
+  resetStateUser,
+} = user.actions;
 
 export default user.reducer;
 export {
   removeUserError,
   setUserError,
+  resetStateUser,
 };
