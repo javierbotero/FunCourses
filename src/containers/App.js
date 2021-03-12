@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   BrowserRouter,
   Switch,
   Route,
   Link,
+  Redirect,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import Course from '../components/Course';
-import Login from '../components/Login';
+import Form from '../components/Form';
+import Landing from '../components/Landing';
+import { useAuth } from '../helpers/authHelpers';
+import Main from './Main';
+import { handleApiRequest } from '../helpers/helpers';
 
 const App = props => {
   const {
@@ -22,14 +26,13 @@ const App = props => {
     userPayload,
     initCreator,
   } = props;
-  const [currentUserId, setCurrentUserId] = useState(localStorage.getItem('currentUserIdFunCourses'));
-  const [currentUserPassword, setCurrentUserPassword] = useState(localStorage.getItem('currentUserPasswordFunCourses'));
+  const authObject = useAuth();
   const dispatch = useDispatch();
   const courses = useSelector(state => state.courses.courses);
   const statusUser = useSelector(state => state.user.status);
   const statusCourses = useSelector(state => state.courses.status);
   const tokenData = tokenPayload(id, token);
-  const userData = userPayload(currentUserId, currentUserPassword);
+  const userData = userPayload(authObject.userId, authObject.userPassword);
   const dataThunkCourses = objThunk(
     url,
     'POST',
@@ -45,8 +48,21 @@ const App = props => {
       ...userData,
     },
   );
+  const landingInfo = (
+    <div className="landing">
+      <div className="logo">Logo</div>
+      <header>
+        <ul>
+          <li><Link to="/signup">Sign up</Link></li>
+          <li><Link to="/login">Log in</Link></li>
+        </ul>
+        <h1>Find a fun course!</h1>
+      </header>
+      <Landing />
+    </div>
+  );
   useEffect(() => {
-    if (currentUserId && currentUserPassword) {
+    if (authObject.userId && authObject.userPassword) {
       if (statusCourses === 'idle') {
         dispatch(getCourses(dataThunkCourses));
       }
@@ -55,66 +71,80 @@ const App = props => {
       }
     }
   }, [statusCourses, getCourses, getUser, dispatch, dataThunkCourses, dataThunkUser, statusUser]);
-  const coursesToDivs = courses => courses.map(course => (
-    <div key={course.id}>
-      <div>Some picture</div>
-      <div>{course.title}</div>
-      <div>
-        <Link to={`course/${course.id}`}>More Info</Link>
-      </div>
-    </div>
-  ));
-  const handleApiRequest = async (initCreator, verb, url, data) => {
-    const init = initCreator({ verb, data });
-    const response = await fetch(url, init)
-      .then(res => res.json().then(data => data))
-      .catch(err => err.json().then(err => err));
-    return response;
-  };
 
-  if (currentUserId && currentUserPassword) {
-    return (
-      <div>
-        <BrowserRouter>
-          <header>
-            <h1>Find a fun course!</h1>
-          </header>
-          <Switch>
-            <Route exact path="/">
-              {coursesToDivs(courses)}
-            </Route>
-            <Route
-              exact
-              path="course/:id"
-              render={({ match }) => (
-                <div>
-                  <nav>
-                    <ul>
-                      <li>
-                        <Link to="/">&#60;</Link>
-                      </li>
-                    </ul>
-                  </nav>
-                  <Course match={match} courses={courses} />
-                </div>
-              )}
-            />
-          </Switch>
-        </BrowserRouter>
-      </div>
-    );
-  }
   return (
-    <Login
-      tokenPayload={tokenPayload}
-      id={id}
-      token={token}
-      url={url}
-      initCreator={initCreator}
-      handleApiRequest={handleApiRequest}
-      setCurrentUserId={setCurrentUserId}
-      setCurrentUserPassword={setCurrentUserPassword}
-    />
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={({ location }) => {
+              if (authObject.userId && authObject.userPassword) {
+                return (
+                  <Redirect
+                    to={{
+                      pathname: '/app',
+                      state: { from: location },
+                    }}
+                  />
+                );
+              }
+              return landingInfo;
+            }}
+          />
+          <Route
+            path="/app"
+            render={({ match, location }) => {
+              if (authObject.userId && authObject.userPassword) {
+                return (
+                  <Main
+                    match={match}
+                    courses={courses}
+                  />
+                );
+              }
+              return (
+                <Redirect
+                  to={{
+                    pathname: '/login',
+                    state: { from: location },
+                  }}
+                />
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/:indentifier"
+            render={({ location, match }) => {
+              if (authObject.userId && authObject.userPassword) {
+                return (
+                  <Redirect
+                    to={{
+                      pathname: '/app',
+                      state: { from: location },
+                    }}
+                  />
+                );
+              }
+              return (
+                <Form
+                  initCreator={initCreator}
+                  tokenPayload={tokenPayload}
+                  handleApiRequest={handleApiRequest}
+                  id={id}
+                  token={token}
+                  url={url}
+                  match={match}
+                  useAuth={useAuth}
+                />
+              );
+            }}
+          />
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 };
 
