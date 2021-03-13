@@ -97,6 +97,7 @@ const Main = props => {
           <Courses
             coursesToDivs={coursesToDivs}
             courses={courses}
+            url={url}
           />
         </Route>
         <Route
@@ -119,7 +120,7 @@ const Main = props => {
                     </li>
                   </ul>
                 </nav>
-                <Course match={match} courses={courses} location={location} />
+                <Course match={match} courses={courses} location={location} url={url} />
               </div>
             );
           }}
@@ -128,27 +129,11 @@ const Main = props => {
           exact
           path={`${path}/user/:id`}
           render={({ match, location }) => (
-            <div>
-              <nav>
-                <ul>
-                  <li>
-                    <Link to={{
-                      pathname: location.from.pathname,
-                      state: { from: location },
-                    }}
-                    >
-                      &#60;
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-              <div>
-                <User
-                  match={match}
-                  location={location}
-                />
-              </div>
-            </div>
+            <User
+              match={match}
+              location={location}
+              url={url}
+            />
           )}
         />
       </Switch>

@@ -1,10 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 
 const Course = props => {
-  const { match, courses } = props;
-  console.log(match.params.id);
+  const {
+    match,
+    courses,
+    location,
+    url,
+  } = props;
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
 
   return (
@@ -12,8 +17,15 @@ const Course = props => {
       <div>
         <div>{course.title}</div>
         <div>
-          Teacher:
-          {` ${course.teacher.username}`}
+          <Link
+            to={{
+              pathname: `${url}/user/${course.teacher_id}`,
+              state: { from: location },
+            }}
+          >
+            Teacher:
+            {` ${course.teacher.username}`}
+          </Link>
         </div>
       </div>
       <div>{course.content}</div>
@@ -27,6 +39,7 @@ const Course = props => {
 
 Course.propTypes = {
   match: ReactRouterPropTypes.match.isRequired,
+  location: ReactRouterPropTypes.location.isRequired,
   courses: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
@@ -62,6 +75,7 @@ Course.propTypes = {
       confirmed: PropTypes.bool,
     })).isRequired,
   })).isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default Course;
