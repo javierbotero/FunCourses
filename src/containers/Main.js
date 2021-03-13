@@ -13,6 +13,7 @@ import { useAuth } from '../helpers/authHelpers';
 import { resetStateCourses } from '../reducers/courses';
 import { resetStateUser } from '../reducers/user';
 import Courses from '../components/Courses';
+import Dashboard from '../components/Dashboard';
 
 const Main = props => {
   const {
@@ -103,27 +104,24 @@ const Main = props => {
         <Route
           exact
           path={`${path}/course/:id`}
-          render={({ match, location }) => {
-            console.log(location);
-            return (
-              <div>
-                <nav>
-                  <ul>
-                    <li>
-                      <Link to={{
-                        pathname: location.state.from ? location.state.from.pathname : '/app',
-                        state: { from: location },
-                      }}
-                      >
-                        &#60;
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-                <Course match={match} courses={courses} location={location} url={url} />
-              </div>
-            );
-          }}
+          render={({ match, location }) => (
+            <div>
+              <nav>
+                <ul>
+                  <li>
+                    <Link to={{
+                      pathname: location.state.from ? location.state.from.pathname : '/app',
+                      state: { from: location },
+                    }}
+                    >
+                      &#60;
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+              <Course match={match} courses={courses} location={location} url={url} />
+            </div>
+          )}
         />
         <Route
           exact
@@ -131,6 +129,17 @@ const Main = props => {
           render={({ match, location }) => (
             <User
               match={match}
+              location={location}
+              url={url}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={`${path}/dashboard`}
+          render={({ location }) => (
+            <Dashboard
+              courses={courses}
               location={location}
               url={url}
             />
