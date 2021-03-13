@@ -142,6 +142,7 @@ const Main = props => {
               courses={courses}
               location={location}
               url={url}
+              coursesToDivs={coursesToDivs}
             />
           )}
         />
