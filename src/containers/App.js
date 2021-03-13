@@ -107,6 +107,7 @@ const App = props => {
                   <Main
                     match={match}
                     courses={courses}
+                    location={location}
                   />
                 );
               }

@@ -8,14 +8,17 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import Course from '../components/Course';
+import User from '../components/User';
 import { useAuth } from '../helpers/authHelpers';
 import { resetStateCourses } from '../reducers/courses';
 import { resetStateUser } from '../reducers/user';
+import Courses from '../components/Courses';
 
 const Main = props => {
   const {
     courses,
     match,
+    location,
     resetCourses,
     resetUser,
   } = props;
@@ -26,7 +29,13 @@ const Main = props => {
       <div>Some picture</div>
       <div>{course.title}</div>
       <div>
-        <Link to={`${url}/course/${course.id}`}>More Info</Link>
+        <Link to={{
+          pathname: `${url}/course/${course.id}`,
+          state: { from: location },
+        }}
+        >
+          More Info
+        </Link>
       </div>
     </div>
   ));
@@ -45,28 +54,100 @@ const Main = props => {
         <div className="avatar">Avatar</div>
         <ul>
           <li>
-            <Link to={`${url}`}>Courses</Link>
+            <Link to={{
+              pathname: `${url}`,
+              state: { from: location },
+            }}
+            >
+              Courses
+            </Link>
+          </li>
+          <li>
+            <Link to={{
+              pathname: `${url}/dashboard`,
+              state: { from: location },
+            }}
+            >
+              Dasboard
+            </Link>
+          </li>
+          <li>
+            <Link to={{
+              pathname: `${url}/create`,
+              state: { from: location },
+            }}
+            >
+              Create
+            </Link>
+          </li>
+          <li>
+            <Link to={{
+              pathname: `${url}/report`,
+              state: { from: location },
+            }}
+            >
+              Report
+            </Link>
           </li>
         </ul>
         <button type="button" onClick={logout}>Log out</button>
       </header>
       <Switch>
         <Route exact path={`${path}`}>
-          {coursesToDivs(courses)}
+          <Courses
+            coursesToDivs={coursesToDivs}
+            courses={courses}
+          />
         </Route>
         <Route
           exact
           path={`${path}/course/:id`}
-          render={({ match }) => (
+          render={({ match, location }) => {
+            console.log(location);
+            return (
+              <div>
+                <nav>
+                  <ul>
+                    <li>
+                      <Link to={{
+                        pathname: location.state.from ? location.state.from.pathname : '/app',
+                        state: { from: location },
+                      }}
+                      >
+                        &#60;
+                      </Link>
+                    </li>
+                  </ul>
+                </nav>
+                <Course match={match} courses={courses} location={location} />
+              </div>
+            );
+          }}
+        />
+        <Route
+          exact
+          path={`${path}/user/:id`}
+          render={({ match, location }) => (
             <div>
               <nav>
                 <ul>
                   <li>
-                    <Link to="/">&#60;</Link>
+                    <Link to={{
+                      pathname: location.from.pathname,
+                      state: { from: location },
+                    }}
+                    >
+                      &#60;
+                    </Link>
                   </li>
                 </ul>
               </nav>
-              <Course match={match} courses={courses} />
+              <div>
+                <User
+                  match={match}
+                  location={location}
+                />
+              </div>
             </div>
           )}
         />
@@ -77,6 +158,7 @@ const Main = props => {
 
 Main.propTypes = {
   match: ReactRouterPropTypes.match.isRequired,
+  location: ReactRouterPropTypes.location.isRequired,
   courses: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
