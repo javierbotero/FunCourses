@@ -1,14 +1,66 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
+import { Link } from 'react-router-dom';
 
 const Courses = props => {
   const {
     courses,
     coursesToDivs,
+    location,
+    url,
+    useAuth,
+    resetUser,
+    resetCourses,
   } = props;
+  const authObject = useAuth();
+  const logout = () => {
+    localStorage.removeItem('currentUserIdFunCourses');
+    localStorage.removeItem('currentUserPasswordFunCourses');
+    authObject.setUserId(null);
+    authObject.setUserPassword(null);
+    resetUser();
+    resetCourses();
+  };
+
   return (
-    <div className="classes">
-      {coursesToDivs(courses)}
+    <div className="courses">
+      <header>
+        <div className="avatar">Avatar</div>
+        <ul>
+          <li>
+            <Link to={{
+              pathname: `${url}/dashboard`,
+              state: { from: location },
+            }}
+            >
+              Dasboard
+            </Link>
+          </li>
+          <li>
+            <Link to={{
+              pathname: `${url}/create`,
+              state: { from: location },
+            }}
+            >
+              Create
+            </Link>
+          </li>
+          <li>
+            <Link to={{
+              pathname: `${url}/report`,
+              state: { from: location },
+            }}
+            >
+              Report
+            </Link>
+          </li>
+        </ul>
+        <button type="button" onClick={logout}>Log out</button>
+      </header>
+      <div className="list-courses">
+        {coursesToDivs(courses)}
+      </div>
     </div>
   );
 };
@@ -50,6 +102,11 @@ Courses.propTypes = {
     })).isRequired,
   })).isRequired,
   coursesToDivs: PropTypes.func.isRequired,
+  location: ReactRouterPropTypes.location.isRequired,
+  url: PropTypes.string.isRequired,
+  useAuth: PropTypes.func.isRequired,
+  resetUser: PropTypes.func.isRequired,
+  resetCourses: PropTypes.func.isRequired,
 };
 
 export default Courses;

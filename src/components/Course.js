@@ -14,6 +14,19 @@ const Course = props => {
 
   return (
     <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to={{
+              pathname: location.state ? location.state.from.pathname : `${url}`,
+              state: { from: location },
+            }}
+            >
+              &#60;
+            </Link>
+          </li>
+        </ul>
+      </nav>
       <div>
         <div>{course.title}</div>
         <div>

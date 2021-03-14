@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ReactRouterpropTypes from 'react-router-prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 import { Link } from 'react-router-dom';
 
 const Dashboard = props => {
@@ -66,6 +66,19 @@ const Dashboard = props => {
 
   return (
     <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to={{
+              pathname: location.state ? location.state.from.pathname : `${url}`,
+              state: { from: location },
+            }}
+            >
+              &#60;
+            </Link>
+          </li>
+        </ul>
+      </nav>
       <header>
         <h2>Dashboard</h2>
         <p>
@@ -189,7 +202,7 @@ Dashboard.propTypes = {
     })),
   }).isRequired,
   coursesToDivs: PropTypes.func.isRequired,
-  location: ReactRouterpropTypes.location.isRequired,
+  location: ReactRouterPropTypes.location.isRequired,
   url: PropTypes.string.isRequired,
 };
 

@@ -25,7 +25,6 @@ const Main = props => {
     resetUser,
   } = props;
   const { path, url } = match;
-  const authObject = useAuth();
   const coursesToDivs = courses => courses.map(course => (
     <div key={course.id}>
       <div>Some picture</div>
@@ -41,87 +40,26 @@ const Main = props => {
       </div>
     </div>
   ));
-  const logout = () => {
-    localStorage.removeItem('currentUserIdFunCourses');
-    localStorage.removeItem('currentUserPasswordFunCourses');
-    authObject.setUserId(null);
-    authObject.setUserPassword(null);
-    resetUser();
-    resetCourses();
-  };
 
   return (
     <div>
-      <header>
-        <div className="avatar">Avatar</div>
-        <ul>
-          <li>
-            <Link to={{
-              pathname: `${url}`,
-              state: { from: location },
-            }}
-            >
-              Courses
-            </Link>
-          </li>
-          <li>
-            <Link to={{
-              pathname: `${url}/dashboard`,
-              state: { from: location },
-            }}
-            >
-              Dasboard
-            </Link>
-          </li>
-          <li>
-            <Link to={{
-              pathname: `${url}/create`,
-              state: { from: location },
-            }}
-            >
-              Create
-            </Link>
-          </li>
-          <li>
-            <Link to={{
-              pathname: `${url}/report`,
-              state: { from: location },
-            }}
-            >
-              Report
-            </Link>
-          </li>
-        </ul>
-        <button type="button" onClick={logout}>Log out</button>
-      </header>
       <Switch>
         <Route exact path={`${path}`}>
           <Courses
             coursesToDivs={coursesToDivs}
             courses={courses}
             url={url}
+            location={location}
+            useAuth={useAuth}
+            resetUser={resetUser}
+            resetCourses={resetCourses}
           />
         </Route>
         <Route
           exact
           path={`${path}/course/:id`}
           render={({ match, location }) => (
-            <div>
-              <nav>
-                <ul>
-                  <li>
-                    <Link to={{
-                      pathname: location.state.from ? location.state.from.pathname : '/app',
-                      state: { from: location },
-                    }}
-                    >
-                      &#60;
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-              <Course match={match} courses={courses} location={location} url={url} />
-            </div>
+            <Course match={match} courses={courses} location={location} url={url} />
           )}
         />
         <Route
