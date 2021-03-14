@@ -25,6 +25,23 @@ const Main = props => {
     resetUser,
   } = props;
   const { path, url } = match;
+  const usersListToDiv = users => users.map(u => (
+    <div className="user" key={u.id}>
+      <div style={{ backgroundImage: 'url(u.avatar)' }}>
+        avatar
+      </div>
+      <div>
+        <Link
+          to={{
+            pathname: `${url}/user/${u.id}`,
+            state: { from: location },
+          }}
+        >
+          {u.username}
+        </Link>
+      </div>
+    </div>
+  ));
   const coursesToDivs = courses => courses.map(course => (
     <div key={course.id}>
       <div>Some picture</div>
@@ -59,7 +76,13 @@ const Main = props => {
           exact
           path={`${path}/course/:id`}
           render={({ match, location }) => (
-            <Course match={match} courses={courses} location={location} url={url} />
+            <Course
+              match={match}
+              courses={courses}
+              location={location}
+              url={url}
+              usersListToDiv={usersListToDiv}
+            />
           )}
         />
         <Route
@@ -82,6 +105,7 @@ const Main = props => {
               location={location}
               url={url}
               coursesToDivs={coursesToDivs}
+              usersListToDiv={usersListToDiv}
             />
           )}
         />

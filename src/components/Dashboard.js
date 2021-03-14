@@ -10,9 +10,10 @@ const Dashboard = props => {
     location,
     url,
     coursesToDivs,
+    usersListToDiv,
   } = props;
 
-  const displayPendings = (
+  const displayPendingSubscriptions = (
     course,
     url,
     location,
@@ -55,14 +56,47 @@ const Dashboard = props => {
       <h4>{c.title}</h4>
       <section>
         <h4>Enrollment Requests</h4>
-        {displayPendings(c, url, location)}
+        {displayPendingSubscriptions(c, url, location)}
+        <p>
+          {c.pendings.length}
+          {' students waiting'}
+        </p>
       </section>
       <aside>
         <h4>Accepted Students</h4>
-        <p>Total </p>
+        <div>
+          {usersListToDiv(c.confirmed_students)}
+        </div>
+        <p>
+          {c.subscriptions.length}
+          {' students are confirmed'}
+        </p>
       </aside>
     </div>
   ));
+
+  const displayPendingFriendships = (students, requests, location) => requests.map(r => {
+    const student = students.find(s => s.id === r.sender_id);
+    return (
+      <div className="request" key={r.id}>
+        <div style={{ backgroundImage: 'url(#)' }}>
+          avatar
+        </div>
+        <Link
+          to={{
+            pathname: `${url}/user/${student.id}`,
+            state: { from: location },
+          }}
+        >
+          {student.username}
+        </Link>
+        <div>
+          <button type="button">Accept</button>
+          <button type="button">Ignore</button>
+        </div>
+      </div>
+    );
+  });
 
   return (
     <div>
@@ -104,7 +138,11 @@ const Dashboard = props => {
             Friendship Requests
           </h4>
           <div>
-            {}
+            {displayPendingFriendships(
+              user.friendship_requests,
+              user.pending_to_accept_friendships,
+              location,
+            )}
           </div>
         </div>
       </aside>
@@ -165,6 +203,15 @@ Dashboard.propTypes = {
     favorites: PropTypes.arrayOf(PropTypes.shape({
       course_id: PropTypes.number,
     })).isRequired,
+    pending_to_accept_friendships: PropTypes.arrayOf(PropTypes.shape({
+      receiver_id: PropTypes.number,
+      sender_id: PropTypes.number,
+    })).isRequired,
+    friendship_requests: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+      email: PropTypes.string,
+    })).isRequired,
     courses: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
@@ -204,6 +251,7 @@ Dashboard.propTypes = {
   coursesToDivs: PropTypes.func.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   url: PropTypes.string.isRequired,
+  usersListToDiv: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
