@@ -1,15 +1,69 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ReactRouterpropTypes from 'react-router-prop-types';
+import { Link } from 'react-router-dom';
 
 const Dashboard = props => {
   const {
     user,
-    // location,
-    // url,
+    location,
+    url,
     coursesToDivs,
   } = props;
-  const teacherCoursesToDivs = courses
+
+  const displayPendings = (
+    course,
+    url,
+    location,
+  ) => course.pendings.map(p => {
+    const student = course.pending_students.find(s => s.id === p.user_id);
+
+    return (
+      <div className="request" key={p.id}>
+        <div>
+          {'Course: '}
+          <Link to={{
+            pathname: `${url}/user/${course.id}`,
+            state: { from: location },
+          }}
+          >
+            {course.title}
+          </Link>
+        </div>
+        <div>
+          {'Student: '}
+          <Link
+            to={{
+              pathname: `${url}/user/${course.id}`,
+              state: { from: location },
+            }}
+          >
+            {student.username}
+          </Link>
+        </div>
+        <div>
+          <button type="button">Accept</button>
+          <button type="button">Ignore</button>
+        </div>
+      </div>
+    );
+  });
+
+  const teacherCoursesToDivs = (courses, url, location) => courses.map(c => (
+    <div className="teacher-course" key={c.id}>
+      <h4>{c.title}</h4>
+      <section>
+        <h4>Enrollment Requests</h4>
+        {displayPendings(c, url, location)}
+      </section>
+      <aside>
+        <h4>Accepted Students</h4>
+        <p>Total </p>
+      </aside>
+    </div>
+  ));
+
   return (
     <div>
       <header>
@@ -28,14 +82,14 @@ const Dashboard = props => {
         </div>
         <div className="teacher">
           <h4>As a Teacher</h4>
-          {teacherCoursesToDivs(user.courses)}
+          {teacherCoursesToDivs(user.courses, url, location)}
         </div>
       </main>
       <aside>
         <div>
-          <h3>
-            Friendship Pendings
-          </h3>
+          <h4>
+            Friendship Requests
+          </h4>
           <div>
             {}
           </div>
@@ -135,6 +189,8 @@ Dashboard.propTypes = {
     })),
   }).isRequired,
   coursesToDivs: PropTypes.func.isRequired,
+  location: ReactRouterpropTypes.location.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -29,6 +29,7 @@ const App = props => {
   const authObject = useAuth();
   const dispatch = useDispatch();
   const courses = useSelector(state => state.courses.courses);
+  const user = useSelector(state => state.user.user);
   const statusUser = useSelector(state => state.user.status);
   const statusCourses = useSelector(state => state.courses.status);
   const errorCourses = useSelector(state => state.courses.error);
@@ -107,6 +108,7 @@ const App = props => {
                   <Main
                     match={match}
                     courses={courses}
+                    user={user}
                     location={location}
                   />
                 );
