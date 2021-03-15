@@ -37,7 +37,10 @@ const Main = props => {
         <Link
           to={{
             pathname: `${url}/user/${u.id}`,
-            state: { from: location },
+            state: {
+              from: location,
+              user: u,
+            },
           }}
         >
           {u.username}
@@ -74,10 +77,30 @@ const Main = props => {
       <div>
         <Link to={{
           pathname: `${url}/user/${c.user.id}`,
-          state: { from: location },
+          state: {
+            from: location,
+            user: c.user,
+          },
         }}
         >
           {c.user.username}
+        </Link>
+      </div>
+      <div>{c.body}</div>
+    </div>
+  ));
+  const commentsToDivsWithCourse = comments => comments.map(c => (
+    <div key={c.id}>
+      <div>
+        {'In course: '}
+        <Link to={{
+          pathname: `${url}/user/${c.course_id}`,
+          state: {
+            from: location,
+          },
+        }}
+        >
+          {c.course.title}
         </Link>
       </div>
       <div>{c.body}</div>
@@ -123,6 +146,9 @@ const Main = props => {
               match={match}
               location={location}
               url={url}
+              user={user}
+              coursesToDivs={coursesToDivs}
+              commentsToDivsWithCourse={commentsToDivsWithCourse}
             />
           )}
         />

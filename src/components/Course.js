@@ -50,7 +50,10 @@ const Course = props => {
           <Link
             to={{
               pathname: `${url}/user/${course.teacher_id}`,
-              state: { from: location },
+              state: {
+                from: location,
+                user: course.teacher,
+              },
             }}
           >
             Teacher:

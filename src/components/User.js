@@ -5,10 +5,53 @@ import { Link } from 'react-router-dom';
 
 const User = props => {
   const {
+    user,
     match,
     location,
     url,
+    coursesToDivs,
+    commentsToDivsWithCourse,
   } = props;
+  const foundUser = (users, id) => users.find(u => u.id === id);
+  const infoUser = foundUser([...user.requests, ...user.pendings], parseInt(match.params.id, 10))
+    || location.state.user;
+  const infoUserToHtml = obj => {
+    if (obj.status) {
+      return (
+        <div>
+          <div>
+            {obj.status}
+          </div>
+          <h3>
+            {obj.username}
+            {' Courses'}
+          </h3>
+          <div className="student">
+            <h4>As a Student</h4>
+            {coursesToDivs(user.courses_as_student)}
+          </div>
+          <div className="teacher">
+            <h4>As a Teacher</h4>
+            {coursesToDivs(user.courses)}
+          </div>
+          <div>
+            <h4>
+              Comments mady by
+              {` ${obj.username}`}
+            </h4>
+            {commentsToDivsWithCourse(obj.comments)}
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div>
+        <div>Your are not friends yet</div>
+        <button type="button">Add to friend</button>
+      </div>
+    );
+  };
+
   return (
     <div>
       <nav>
@@ -20,19 +63,8 @@ const User = props => {
           </li>
         </ul>
       </nav>
-      <h1>User</h1>
-      <div>
-        <h1>
-          id:
-          {match.params.id}
-        </h1>
-      </div>
-      <div>
-        <h1>
-          location:
-          {location.state.from.pathname}
-        </h1>
-      </div>
+      <h3>{infoUser.username}</h3>
+      {infoUserToHtml(infoUser)}
     </div>
   );
 };
@@ -41,6 +73,141 @@ User.propTypes = {
   match: ReactRouterPropTypes.match.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   url: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    courses_as_student: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      teacher_id: PropTypes.number.isRequired,
+      status: PropTypes.string.isRequired,
+      dates: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      created_at: PropTypes.string.isRequired,
+      updated_at: PropTypes.string.isRequired,
+      teacher: PropTypes.shape({
+        id: PropTypes.number,
+        username: PropTypes.string,
+      }).isRequired,
+      favorites: PropTypes.arrayOf(PropTypes.shape({
+        course_id: PropTypes.number,
+        user_id: PropTypes.number,
+      })).isRequired,
+      subscriptions: PropTypes.arrayOf(PropTypes.shape({
+        course_id: PropTypes.number,
+        user_id: PropTypes.number.isRequired,
+        confirmed: PropTypes.bool,
+      })).isRequired,
+      comments: PropTypes.arrayOf(PropTypes.shape({
+        user_id: PropTypes.number,
+        course_id: PropTypes.number,
+        body: PropTypes.string,
+      })).isRequired,
+      pendings: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        user_id: PropTypes.number,
+        course_id: PropTypes.number,
+        confirmed: PropTypes.bool,
+      })).isRequired,
+    })).isRequired,
+    pending_courses_as_student: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      teacher_id: PropTypes.number.isRequired,
+      dates: PropTypes.string.isRequired,
+    })).isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      body: PropTypes.string.isRequired,
+      course_id: PropTypes.number.isRequired,
+    })).isRequired,
+    favorites: PropTypes.arrayOf(PropTypes.shape({
+      course_id: PropTypes.number,
+    })).isRequired,
+    pending_to_accept_friendships: PropTypes.arrayOf(PropTypes.shape({
+      receiver_id: PropTypes.number,
+      sender_id: PropTypes.number,
+    })).isRequired,
+    friendship_requests: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+      email: PropTypes.string,
+    })).isRequired,
+    requests: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        status: PropTypes.string,
+        email: PropTypes.string,
+        username: PropTypes.string,
+        courses_as_student: PropTypes.arrayOf({
+          id: PropTypes.number,
+          title: PropTypes.string,
+          content: PropTypes.string,
+          favorites: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number,
+            user_id: PropTypes.number,
+            course_id: PropTypes.number,
+          })),
+        }),
+      }),
+    ).isRequired,
+    pendings: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        status: PropTypes.string,
+        email: PropTypes.string,
+        username: PropTypes.string,
+        courses_as_student: PropTypes.arrayOf({
+          id: PropTypes.number,
+          title: PropTypes.string,
+          content: PropTypes.string,
+          favorites: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number,
+            user_id: PropTypes.number,
+            course_id: PropTypes.number,
+          })),
+        }),
+      }),
+    ).isRequired,
+    courses: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      teacher_id: PropTypes.number.isRequired,
+      status: PropTypes.string.isRequired,
+      dates: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      created_at: PropTypes.string.isRequired,
+      updated_at: PropTypes.string.isRequired,
+      teacher: PropTypes.shape({
+        id: PropTypes.number,
+        username: PropTypes.string,
+      }).isRequired,
+      favorites: PropTypes.arrayOf(PropTypes.shape({
+        course_id: PropTypes.number,
+        user_id: PropTypes.number,
+      })).isRequired,
+      subscriptions: PropTypes.arrayOf(PropTypes.shape({
+        course_id: PropTypes.number,
+        user_id: PropTypes.number.isRequired,
+        confirmed: PropTypes.bool,
+      })).isRequired,
+      comments: PropTypes.arrayOf(PropTypes.shape({
+        user_id: PropTypes.number,
+        course_id: PropTypes.number,
+        body: PropTypes.string,
+      })).isRequired,
+      pendings: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        user_id: PropTypes.number,
+        course_id: PropTypes.number,
+        confirmed: PropTypes.bool,
+      })).isRequired,
+    })),
+  }).isRequired,
+  coursesToDivs: PropTypes.func.isRequired,
+  commentsToDivsWithCourse: PropTypes.func.isRequired,
 };
 
 export default User;

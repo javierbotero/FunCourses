@@ -212,6 +212,42 @@ Dashboard.propTypes = {
       username: PropTypes.string,
       email: PropTypes.string,
     })).isRequired,
+    requests: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        status: PropTypes.string,
+        email: PropTypes.string,
+        username: PropTypes.string,
+        courses_as_student: PropTypes.arrayOf({
+          id: PropTypes.number,
+          title: PropTypes.string,
+          content: PropTypes.string,
+          favorites: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number,
+            user_id: PropTypes.number,
+            course_id: PropTypes.number,
+          })),
+        }),
+      }),
+    ).isRequired,
+    pendings: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        status: PropTypes.string,
+        email: PropTypes.string,
+        username: PropTypes.string,
+        courses_as_student: PropTypes.arrayOf({
+          id: PropTypes.number,
+          title: PropTypes.string,
+          content: PropTypes.string,
+          favorites: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.number,
+            user_id: PropTypes.number,
+            course_id: PropTypes.number,
+          })),
+        }),
+      }),
+    ).isRequired,
     courses: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
