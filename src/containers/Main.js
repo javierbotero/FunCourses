@@ -7,6 +7,7 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Course from '../components/Course';
 import User from '../components/User';
 import { useAuth } from '../helpers/authHelpers';
@@ -25,6 +26,8 @@ const Main = props => {
     resetUser,
   } = props;
   const { path, url } = match;
+  const objAuth = useAuth();
+  const isFavorite = (favs, id) => favs.some(f => f.user_id === id);
   const usersListToDiv = users => users.map(u => (
     <div className="user" key={u.id}>
       <div style={{ backgroundImage: 'url(u.avatar)' }}>
@@ -46,6 +49,15 @@ const Main = props => {
     <div key={course.id}>
       <div>Some picture</div>
       <div>{course.title}</div>
+      <div>
+        <button type="button">
+          <FontAwesomeIcon icon={
+            isFavorite(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
+            }
+          />
+        </button>
+        {` ${course.favorites.length}`}
+      </div>
       <div>
         <Link to={{
           pathname: `${url}/course/${course.id}`,
@@ -84,6 +96,7 @@ const Main = props => {
             useAuth={useAuth}
             resetUser={resetUser}
             resetCourses={resetCourses}
+            isFavorite={isFavorite}
           />
         </Route>
         <Route
@@ -98,6 +111,7 @@ const Main = props => {
               usersListToDiv={usersListToDiv}
               commentsToDivs={commentsToDivs}
               useAuth={useAuth}
+              isFavorite={isFavorite}
             />
           )}
         />

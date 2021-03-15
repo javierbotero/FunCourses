@@ -13,6 +13,7 @@ const Course = props => {
     usersListToDiv,
     commentsToDivs,
     useAuth,
+    isFavorite,
   } = props;
   const objAuth = useAuth();
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
@@ -31,7 +32,6 @@ const Course = props => {
     }
     return 'No date for now';
   };
-  const isFavorite = (favs, id) => favs.some(f => f.user_id === id);
 
   return (
     <div>
@@ -81,6 +81,7 @@ const Course = props => {
             }
           />
         </button>
+        { ` ${course.favorites.length}`}
       </div>
       <div>
         {!course.confirmed_students.some(s => s.id === objAuth.userId)
@@ -150,6 +151,7 @@ Course.propTypes = {
   usersListToDiv: PropTypes.func.isRequired,
   commentsToDivs: PropTypes.func.isRequired,
   useAuth: PropTypes.func.isRequired,
+  isFavorite: PropTypes.func.isRequired,
 };
 
 export default Course;

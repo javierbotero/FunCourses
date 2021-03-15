@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Courses = props => {
   const {
@@ -59,7 +60,7 @@ const Courses = props => {
         <button type="button" onClick={logout}>Log out</button>
       </header>
       <div className="list-courses">
-        {coursesToDivs(courses)}
+        {coursesToDivs(courses, FontAwesomeIcon)}
       </div>
     </div>
   );
