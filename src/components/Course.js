@@ -24,7 +24,6 @@ const Course = props => {
     }
     return 'No date for now';
   };
-
   const finish = () => {
     if (dates.length > 0) {
       const date = new Date(dates[dates.length - 1]);
@@ -32,6 +31,7 @@ const Course = props => {
     }
     return 'No date for now';
   };
+  const isFavorite = (favs, id) => favs.some(f => f.user_id === id);
 
   return (
     <div>
@@ -76,7 +76,10 @@ const Course = props => {
       </div>
       <div>
         <button type="button">
-          <FontAwesomeIcon icon={['far', 'heart']} />
+          <FontAwesomeIcon icon={
+            isFavorite(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
+            }
+          />
         </button>
       </div>
       <div>
