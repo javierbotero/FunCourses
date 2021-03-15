@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Course = props => {
   const {
@@ -9,8 +10,28 @@ const Course = props => {
     courses,
     location,
     url,
+    usersListToDiv,
+    commentsToDivs,
+    useAuth,
   } = props;
+  const objAuth = useAuth();
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
+  const dates = course.dates.split(' ').slice(0, -1);
+  const start = () => {
+    if (dates.length > 0) {
+      const date = new Date(dates[dates.length - 2]);
+      return date.toLocaleDateString();
+    }
+    return 'No date for now';
+  };
+
+  const finish = () => {
+    if (dates.length > 0) {
+      const date = new Date(dates[dates.length - 1]);
+      return date.toLocaleDateString();
+    }
+    return 'No date for now';
+  };
 
   return (
     <div>
@@ -37,10 +58,48 @@ const Course = props => {
           </Link>
         </div>
       </div>
+      <div>
+        Start:
+        {` ${start()}`}
+        <br />
+        End:
+        {` ${finish()}`}
+      </div>
       <div>{course.content}</div>
       <div>
         status:
         {` ${course.status}`}
+      </div>
+      <div>
+        price:
+        {` $${course.price}`}
+      </div>
+      <div>
+        <button type="button">
+          <FontAwesomeIcon icon={['far', 'heart']} />
+        </button>
+      </div>
+      <div>
+        {!course.confirmed_students.some(s => s.id === objAuth.userId)
+        && !course.pending_students.some(s => s.id === objAuth.userId)
+        && course.status !== 'Closed'
+        && (
+          <button type="button">Subscribe</button>
+        ) }
+      </div>
+      <div>
+        <div>
+          <h4>Students confirmed</h4>
+          <div>{usersListToDiv(course.confirmed_students)}</div>
+        </div>
+        <div>
+          <h4>Students waiting for confirmation</h4>
+          <div>{usersListToDiv(course.pending_students)}</div>
+        </div>
+      </div>
+      <div>
+        <h4>Comments</h4>
+        <div>{commentsToDivs(course.comments)}</div>
       </div>
     </div>
   );
@@ -85,6 +144,9 @@ Course.propTypes = {
     })).isRequired,
   })).isRequired,
   url: PropTypes.string.isRequired,
+  usersListToDiv: PropTypes.func.isRequired,
+  commentsToDivs: PropTypes.func.isRequired,
+  useAuth: PropTypes.func.isRequired,
 };
 
 export default Course;

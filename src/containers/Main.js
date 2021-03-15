@@ -57,6 +57,20 @@ const Main = props => {
       </div>
     </div>
   ));
+  const commentsToDivs = comments => comments.map(c => (
+    <div key={c.id}>
+      <div>
+        <Link to={{
+          pathname: `${url}/user/${c.user.id}`,
+          state: { from: location },
+        }}
+        >
+          {c.user.username}
+        </Link>
+      </div>
+      <div>{c.body}</div>
+    </div>
+  ));
 
   return (
     <div>
@@ -82,6 +96,8 @@ const Main = props => {
               location={location}
               url={url}
               usersListToDiv={usersListToDiv}
+              commentsToDivs={commentsToDivs}
+              useAuth={useAuth}
             />
           )}
         />

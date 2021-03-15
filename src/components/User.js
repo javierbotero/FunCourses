@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const User = props => {
-  const { match, location, url } = props;
+  const {
+    match,
+    location,
+    url,
+  } = props;
   return (
     <div>
       <nav>

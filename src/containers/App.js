@@ -8,11 +8,17 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { faHeart as fasFaHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
 import Form from '../components/Form';
 import Landing from '../components/Landing';
 import { useAuth } from '../helpers/authHelpers';
 import Main from './Main';
 import { handleApiRequest } from '../helpers/helpers';
+
+library.add(fasFaHeart, farFaHeart);
+dom.watch();
 
 const App = props => {
   const {
