@@ -1,19 +1,16 @@
 import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const User = props => {
-  const { match, location } = props;
+  const { match, location, url } = props;
   return (
     <div>
       <nav>
         <ul>
           <li>
-            <Link to={{
-              pathname: location.state.from.pathname,
-              state: { from: location },
-            }}
-            >
+            <Link to={location.state ? location.state.from.pathname : `${url}`}>
               &#60;
             </Link>
           </li>
@@ -39,6 +36,7 @@ const User = props => {
 User.propTypes = {
   match: ReactRouterPropTypes.match.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default User;

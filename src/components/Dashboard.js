@@ -25,7 +25,7 @@ const Dashboard = props => {
         <div>
           {'Course: '}
           <Link to={{
-            pathname: `${url}/user/${course.id}`,
+            pathname: `${url}/course/${course.id}`,
             state: { from: location },
           }}
           >
