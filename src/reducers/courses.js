@@ -1,11 +1,13 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { getCourses } from '../actions/retrievals';
+import { createCourse } from '../actions/creators';
 
 const initialState = {
   courses: [],
   status: 'idle',
   error: '',
+  notification: '',
 };
 
 const courses = createSlice({
@@ -19,6 +21,7 @@ const courses = createSlice({
       state.status = 'idle';
       state.error = '';
     },
+    removeNotificationCourses: state => { state.notification = ''; },
   },
   extraReducers: {
     [getCourses.pending]: state => { state.status = 'pending'; },
@@ -42,18 +45,38 @@ const courses = createSlice({
       state.error = `Something went wrong ${action.payload}`;
       state.courses = [];
     },
+    [createCourse.pending]: state => { state.status = 'pending'; },
+    [createCourse.fulfilled]: (state, action) => {
+      if (action.payload.course) {
+        state.courses.push(action.payload.course);
+        state.status = 'fulfilled';
+        state.error = '';
+      } else if (action.payload.error) {
+        state.error = action.payload.error;
+        state.status = `Something went wrong ${action.payload.error}`;
+      } else {
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong ${action.payload}`;
+      }
+    },
+    [createCourse.rejected]: (state, action) => {
+      state.status = 'Rejected';
+      state.error = `Something went wrong ${action.payload}`;
+    },
   },
 });
 
 const {
-  removeError,
+  removeCourseError,
   resetStateCourses,
   setCourseError,
+  removeNotificationCourses,
 } = courses.actions;
 
 export default courses.reducer;
 export {
   setCourseError,
-  removeError,
+  removeCourseError,
   resetStateCourses,
+  removeNotificationCourses,
 };

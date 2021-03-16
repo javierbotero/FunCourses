@@ -15,6 +15,7 @@ import { resetStateCourses } from '../reducers/courses';
 import { resetStateUser } from '../reducers/user';
 import Courses from '../components/Courses';
 import Dashboard from '../components/Dashboard';
+import FormCourse from '../components/FormCourse';
 
 const Main = props => {
   const {
@@ -24,6 +25,12 @@ const Main = props => {
     location,
     resetCourses,
     resetUser,
+    objThunk,
+    userPayload,
+    tokenPayload,
+    id,
+    token,
+    urlApi,
   } = props;
   const { path, url } = match;
   const objAuth = useAuth();
@@ -165,6 +172,24 @@ const Main = props => {
             />
           )}
         />
+        <Route
+          exact
+          path={`${path}/create`}
+          render={({ location }) => (
+            <FormCourse
+              location={location}
+              userId={objAuth.userId}
+              password={objAuth.userPassword}
+              id={id}
+              token={token}
+              username={user.username}
+              urlApi={urlApi}
+              objThunk={objThunk}
+              userPayload={userPayload}
+              tokenPayload={tokenPayload}
+            />
+          )}
+        />
       </Switch>
     </div>
   );
@@ -298,6 +323,12 @@ Main.propTypes = {
   }).isRequired,
   resetUser: PropTypes.func.isRequired,
   resetCourses: PropTypes.func.isRequired,
+  objThunk: PropTypes.func.isRequired,
+  userPayload: PropTypes.func.isRequired,
+  tokenPayload: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  token: PropTypes.string.isRequired,
+  urlApi: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

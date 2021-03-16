@@ -16,6 +16,8 @@ import Landing from '../components/Landing';
 import { useAuth } from '../helpers/authHelpers';
 import Main from './Main';
 import { handleApiRequest } from '../helpers/helpers';
+import { removeCourseError, removeNotificationCourses } from '../reducers/courses';
+import { removeUserError, removeNotificationUser } from '../reducers/user';
 
 library.add(fasFaHeart, farFaHeart);
 dom.watch();
@@ -40,6 +42,8 @@ const App = props => {
   const statusCourses = useSelector(state => state.courses.status);
   const errorCourses = useSelector(state => state.courses.error);
   const errorUser = useSelector(state => state.user.error);
+  const notificationUser = useSelector(state => state.user.notification);
+  const notificationCourses = useSelector(state => state.courses.notification);
   const tokenData = tokenPayload(id, token);
   const userData = userPayload(authObject.userId, authObject.userPassword);
   const dataThunkCourses = objThunk(
@@ -81,12 +85,23 @@ const App = props => {
     }
   }, [statusCourses, getCourses, getUser, dispatch, dataThunkCourses, dataThunkUser, statusUser]);
 
+  const removeErrorOrNotification = () => {
+    if (errorCourses.length > 0) { dispatch(removeCourseError()); }
+    if (errorUser.length > 0) { dispatch(removeUserError()); }
+    if (notificationUser.length > 0) { dispatch(removeNotificationUser()); }
+    if (notificationCourses.length > 0) { dispatch(removeNotificationCourses()); }
+  };
+
   return (
-    <div>
+    <div onPointerDown={removeErrorOrNotification}>
       <BrowserRouter>
         <div className={errorCourses.length > 0 || errorUser.length > 0 ? 'error' : ''}>
           {errorCourses.length > 0 ? `${errorCourses}. ` : ''}
           {errorUser}
+        </div>
+        <div className={notificationUser.length > 0 || notificationCourses.length > 0 ? 'notification' : ''}>
+          {notificationUser}
+          {notificationCourses}
         </div>
         <Switch>
           <Route
@@ -116,6 +131,12 @@ const App = props => {
                     courses={courses}
                     user={user}
                     location={location}
+                    objThunk={objThunk}
+                    userPayload={userPayload}
+                    tokenPayload={tokenPayload}
+                    id={id}
+                    token={token}
+                    urlApi={url}
                   />
                 );
               }
