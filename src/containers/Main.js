@@ -16,6 +16,7 @@ import { resetStateUser } from '../reducers/user';
 import Courses from '../components/Courses';
 import Dashboard from '../components/Dashboard';
 import FormCourse from '../components/FormCourse';
+import Report from '../components/Report';
 
 const Main = props => {
   const {
@@ -187,6 +188,17 @@ const Main = props => {
               objThunk={objThunk}
               userPayload={userPayload}
               tokenPayload={tokenPayload}
+            />
+          )}
+        />
+        <Route
+          exact
+          path={`${url}/report`}
+          render={({ location }) => (
+            <Report
+              location={location}
+              url={url}
+              user={user}
             />
           )}
         />
