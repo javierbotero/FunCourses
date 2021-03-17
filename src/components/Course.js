@@ -14,6 +14,7 @@ const Course = props => {
     commentsToDivs,
     useAuth,
     isFavorite,
+    handleLike,
   } = props;
   const objAuth = useAuth();
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
@@ -78,7 +79,7 @@ const Course = props => {
         {` $${course.price}`}
       </div>
       <div>
-        <button type="button">
+        <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isFavorite, course.favorites)}>
           <FontAwesomeIcon icon={
             isFavorite(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
             }
@@ -155,6 +156,7 @@ Course.propTypes = {
   commentsToDivs: PropTypes.func.isRequired,
   useAuth: PropTypes.func.isRequired,
   isFavorite: PropTypes.func.isRequired,
+  handleLike: PropTypes.func.isRequired,
 };
 
 export default Course;

@@ -161,6 +161,7 @@ const Main = props => {
               commentsToDivs={commentsToDivs}
               useAuth={useAuth}
               isFavorite={isFavorite}
+              handleLike={handleLike}
             />
           )}
         />
