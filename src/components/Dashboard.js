@@ -65,7 +65,7 @@ const Dashboard = props => {
       <aside>
         <h4>Accepted Students</h4>
         <div>
-          {usersListToDiv(c.confirmed_students)}
+          {usersListToDiv(c.confirmed_students, location, url)}
         </div>
         <p>
           {c.subscriptions.length}

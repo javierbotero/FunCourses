@@ -39,7 +39,7 @@ const User = props => {
               Comments mady by
               {` ${obj.username}`}
             </h4>
-            {commentsToDivsWithCourse(obj.comments)}
+            {commentsToDivsWithCourse(obj.comments, location, url)}
           </div>
         </div>
       );

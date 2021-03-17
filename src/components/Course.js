@@ -98,16 +98,16 @@ const Course = props => {
       <div>
         <div>
           <h4>Students confirmed</h4>
-          <div>{usersListToDiv(course.confirmed_students)}</div>
+          <div>{usersListToDiv(course.confirmed_students, location, url)}</div>
         </div>
         <div>
           <h4>Students waiting for confirmation</h4>
-          <div>{usersListToDiv(course.pending_students)}</div>
+          <div>{usersListToDiv(course.pending_students, location, url)}</div>
         </div>
       </div>
       <div>
         <h4>Comments</h4>
-        <div>{commentsToDivs(course.comments)}</div>
+        <div>{commentsToDivs(course.comments, location, url)}</div>
       </div>
     </div>
   );

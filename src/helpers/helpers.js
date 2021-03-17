@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const initCreator = obj => ({
   method: obj.verb,
   mode: 'cors',
@@ -40,10 +42,70 @@ const handleApiRequest = async (initCreator, verb, url, data) => {
   return response;
 };
 
+const commentsToDivsWithCourse = (comments, location, url) => comments.map(c => (
+  <div key={c.id}>
+    <div>
+      {'In course: '}
+      <Link to={{
+        pathname: `${url}/course/${c.course_id}`,
+        state: {
+          from: location,
+        },
+      }}
+      >
+        {c.course.title}
+      </Link>
+    </div>
+    <div>{c.body}</div>
+  </div>
+));
+const commentsToDivs = (comments, location, url) => comments.map(c => (
+  <div key={c.id}>
+    <div>
+      <Link to={{
+        pathname: `${url}/user/${c.user.id}`,
+        state: {
+          from: location,
+          user: c.user,
+        },
+      }}
+      >
+        {c.user.username}
+      </Link>
+    </div>
+    <div>{c.body}</div>
+  </div>
+));
+const usersListToDiv = (users, location, url) => users.map(u => (
+  <div className="user" key={u.id}>
+    <div style={{ backgroundImage: 'url(u.avatar)' }}>
+      avatar
+    </div>
+    <div>
+      <Link
+        to={{
+          pathname: `${url}/user/${u.id}`,
+          state: {
+            from: location,
+            user: u,
+          },
+        }}
+      >
+        {u.username}
+      </Link>
+    </div>
+  </div>
+));
+const isFavorite = (favs, id) => favs.find(f => f.user_id === parseInt(id, 10));
+
 export {
   initCreator,
   objThunk,
   tokenPayload,
   userPayload,
   handleApiRequest,
+  commentsToDivsWithCourse,
+  commentsToDivs,
+  usersListToDiv,
+  isFavorite,
 };

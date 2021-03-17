@@ -15,7 +15,13 @@ import Form from '../components/Form';
 import Landing from '../components/Landing';
 import { useAuth } from '../helpers/authHelpers';
 import Main from './Main';
-import { handleApiRequest } from '../helpers/helpers';
+import {
+  handleApiRequest,
+  commentsToDivsWithCourse,
+  commentsToDivs,
+  usersListToDiv,
+  isFavorite,
+} from '../helpers/helpers';
 import { removeCourseError, removeNotificationCourses } from '../reducers/courses';
 import { removeUserError, removeNotificationUser } from '../reducers/user';
 
@@ -137,6 +143,10 @@ const App = props => {
                     id={id}
                     token={token}
                     urlApi={url}
+                    commentsToDivsWithCourse={commentsToDivsWithCourse}
+                    commentsToDivs={commentsToDivs}
+                    usersListToDiv={usersListToDiv}
+                    isFavorite={isFavorite}
                   />
                 );
               }

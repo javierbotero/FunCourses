@@ -35,10 +35,13 @@ const Main = props => {
     urlApi,
     sendLike,
     delLike,
+    commentsToDivsWithCourse,
+    commentsToDivs,
+    usersListToDiv,
+    isFavorite,
   } = props;
   const { path, url } = match;
   const objAuth = useAuth();
-  const isFavorite = (favs, id) => favs.find(f => f.user_id === parseInt(id, 10));
   const handleLike = (userId, courseId, cb, favorites) => {
     const init = {
       ...tokenPayload(id, token),
@@ -54,26 +57,6 @@ const Main = props => {
       sendLike(payload);
     }
   };
-  const usersListToDiv = users => users.map(u => (
-    <div className="user" key={u.id}>
-      <div style={{ backgroundImage: 'url(u.avatar)' }}>
-        avatar
-      </div>
-      <div>
-        <Link
-          to={{
-            pathname: `${url}/user/${u.id}`,
-            state: {
-              from: location,
-              user: u,
-            },
-          }}
-        >
-          {u.username}
-        </Link>
-      </div>
-    </div>
-  ));
   const coursesToDivs = courses => courses.map(course => (
     <div key={course.id}>
       <div>Some picture</div>
@@ -96,40 +79,6 @@ const Main = props => {
           More Info
         </Link>
       </div>
-    </div>
-  ));
-  const commentsToDivs = comments => comments.map(c => (
-    <div key={c.id}>
-      <div>
-        <Link to={{
-          pathname: `${url}/user/${c.user.id}`,
-          state: {
-            from: location,
-            user: c.user,
-          },
-        }}
-        >
-          {c.user.username}
-        </Link>
-      </div>
-      <div>{c.body}</div>
-    </div>
-  ));
-  const commentsToDivsWithCourse = comments => comments.map(c => (
-    <div key={c.id}>
-      <div>
-        {'In course: '}
-        <Link to={{
-          pathname: `${url}/user/${c.course_id}`,
-          state: {
-            from: location,
-          },
-        }}
-        >
-          {c.course.title}
-        </Link>
-      </div>
-      <div>{c.body}</div>
     </div>
   ));
 
@@ -362,6 +311,10 @@ Main.propTypes = {
   urlApi: PropTypes.string.isRequired,
   sendLike: PropTypes.func.isRequired,
   delLike: PropTypes.func.isRequired,
+  commentsToDivsWithCourse: PropTypes.func.isRequired,
+  commentsToDivs: PropTypes.func.isRequired,
+  usersListToDiv: PropTypes.func.isRequired,
+  isFavorite: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
