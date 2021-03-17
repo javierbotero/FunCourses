@@ -17,6 +17,7 @@ import Courses from '../components/Courses';
 import Dashboard from '../components/Dashboard';
 import FormCourse from '../components/FormCourse';
 import Report from '../components/Report';
+import { createLike, deleteLike } from '../actions/creators';
 
 const Main = props => {
   const {
@@ -32,10 +33,27 @@ const Main = props => {
     id,
     token,
     urlApi,
+    sendLike,
+    delLike,
   } = props;
   const { path, url } = match;
   const objAuth = useAuth();
-  const isFavorite = (favs, id) => favs.some(f => f.user_id === id);
+  const isFavorite = (favs, id) => favs.find(f => f.user_id === parseInt(id, 10));
+  const handleLike = (userId, courseId, cb, favorites) => {
+    const init = {
+      ...tokenPayload(id, token),
+      ...userPayload(userId, objAuth.userPassword),
+    };
+    const favorite = cb(favorites, userId);
+    if (favorite) {
+      const payload = objThunk(urlApi, 'DELETE', init);
+      payload.id = favorite.id;
+      delLike(payload);
+    } else {
+      const payload = objThunk(urlApi, 'POST', { ...init, course_id: courseId });
+      sendLike(payload);
+    }
+  };
   const usersListToDiv = users => users.map(u => (
     <div className="user" key={u.id}>
       <div style={{ backgroundImage: 'url(u.avatar)' }}>
@@ -61,7 +79,7 @@ const Main = props => {
       <div>Some picture</div>
       <div>{course.title}</div>
       <div>
-        <button type="button">
+        <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isFavorite, course.favorites)}>
           <FontAwesomeIcon icon={
             isFavorite(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
             }
@@ -341,11 +359,15 @@ Main.propTypes = {
   id: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
   urlApi: PropTypes.string.isRequired,
+  sendLike: PropTypes.func.isRequired,
+  delLike: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
   resetCourses: () => dispatch(resetStateCourses()),
   resetUser: () => dispatch(resetStateUser()),
+  sendLike: payload => dispatch(createLike(payload)),
+  delLike: payload => dispatch(deleteLike(payload)),
 });
 
 export default connect(null, mapDispatchToProps)(Main);

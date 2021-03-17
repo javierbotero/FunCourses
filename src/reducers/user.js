@@ -1,7 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { getUser } from '../actions/retrievals';
-import { createCourse } from '../actions/creators';
+import {
+  createCourse,
+  createLike,
+  deleteLike,
+} from '../actions/creators';
 
 const initialState = {
   user: {},
@@ -60,6 +64,45 @@ const user = createSlice({
       }
     },
     [createCourse.rejected]: (state, action) => {
+      state.status = 'Rejected';
+      state.error = `Something went wrong ${action.payload}`;
+    },
+    [createLike.pending]: state => { state.status = 'pending'; },
+    [createLike.fulfilled]: (state, action) => {
+      if (action.payload.favorite) {
+        state.user.favorites.push(action.payload.favorite);
+        state.status = 'fulfilled';
+        state.error = '';
+        state.notification = 'You liked the course :)';
+      } else if (action.payload.error) {
+        state.error = `Something went wrong ${action.payload.error}`;
+        state.status = 'Rejected by api';
+      } else {
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong ${action.payload}`;
+      }
+    },
+    [createLike.rejected]: (state, action) => {
+      state.status = 'Rejected';
+      state.error = `Something went wrong ${action.payload}`;
+    },
+    [deleteLike.pending]: state => { state.status = 'pending'; },
+    [deleteLike.fulfilled]: (state, action) => {
+      if (action.payload.favorite_id) {
+        const favIndex = state.user.favorites.findIndex(f => f.id === action.payload.favorite_id);
+        state.user.favorites.splice(favIndex, 1);
+        state.status = 'fulfilled';
+        state.error = '';
+        state.notification = 'You changed your opinion';
+      } else if (action.payload.error) {
+        state.error = `Something went wrong ${action.payload.error}`;
+        state.status = 'Rejected by api';
+      } else {
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong ${action.payload}`;
+      }
+    },
+    [deleteLike.rejected]: (state, action) => {
       state.status = 'Rejected';
       state.error = `Something went wrong ${action.payload}`;
     },
