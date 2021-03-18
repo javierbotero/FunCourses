@@ -130,6 +130,33 @@ const Main = props => {
     payload.id = pendingId;
     updSubs(payload);
   };
+  const handleDeleteSubscription = (
+    appId,
+    token,
+    urlapi,
+    objThunkCb,
+    uId,
+    password,
+    courseId,
+    studentId,
+    pendArrSubs,
+    tokenPayloadCb,
+    userPayloadCb,
+    isPresentInUserIdCb,
+  ) => {
+    const init = {
+      ...tokenPayloadCb(appId, token),
+      ...userPayloadCb(uId, password),
+    };
+    const pendSubs = isPresentInUserIdCb(pendArrSubs, studentId);
+    if (pendSubs) {
+      const payload = objThunkCb(urlapi, 'DELETE', init);
+      payload.course = { id: courseId, userId: uId };
+      payload.id = pendSubs.id;
+      payload.studentId = studentId;
+      delSubs(payload);
+    }
+  };
   const coursesToDivs = courses => courses.map(course => (
     <div key={course.id}>
       <div>Some picture</div>
@@ -222,6 +249,7 @@ const Main = props => {
               coursesToDivs={coursesToDivs}
               usersListToDiv={usersListToDiv}
               handleUpdateSubscription={handleUpdateSubscription}
+              handleDeleteSubscription={handleDeleteSubscription}
               objThunk={objThunk}
               tokenPayload={tokenPayload}
               userPayload={userPayload}
@@ -229,6 +257,11 @@ const Main = props => {
               id={id}
               token={token}
               useAuth={useAuth}
+              teacherCourses={user.courses}
+              commentsToDivs={commentsToDivs}
+              isPresentInUserId={isPresentInUserId}
+              isPresentInId={isPresentInId}
+              setUserErr={setUserErr}
             />
           )}
         />

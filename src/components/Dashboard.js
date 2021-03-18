@@ -19,6 +19,8 @@ const Dashboard = props => {
     id,
     token,
     useAuth,
+    handleDeleteSubscription,
+    isPresentInUserId,
   } = props;
 
   const displayPendingSubscriptions = (
@@ -70,7 +72,25 @@ const Dashboard = props => {
           >
             Accept
           </button>
-          <button type="button">Ignore</button>
+          <button
+            type="button"
+            onClick={() => handleDeleteSubscription(
+              id,
+              token,
+              urlApi,
+              objThunk,
+              objAuth.userId,
+              objAuth.userPassword,
+              course.id,
+              student.id,
+              course.pendings,
+              tokenPayload,
+              userPayload,
+              isPresentInUserId,
+            )}
+          >
+            Ignore
+          </button>
         </div>
       </div>
     );
@@ -321,6 +341,8 @@ Dashboard.propTypes = {
   id: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
   useAuth: PropTypes.func.isRequired,
+  handleDeleteSubscription: PropTypes.func.isRequired,
+  isPresentInUserId: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

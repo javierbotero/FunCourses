@@ -52,7 +52,12 @@ const deleteSubscription = createAsyncThunk(
     const payload = await fetch(`${objThunk.url}/subscriptions/${objThunk.id}`, objThunk.init)
       .then(data => data.json().then(res => res))
       .catch(err => `Network error. ${err.error}`);
-    return { ...payload, course: objThunk.course };
+    return {
+      ...payload,
+      course: objThunk.course,
+      studentId: objThunk.studentId ? objThunk.studentId : false,
+      id: objThunk.id,
+    };
   },
 );
 

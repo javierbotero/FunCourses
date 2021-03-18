@@ -131,18 +131,35 @@ const user = createSlice({
     [deleteSubscription.pending]: state => { state.status = 'pending'; },
     [deleteSubscription.fulfilled]: (state, action) => {
       if (action.payload.response) {
-        const indexCourseAsStudent = state
-          .user.courses_as_student.findIndex(c => c.id === action.payload.course.id);
-        const indexPendingCourseAsStudent = state
-          .user.pending_courses_as_student.findIndex(c => c.id === action.payload.course.id);
-        if (indexCourseAsStudent !== -1) {
-          state.user.courses_as_student.splice(indexCourseAsStudent, 1);
-        } else if (indexPendingCourseAsStudent !== -1) {
-          state.user.pending_courses_as_student.splice(indexPendingCourseAsStudent, 1);
+        if (action.payload.studentId) {
+          const indexCourse = state
+            .user.courses.findIndex(c => c.id === action.payload.course.id);
+          const indexPendingSubs = state
+            .user
+            .courses[indexCourse]
+            .pendings
+            .findIndex(s => s.id === action.payload.id);
+          const indexStudent = state
+            .user
+            .courses[indexCourse]
+            .pending_students
+            .findIndex(s => s.id === action.payload.studentId);
+          state.user.courses[indexCourse].pendings.splice(indexPendingSubs, 1);
+          state.user.courses[indexCourse].pending_students.splice(indexStudent, 1);
+        } else {
+          const indexCourseAsStudent = state
+            .user.courses_as_student.findIndex(c => c.id === action.payload.course.id);
+          const indexPendingCourseAsStudent = state
+            .user.pending_courses_as_student.findIndex(c => c.id === action.payload.course.id);
+          if (indexCourseAsStudent !== -1) {
+            state.user.courses_as_student.splice(indexCourseAsStudent, 1);
+          } else if (indexPendingCourseAsStudent !== -1) {
+            state.user.pending_courses_as_student.splice(indexPendingCourseAsStudent, 1);
+          }
         }
         state.status = 'fulfilled';
         state.error = '';
-        state.notification = action.payload.response;
+        state.notification = 'Request deleted';
       } else if (action.payload.error) {
         state.error = `Something went wrong. ${action.payload.error}`;
         state.status = 'Rejected by api';
