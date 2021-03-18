@@ -11,7 +11,7 @@ const authContext = createContext();
 const useAuth = () => useContext(authContext);
 
 const useAuthState = () => {
-  const [userId, setUserId] = useState(localStorage.getItem('currentUserIdFunCourses'));
+  const [userId, setUserId] = useState(parseInt(localStorage.getItem('currentUserIdFunCourses'), 10));
   const [userPassword, setUserPassword] = useState(localStorage.getItem('currentUserPasswordFunCourses'));
   const authenticate = (
     handleApiRequest,

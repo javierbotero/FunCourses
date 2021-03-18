@@ -32,9 +32,37 @@ const deleteLike = createAsyncThunk(
   },
 );
 
+const createSubscription = createAsyncThunk(
+  'createSubscription',
+  async objThunk => {
+    const payload = await fetch(`${objThunk.url}/subscriptions`, objThunk.init)
+      .then(data => data.json().then(res => res))
+      .catch(err => `Network error. ${err.error}`);
+    console.log(payload);
+    return {
+      ...payload,
+      course: objThunk.course,
+      student: objThunk.student,
+    };
+  },
+);
+
+const deleteSubscription = createAsyncThunk(
+  'deleteSubscription',
+  async objThunk => {
+    const payload = await fetch(`${objThunk.url}/subscriptions/${objThunk.id}`, objThunk.init)
+      .then(data => data.json().then(res => res))
+      .catch(err => `Network error. ${err.error}`);
+    console.log(payload);
+    return { ...payload, course: objThunk.course };
+  },
+);
+
 export {
   createCourse,
   createFriendship,
   createLike,
   deleteLike,
+  createSubscription,
+  deleteSubscription,
 };

@@ -5,7 +5,9 @@ import {
   createCourse,
   createLike,
   deleteLike,
-} from '../actions/creators';
+  createSubscription,
+  deleteSubscription,
+} from '../actions/interactions';
 
 const initialState = {
   courses: [],
@@ -70,7 +72,6 @@ const courses = createSlice({
     [createLike.pending]: state => { state.status = 'pending'; },
     [createLike.fulfilled]: (state, action) => {
       if (action.payload.favorite) {
-        console.log(action.payload.favorite);
         const id = state.courses.findIndex(c => c.id === action.payload.favorite.course_id);
         state.courses[id].favorites.push(action.payload.favorite);
         state.status = 'fulfilled';
@@ -101,6 +102,55 @@ const courses = createSlice({
     [deleteLike.rejected]: state => {
       state.status = 'Rejected';
     },
+    [createSubscription.pending]: state => { state.status = 'pending'; },
+    [createSubscription.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      if (action.payload.pending_subscription) {
+        const courseIndex = state.courses
+          .findIndex(c => c.id === action.payload.pending_subscription.course_id);
+        state.courses[courseIndex].pendings.push(action.payload.pending_subscription);
+        state.courses[courseIndex].pending_students.push(action.payload.student);
+        state.status = 'fulfilled';
+        state.error = '';
+        state.notification = '';
+      }
+    },
+    [createSubscription.rejected]: state => {
+      state.status = 'Rejected';
+    },
+    [deleteSubscription.pending]: state => { state.status = 'pending'; },
+    [deleteSubscription.fulfilled]: (state, action) => {
+      if (action.payload.response) {
+        const indexCourse = state
+          .courses.findIndex(c => c.id === action.payload.course.id);
+        const indexSubscription = state
+          .courses[indexCourse]
+          .subscriptions.findIndex(s => s.user_id === parseInt(action.payload.course.userId, 10));
+        if (indexSubscription !== -1) {
+          const indexStudent = state
+            .courses[indexCourse]
+            .confirmed_students.findIndex(s => s.id === parseInt(action.payload.course.userId, 10));
+          state.courses[indexCourse].subscriptions.splice(indexSubscription, 1);
+          state.courses[indexCourse].confirmed_students.splice(indexStudent, 1);
+        } else {
+          const indexPendings = state
+            .courses[indexCourse]
+            .pendings.findIndex(s => s.user_id === parseInt(action.payload.course.userId, 10));
+          const indexPendingStudents = state
+            .courses[indexCourse]
+            .pending_students.findIndex(s => s.id === parseInt(action.payload.course.userId, 10));
+          state.courses[indexCourse].pendings.splice(indexPendings, 1);
+          state.courses[indexCourse].pending_students.splice(indexPendingStudents, 1);
+        }
+        state.status = 'fulfilled';
+        state.error = '';
+      } else if (action.payload.error) {
+        state.status = 'Rejected by api';
+      } else {
+        state.status = 'Rejected from unknown error';
+      }
+    },
+    [deleteSubscription.rejected]: state => { state.status = 'Rejected'; },
   },
 });
 

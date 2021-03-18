@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
-import { createCourse } from '../actions/creators';
+import { createCourse } from '../actions/interactions';
 
 const FormCourse = props => {
   const {
@@ -39,7 +39,7 @@ const FormCourse = props => {
         title,
         content,
         status,
-        dates: `${dateStart} ${dateEnd}`,
+        dates: `${dateStart} ${dateEnd} `,
         price,
       },
     };

@@ -5,7 +5,9 @@ import {
   createCourse,
   createLike,
   deleteLike,
-} from '../actions/creators';
+  createSubscription,
+  deleteSubscription,
+} from '../actions/interactions';
 
 const initialState = {
   user: {},
@@ -57,15 +59,15 @@ const user = createSlice({
         state.notification = 'The course was created successfully';
       } else if (action.payload.error) {
         state.error = action.payload.error;
-        state.status = `Something went wrong ${action.payload.error}`;
+        state.status = `Something went wrong. ${action.payload.error}`;
       } else {
         state.status = 'Rejected from unknown error';
-        state.error = `Something went wrong ${action.payload}`;
+        state.error = `Something went wrong. ${action.payload}`;
       }
     },
     [createCourse.rejected]: (state, action) => {
       state.status = 'Rejected';
-      state.error = `Something went wrong ${action.payload}`;
+      state.error = `Something went wrong. ${action.payload}`;
     },
     [createLike.pending]: state => { state.status = 'pending'; },
     [createLike.fulfilled]: (state, action) => {
@@ -75,16 +77,16 @@ const user = createSlice({
         state.error = '';
         state.notification = 'You liked the course :)';
       } else if (action.payload.error) {
-        state.error = `Something went wrong ${action.payload.error}`;
+        state.error = `Something went wrong. ${action.payload.error}`;
         state.status = 'Rejected by api';
       } else {
         state.status = 'Rejected from unknown error';
-        state.error = `Something went wrong ${action.payload}`;
+        state.error = `Something went wrong. ${action.payload}`;
       }
     },
     [createLike.rejected]: (state, action) => {
       state.status = 'Rejected';
-      state.error = `Something went wrong ${action.payload}`;
+      state.error = `Something went wrong. ${action.payload}`;
     },
     [deleteLike.pending]: state => { state.status = 'pending'; },
     [deleteLike.fulfilled]: (state, action) => {
@@ -95,16 +97,62 @@ const user = createSlice({
         state.error = '';
         state.notification = 'You changed your opinion';
       } else if (action.payload.error) {
-        state.error = `Something went wrong ${action.payload.error}`;
+        state.error = `Something went wrong. ${action.payload.error}`;
         state.status = 'Rejected by api';
       } else {
         state.status = 'Rejected from unknown error';
-        state.error = `Something went wrong ${action.payload}`;
+        state.error = `Something went wrong. ${action.payload}`;
       }
     },
     [deleteLike.rejected]: (state, action) => {
       state.status = 'Rejected';
-      state.error = `Something went wrong ${action.payload}`;
+      state.error = `Something went wrong. ${action.payload}`;
+    },
+    [createSubscription.pending]: state => { state.status = 'pending'; },
+    [createSubscription.fulfilled]: (state, action) => {
+      if (action.payload.pending_subscription) {
+        state.user.pending_courses_as_student.push(action.payload.course);
+        state.status = 'fulfilled';
+        state.error = '';
+        state.notification = 'Wait for teacher confirmation';
+      } else if (action.payload.error) {
+        state.error = `Something went wrong. ${action.payload.error}`;
+        state.status = 'Rejected by api';
+      } else {
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong. ${action.payload}`;
+      }
+    },
+    [createSubscription.rejected]: (state, action) => {
+      state.status = 'Rejected';
+      state.error = `Something went wrong. ${action.payload}`;
+    },
+    [deleteSubscription.pending]: state => { state.status = 'pending'; },
+    [deleteSubscription.fulfilled]: (state, action) => {
+      if (action.payload.response) {
+        const indexCourseAsStudent = state
+          .user.courses_as_student.findIndex(c => c.id === action.payload.course.id);
+        const indexPendingCourseAsStudent = state
+          .user.pending_courses_as_student.findIndex(c => c.id === action.payload.course.id);
+        if (indexCourseAsStudent !== -1) {
+          state.user.courses_as_student.splice(indexCourseAsStudent, 1);
+        } else if (indexPendingCourseAsStudent !== -1) {
+          state.user.pending_courses_as_student.splice(indexPendingCourseAsStudent, 1);
+        }
+        state.status = 'fulfilled';
+        state.error = '';
+        state.notification = action.payload.response;
+      } else if (action.payload.error) {
+        state.error = `Something went wrong. ${action.payload.error}`;
+        state.status = 'Rejected by api';
+      } else {
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong. ${action.payload}`;
+      }
+    },
+    [deleteSubscription.rejected]: (state, action) => {
+      state.status = 'Rejected';
+      state.error = `Something went wrong. ${action.payload}`;
     },
   },
 });

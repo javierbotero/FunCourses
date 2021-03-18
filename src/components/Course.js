@@ -8,13 +8,23 @@ const Course = props => {
   const {
     match,
     courses,
+    teacherCourses,
     location,
     url,
     usersListToDiv,
     commentsToDivs,
     useAuth,
-    isFavorite,
+    isPresentInUserId,
+    isPresentInId,
     handleLike,
+    handleSubscription,
+    objThunk,
+    urlApi,
+    token,
+    tokenPayload,
+    userPayload,
+    id,
+    setUserErr,
   } = props;
   const objAuth = useAuth();
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
@@ -79,20 +89,43 @@ const Course = props => {
         {` $${course.price}`}
       </div>
       <div>
-        <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isFavorite, course.favorites)}>
+        <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
           <FontAwesomeIcon icon={
-            isFavorite(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
+            isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
             }
           />
         </button>
         { ` ${course.favorites.length}`}
       </div>
       <div>
-        {!course.confirmed_students.some(s => s.id === objAuth.userId)
-        && !course.pending_students.some(s => s.id === objAuth.userId)
-        && course.status !== 'Closed'
+        {course.status !== 'Closed'
         && (
-          <button type="button">Subscribe</button>
+          <button
+            type="button"
+            onClick={() => handleSubscription(
+              isPresentInUserId,
+              isPresentInId,
+              setUserErr,
+              objAuth.userId,
+              objAuth.userPassword,
+              course.subscriptions,
+              teacherCourses,
+              course.pending_students,
+              course.pendings,
+              objThunk,
+              urlApi,
+              tokenPayload,
+              userPayload,
+              id,
+              token,
+              course.id,
+              course.title,
+            )}
+          >
+            {isPresentInUserId(course.subscriptions, objAuth.userId) ? 'Unsubscribe' : ''}
+            {isPresentInId(course.pending_students, objAuth.userId) ? 'Cancel' : ''}
+            {!isPresentInId(course.pending_students, objAuth.userId) && !isPresentInId(course.pending_students, objAuth.userId) ? 'Subscribe' : ''}
+          </button>
         ) }
       </div>
       <div>
@@ -151,12 +184,56 @@ Course.propTypes = {
       confirmed: PropTypes.bool,
     })).isRequired,
   })).isRequired,
+  teacherCourses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    teacher_id: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    dates: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    created_at: PropTypes.string.isRequired,
+    updated_at: PropTypes.string.isRequired,
+    teacher: PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+    }).isRequired,
+    favorites: PropTypes.arrayOf(PropTypes.shape({
+      course_id: PropTypes.number,
+      user_id: PropTypes.number,
+    })).isRequired,
+    subscriptions: PropTypes.arrayOf(PropTypes.shape({
+      course_id: PropTypes.number,
+      user_id: PropTypes.number.isRequired,
+      confirmed: PropTypes.bool,
+    })).isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      user_id: PropTypes.number,
+      course_id: PropTypes.number,
+      body: PropTypes.string,
+    })).isRequired,
+    pendings: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      user_id: PropTypes.number,
+      course_id: PropTypes.number,
+      confirmed: PropTypes.bool,
+    })).isRequired,
+  })).isRequired,
   url: PropTypes.string.isRequired,
   usersListToDiv: PropTypes.func.isRequired,
   commentsToDivs: PropTypes.func.isRequired,
   useAuth: PropTypes.func.isRequired,
-  isFavorite: PropTypes.func.isRequired,
+  isPresentInUserId: PropTypes.func.isRequired,
+  isPresentInId: PropTypes.func.isRequired,
   handleLike: PropTypes.func.isRequired,
+  handleSubscription: PropTypes.func.isRequired,
+  objThunk: PropTypes.func.isRequired,
+  urlApi: PropTypes.number.isRequired,
+  token: PropTypes.string.isRequired,
+  tokenPayload: PropTypes.string.isRequired,
+  userPayload: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  setUserErr: PropTypes.func.isRequired,
 };
 
 export default Course;

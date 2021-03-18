@@ -20,7 +20,8 @@ import {
   commentsToDivsWithCourse,
   commentsToDivs,
   usersListToDiv,
-  isFavorite,
+  isPresentInUserId,
+  isPresentInId,
 } from '../helpers/helpers';
 import { removeCourseError, removeNotificationCourses } from '../reducers/courses';
 import { removeUserError, removeNotificationUser } from '../reducers/user';
@@ -146,7 +147,8 @@ const App = props => {
                     commentsToDivsWithCourse={commentsToDivsWithCourse}
                     commentsToDivs={commentsToDivs}
                     usersListToDiv={usersListToDiv}
-                    isFavorite={isFavorite}
+                    isPresentInUserId={isPresentInUserId}
+                    isPresentInId={isPresentInId}
                   />
                 );
               }

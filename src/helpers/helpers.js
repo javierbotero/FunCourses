@@ -96,7 +96,8 @@ const usersListToDiv = (users, location, url) => users.map(u => (
     </div>
   </div>
 ));
-const isFavorite = (favs, id) => favs.find(f => f.user_id === parseInt(id, 10));
+const isPresentInUserId = (arr, id) => arr.find(item => item.user_id === parseInt(id, 10));
+const isPresentInId = (arr, id) => arr.find(item => item.id === parseInt(id, 10));
 
 export {
   initCreator,
@@ -107,5 +108,6 @@ export {
   commentsToDivsWithCourse,
   commentsToDivs,
   usersListToDiv,
-  isFavorite,
+  isPresentInUserId,
+  isPresentInId,
 };
