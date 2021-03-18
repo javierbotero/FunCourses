@@ -38,7 +38,6 @@ const createSubscription = createAsyncThunk(
     const payload = await fetch(`${objThunk.url}/subscriptions`, objThunk.init)
       .then(data => data.json().then(res => res))
       .catch(err => `Network error. ${err.error}`);
-    console.log(payload);
     return {
       ...payload,
       course: objThunk.course,
@@ -53,8 +52,17 @@ const deleteSubscription = createAsyncThunk(
     const payload = await fetch(`${objThunk.url}/subscriptions/${objThunk.id}`, objThunk.init)
       .then(data => data.json().then(res => res))
       .catch(err => `Network error. ${err.error}`);
-    console.log(payload);
     return { ...payload, course: objThunk.course };
+  },
+);
+
+const updateSubscription = createAsyncThunk(
+  'updateSubscription',
+  async objThunk => {
+    const payload = await fetch(`${objThunk.url}/subscriptions/${objThunk.id}`, objThunk.init)
+      .then(data => data.json().then(res => res))
+      .catch(err => `Network error. ${err.error}`);
+    return { ...payload, student: objThunk.student };
   },
 );
 
@@ -65,4 +73,5 @@ export {
   deleteLike,
   createSubscription,
   deleteSubscription,
+  updateSubscription,
 };

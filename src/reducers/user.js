@@ -7,6 +7,7 @@ import {
   deleteLike,
   createSubscription,
   deleteSubscription,
+  updateSubscription,
 } from '../actions/interactions';
 
 const initialState = {
@@ -151,6 +152,44 @@ const user = createSlice({
       }
     },
     [deleteSubscription.rejected]: (state, action) => {
+      state.status = 'Rejected';
+      state.error = `Something went wrong. ${action.payload}`;
+    },
+    [updateSubscription.pending]: state => { state.status = 'pending'; },
+    [updateSubscription.fulfilled]: (state, action) => {
+      if (action.payload.updated_subscription) {
+        const indexCourse = state
+          .user.courses.findIndex(c => c.id === action.payload.updated_subscription.course_id);
+        const indexPendingSubs = state
+          .user
+          .courses[indexCourse]
+          .pendings
+          .findIndex(s => s.id === action.payload.updated_subscription.id);
+        const indexStudent = state
+          .user
+          .courses[indexCourse]
+          .pending_students
+          .findIndex(s => s.id === action.payload.updated_subscription.user_id);
+        if (indexCourse !== -1 && indexPendingSubs !== -1 && indexStudent !== -1) {
+          state.user.courses[indexCourse].pendings.splice(indexPendingSubs, 1);
+          state.user.courses[indexCourse].pending_students.splice(indexStudent, 1);
+          state.user.courses[indexCourse].subscriptions.push(action.payload.updated_subscription);
+          state.user.courses[indexCourse].confirmed_students.push(action.payload.student);
+          state.status = 'fulfilled';
+          state.error = '';
+          state.notification = `${action.payload.student.username} is now part of your course's students`;
+        } else if (action.payload.error) {
+          state.error = 'No course or student match :/';
+        }
+      } else if (action.payload.error) {
+        state.error = `Something went wrong. ${action.payload.error}`;
+        state.status = 'Rejected by api';
+      } else {
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong. ${action.payload}`;
+      }
+    },
+    [updateSubscription.rejected]: (state, action) => {
       state.status = 'Rejected';
       state.error = `Something went wrong. ${action.payload}`;
     },

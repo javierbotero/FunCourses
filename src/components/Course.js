@@ -124,7 +124,7 @@ const Course = props => {
           >
             {isPresentInUserId(course.subscriptions, objAuth.userId) ? 'Unsubscribe' : ''}
             {isPresentInId(course.pending_students, objAuth.userId) ? 'Cancel' : ''}
-            {!isPresentInId(course.pending_students, objAuth.userId) && !isPresentInId(course.pending_students, objAuth.userId) ? 'Subscribe' : ''}
+            {!isPresentInUserId(course.subscriptions, objAuth.userId) && !isPresentInId(course.pending_students, objAuth.userId) ? 'Subscribe' : ''}
           </button>
         ) }
       </div>

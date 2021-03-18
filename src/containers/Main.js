@@ -22,6 +22,7 @@ import {
   deleteLike,
   createSubscription,
   deleteSubscription,
+  updateSubscription,
 } from '../actions/interactions';
 
 const Main = props => {
@@ -48,6 +49,7 @@ const Main = props => {
     creSubs,
     delSubs,
     setUserErr,
+    updSubs,
   } = props;
   const { path, url } = match;
   const objAuth = useAuth();
@@ -76,7 +78,7 @@ const Main = props => {
     arrTeacherCourses,
     arrCoursePendingStudents,
     arrCoursePendings,
-    objThunkCB,
+    objThunkCb,
     urlapi,
     tokenPayloadCb,
     userPayloadCb,
@@ -94,19 +96,39 @@ const Main = props => {
       ...tokenPayloadCb(appId, token),
       ...userPayloadCb(uId, password),
     };
-    console.log('arrSubs: ', arrSubs, 'arrCoursePendingStudents: ', arrCoursePendingStudents, 'uId: ', uId, '!isPresentInIdCb(arrCoursePendingStudents, uId): ', !isPresentInIdCb(arrCoursePendingStudents, uId));
     if (!subscription && !isPresentInIdCb(arrCoursePendingStudents, uId)) {
       init.course_id = courseId;
-      const payload = objThunkCB(urlapi, 'POST', init);
+      const payload = objThunkCb(urlapi, 'POST', init);
       payload.course = { id: courseId, title: courseTitle };
       payload.student = { id: uId, username: user.username };
       creSubs(payload);
     } else {
-      const payload = objThunk(urlapi, 'DELETE', init);
+      const payload = objThunkCb(urlapi, 'DELETE', init);
       payload.course = { id: courseId, userId: uId };
       payload.id = subscription ? subscription.id : isPresentInUserId(arrCoursePendings, uId).id;
       delSubs(payload);
     }
+  };
+  const handleUpdateSubscription = (
+    student,
+    pendingId,
+    objThunkCb,
+    tokenPayloadCb,
+    userPayloadCb,
+    urlapi,
+    appId,
+    token,
+    uId,
+    password,
+  ) => {
+    const init = {
+      ...tokenPayloadCb(appId, token),
+      ...userPayloadCb(uId, password),
+    };
+    const payload = objThunkCb(urlapi, 'PUT', init);
+    payload.student = student;
+    payload.id = pendingId;
+    updSubs(payload);
   };
   const coursesToDivs = courses => courses.map(course => (
     <div key={course.id}>
@@ -199,6 +221,14 @@ const Main = props => {
               url={url}
               coursesToDivs={coursesToDivs}
               usersListToDiv={usersListToDiv}
+              handleUpdateSubscription={handleUpdateSubscription}
+              objThunk={objThunk}
+              tokenPayload={tokenPayload}
+              userPayload={userPayload}
+              urlApi={urlApi}
+              id={id}
+              token={token}
+              useAuth={useAuth}
             />
           )}
         />
@@ -380,6 +410,7 @@ Main.propTypes = {
   creSubs: PropTypes.func.isRequired,
   delSubs: PropTypes.func.isRequired,
   setUserErr: PropTypes.func.isRequired,
+  updSubs: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -390,6 +421,7 @@ const mapDispatchToProps = dispatch => ({
   delLike: payload => dispatch(deleteLike(payload)),
   creSubs: payload => dispatch(createSubscription(payload)),
   delSubs: payload => dispatch(deleteSubscription(payload)),
+  updSubs: payload => dispatch(updateSubscription(payload)),
 });
 
 export default connect(null, mapDispatchToProps)(Main);

@@ -11,6 +11,14 @@ const Dashboard = props => {
     url,
     coursesToDivs,
     usersListToDiv,
+    handleUpdateSubscription,
+    objThunk,
+    tokenPayload,
+    userPayload,
+    urlApi,
+    id,
+    token,
+    useAuth,
   } = props;
 
   const displayPendingSubscriptions = (
@@ -19,6 +27,7 @@ const Dashboard = props => {
     location,
   ) => course.pendings.map(p => {
     const student = course.pending_students.find(s => s.id === p.user_id);
+    const objAuth = useAuth();
 
     return (
       <div className="request" key={p.id}>
@@ -44,7 +53,23 @@ const Dashboard = props => {
           </Link>
         </div>
         <div>
-          <button type="button">Accept</button>
+          <button
+            type="button"
+            onClick={() => handleUpdateSubscription(
+              student,
+              p.id,
+              objThunk,
+              tokenPayload,
+              userPayload,
+              urlApi,
+              id,
+              token,
+              objAuth.userId,
+              objAuth.userPassword,
+            )}
+          >
+            Accept
+          </button>
           <button type="button">Ignore</button>
         </div>
       </div>
@@ -288,6 +313,14 @@ Dashboard.propTypes = {
   location: ReactRouterPropTypes.location.isRequired,
   url: PropTypes.string.isRequired,
   usersListToDiv: PropTypes.func.isRequired,
+  handleUpdateSubscription: PropTypes.func.isRequired,
+  objThunk: PropTypes.func.isRequired,
+  tokenPayload: PropTypes.func.isRequired,
+  userPayload: PropTypes.func.isRequired,
+  urlApi: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  token: PropTypes.string.isRequired,
+  useAuth: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

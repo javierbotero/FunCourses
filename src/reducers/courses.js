@@ -7,6 +7,7 @@ import {
   deleteLike,
   createSubscription,
   deleteSubscription,
+  updateSubscription,
 } from '../actions/interactions';
 
 const initialState = {
@@ -104,7 +105,6 @@ const courses = createSlice({
     },
     [createSubscription.pending]: state => { state.status = 'pending'; },
     [createSubscription.fulfilled]: (state, action) => {
-      console.log(action.payload);
       if (action.payload.pending_subscription) {
         const courseIndex = state.courses
           .findIndex(c => c.id === action.payload.pending_subscription.course_id);
@@ -151,6 +151,36 @@ const courses = createSlice({
       }
     },
     [deleteSubscription.rejected]: state => { state.status = 'Rejected'; },
+    [updateSubscription.pending]: state => { state.status = 'pending'; },
+    [updateSubscription.fulfilled]: (state, action) => {
+      if (action.payload.updated_subscription) {
+        const indexCourse = state
+          .courses.findIndex(c => c.id === action.payload.updated_subscription.course_id);
+        const indexPendings = state
+          .courses[indexCourse]
+          .pendings
+          .findIndex(s => s.user_id === parseInt(action.payload.updated_subscription.user_id, 10));
+        const indexPendingStudents = state
+          .courses[indexCourse]
+          .pending_students
+          .findIndex(s => s.id === parseInt(action.payload.updated_subscription.user_id, 10));
+        if (indexPendings !== -1 && indexPendingStudents !== -1) {
+          state.courses[indexCourse].pendings.splice(indexPendings, 1);
+          state.courses[indexCourse].pending_students.splice(indexPendingStudents, 1);
+          state.courses[indexCourse].confirmed_students.push(action.payload.student);
+          state.courses[indexCourse].subscriptions.push(action.payload.updated_subscription);
+          state.status = 'fulfilled';
+          state.error = '';
+        } else {
+          state.status = 'Rejected by local error';
+        }
+      } else if (action.payload.error) {
+        state.status = 'Rejected by Api';
+      } else {
+        state.status = 'Rejected from unknown error';
+      }
+    },
+    [updateSubscription.rejected]: state => { state.status = 'Rejected'; },
   },
 });
 
