@@ -9,6 +9,7 @@ import {
   deleteSubscription,
   updateSubscription,
   createFriendship,
+  deleteFriendship,
 } from '../actions/interactions';
 
 const initialState = {
@@ -225,6 +226,33 @@ const user = createSlice({
       }
     },
     [createFriendship.rejected]: (state, action) => {
+      state.status = 'Rejected';
+      state.error = `Something went wrong. ${action.payload}`;
+    },
+    [deleteFriendship.pending]: state => { state.status = 'pending'; },
+    [deleteFriendship.fulfilled]: (state, action) => {
+      if (action.payload.response) {
+        if (action.payload.friendship.pendingRequested) {
+          const indexRequest = state
+            .user
+            .pending_requested_friendships
+            .findIndex(f => f.id === parseInt(action.payload.friendship.id, 10));
+          state.user.pending_requested_friendships.splice(indexRequest, 1);
+        } else {
+          console.log('reducer delete friendship');
+        }
+        state.notification = 'The request has been deleted';
+        state.error = '';
+        state.status = 'Fullfilled';
+      } else if (action.payload.error) {
+        state.error = `Something went wrong. ${action.payload.error}`;
+        state.status = 'Rejected by api';
+      } else {
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong. ${action.payload}`;
+      }
+    },
+    [deleteFriendship.rejected]: (state, action) => {
       state.status = 'Rejected';
       state.error = `Something went wrong. ${action.payload}`;
     },

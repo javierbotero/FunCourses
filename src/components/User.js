@@ -20,6 +20,7 @@ const User = props => {
     urlApi,
     objThunk,
     isFriendshipRequested,
+    handleDelFriend,
   } = props;
   const objAuth = useAuth();
   const foundUser = (users, id) => users.find(u => u.id === id);
@@ -60,8 +61,22 @@ const User = props => {
         <button
           type="button"
           onClick={() => {
-            if (isFriendshipRequested(user.pending_requested_friendships, obj.id)) {
-              console.log('Not friend');
+            const isRequested = isFriendshipRequested(user.pending_requested_friendships, obj.id);
+            if (isRequested) {
+              handleDelFriend(
+                tokenPayload,
+                userPayload,
+                id,
+                token,
+                objAuth.userId,
+                objAuth.userPassword,
+                urlApi,
+                objThunk,
+                {
+                  id: isRequested.id,
+                  pendingRequested: true,
+                },
+              );
             } else {
               handleCreateFriendship(
                 tokenPayload,
@@ -253,6 +268,7 @@ User.propTypes = {
   objThunk: PropTypes.func.isRequired,
   urlApi: PropTypes.string.isRequired,
   isFriendshipRequested: PropTypes.func.isRequired,
+  handleDelFriend: PropTypes.func.isRequired,
 };
 
 export default User;
