@@ -10,6 +10,7 @@ import {
   updateSubscription,
   createFriendship,
   deleteFriendship,
+  updateFriendship,
 } from '../actions/interactions';
 
 const initialState = {
@@ -264,6 +265,37 @@ const user = createSlice({
       }
     },
     [deleteFriendship.rejected]: (state, action) => {
+      state.status = 'Rejected';
+      state.error = `Something went wrong. ${action.payload}`;
+    },
+    [updateFriendship.pending]: state => { state.status = 'pending'; },
+    [updateFriendship.fulfilled]: (state, action) => {
+      if (action.payload.new_friend) {
+        const indexRequest = state
+          .user
+          .friendship_requests
+          .findIndex(f => f.id === parseInt(action.payload.friendship.studentId, 10));
+        state
+          .user
+          .pending_to_accept_friendships
+          .splice(action.payload.friendship.indexRequest, 1);
+        state
+          .user
+          .friendship_requests
+          .splice(indexRequest, 1);
+        state.user.requests.push(action.payload.new_friend);
+        state.notification = `${action.payload.friendship.studentName} is a new friend :)`;
+        state.error = '';
+        state.status = 'Fullfilled';
+      } else if (action.payload.error) {
+        state.error = `Something went wrong. ${action.payload.error}`;
+        state.status = 'Rejected by api';
+      } else {
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong. ${action.payload}`;
+      }
+    },
+    [updateFriendship.rejected]: (state, action) => {
       state.status = 'Rejected';
       state.error = `Something went wrong. ${action.payload}`;
     },

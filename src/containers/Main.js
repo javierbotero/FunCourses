@@ -25,6 +25,7 @@ import {
   updateSubscription,
   createFriendship,
   deleteFriendship,
+  updateFriendship,
 } from '../actions/interactions';
 
 const Main = props => {
@@ -55,6 +56,7 @@ const Main = props => {
     creFriend,
     isFriendshipRequested,
     delFriend,
+    updFriend,
   } = props;
   const { path, url } = match;
   const objAuth = useAuth();
@@ -205,6 +207,25 @@ const Main = props => {
     payload.friendship = friendship;
     delFriend(payload);
   };
+  const handleUpdFriend = (
+    tokenPayloadCb,
+    userPayloadCb,
+    id,
+    token,
+    uId,
+    password,
+    urlapi,
+    objThunkCb,
+    friendship,
+  ) => {
+    const init = {
+      ...tokenPayloadCb(id, token),
+      ...userPayloadCb(uId, password),
+    };
+    const payload = objThunkCb(urlapi, 'PUT', init);
+    payload.friendship = friendship;
+    updFriend(payload);
+  };
   const coursesToDivs = courses => courses.map(course => (
     <div key={course.id}>
       <div>Some picture</div>
@@ -321,6 +342,7 @@ const Main = props => {
               isPresentInId={isPresentInId}
               setUserErr={setUserErr}
               handleDelFriend={handleDelFriend}
+              handleUpdFriend={handleUpdFriend}
             />
           )}
         />
@@ -506,6 +528,7 @@ Main.propTypes = {
   creFriend: PropTypes.func.isRequired,
   isFriendshipRequested: PropTypes.func.isRequired,
   delFriend: PropTypes.func.isRequired,
+  updFriend: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -519,6 +542,7 @@ const mapDispatchToProps = dispatch => ({
   updSubs: payload => dispatch(updateSubscription(payload)),
   creFriend: payload => dispatch(createFriendship(payload)),
   delFriend: payload => dispatch(deleteFriendship(payload)),
+  updFriend: payload => dispatch(updateFriendship(payload)),
 });
 
 export default connect(null, mapDispatchToProps)(Main);

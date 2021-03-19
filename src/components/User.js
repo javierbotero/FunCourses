@@ -24,8 +24,19 @@ const User = props => {
   } = props;
   const objAuth = useAuth();
   const foundUser = (users, id) => users.find(u => u.id === id);
-  const infoUser = foundUser([...user.requests, ...user.pendings], parseInt(match.params.id, 10))
-    || location.state.user;
+  const selectUser = (foundUser, user, match, location) => {
+    const found = foundUser([...user.requests, ...user.pendings], parseInt(match.params.id, 10));
+    let result;
+    if (found) {
+      result = found;
+    } else if (user.id === parseInt(match.params.id, 10)) {
+      result = user;
+    } else {
+      result = location.state.user;
+    }
+    return result;
+  };
+  const infoUser = selectUser(foundUser, user, match, location);
   const infoUserToHtml = obj => {
     if (obj.status) {
       return (
@@ -38,11 +49,11 @@ const User = props => {
             {' Courses'}
           </h3>
           <div className="student">
-            <h4>As a Student</h4>
+            <h4>Courses as a Student</h4>
             {coursesToDivs(obj.courses_as_student)}
           </div>
           <div className="teacher">
-            <h4>As a Teacher</h4>
+            <h4>Courses as a Teacher</h4>
             {coursesToDivs(obj.courses)}
           </div>
           <div>

@@ -22,6 +22,7 @@ const Dashboard = props => {
     handleDeleteSubscription,
     isPresentInUserId,
     handleDelFriend,
+    handleUpdFriend,
   } = props;
   const objAuth = useAuth();
 
@@ -137,7 +138,29 @@ const Dashboard = props => {
           {student.username}
         </Link>
         <div>
-          <button type="button">Accept</button>
+          <button
+            type="button"
+            onClick={() => {
+              handleUpdFriend(
+                tokenPayload,
+                userPayload,
+                id,
+                token,
+                objAuth.userId,
+                objAuth.userPassword,
+                urlApi,
+                objThunk,
+                {
+                  id: r.id,
+                  indexRequest: i,
+                  studentId: student.id,
+                  studentName: student.username,
+                },
+              );
+            }}
+          >
+            Accept
+          </button>
           <button
             type="button"
             onClick={() => handleDelFriend(
@@ -365,6 +388,7 @@ Dashboard.propTypes = {
   handleDeleteSubscription: PropTypes.func.isRequired,
   isPresentInUserId: PropTypes.func.isRequired,
   handleDelFriend: PropTypes.func.isRequired,
+  handleUpdFriend: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

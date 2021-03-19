@@ -95,6 +95,19 @@ const deleteFriendship = createAsyncThunk(
   },
 );
 
+const updateFriendship = createAsyncThunk(
+  'updateFriendship',
+  async objThunk => {
+    const payload = await fetch(`${objThunk.url}/friendships/${objThunk.friendship.id}`, objThunk.init)
+      .then(data => data.json().then(res => res))
+      .catch(err => `Network error. ${err.error}`);
+    return {
+      ...payload,
+      friendship: objThunk.friendship,
+    };
+  },
+);
+
 export {
   createCourse,
   createLike,
@@ -104,4 +117,5 @@ export {
   updateSubscription,
   createFriendship,
   deleteFriendship,
+  updateFriendship,
 };
