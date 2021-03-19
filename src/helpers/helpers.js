@@ -98,6 +98,7 @@ const usersListToDiv = (users, location, url) => users.map(u => (
 ));
 const isPresentInUserId = (arr, id) => arr.find(item => item.user_id === parseInt(id, 10));
 const isPresentInId = (arr, id) => arr.find(item => item.id === parseInt(id, 10));
+const isFriendshipRequested = (arr, id) => arr.find(f => f.receiver_id === parseInt(id, 10));
 
 export {
   initCreator,
@@ -110,4 +111,5 @@ export {
   usersListToDiv,
   isPresentInUserId,
   isPresentInId,
+  isFriendshipRequested,
 };

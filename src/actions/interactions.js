@@ -10,8 +10,6 @@ const createCourse = createAsyncThunk(
   },
 );
 
-const createFriendship = createAsyncThunk();
-
 const createLike = createAsyncThunk(
   'createLike',
   async objThunk => {
@@ -71,12 +69,25 @@ const updateSubscription = createAsyncThunk(
   },
 );
 
+const createFriendship = createAsyncThunk(
+  'createFriendship',
+  async objThunk => {
+    const payload = await fetch(`${objThunk.url}/friendships`, objThunk.init)
+      .then(data => data.json().then(res => res))
+      .catch(err => `Network error. ${err.error}`);
+    return {
+      ...payload,
+      user: objThunk.user,
+    };
+  },
+);
+
 export {
   createCourse,
-  createFriendship,
   createLike,
   deleteLike,
   createSubscription,
   deleteSubscription,
   updateSubscription,
+  createFriendship,
 };

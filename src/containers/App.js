@@ -22,6 +22,7 @@ import {
   usersListToDiv,
   isPresentInUserId,
   isPresentInId,
+  isFriendshipRequested,
 } from '../helpers/helpers';
 import { removeCourseError, removeNotificationCourses } from '../reducers/courses';
 import { removeUserError, removeNotificationUser } from '../reducers/user';
@@ -149,6 +150,7 @@ const App = props => {
                     usersListToDiv={usersListToDiv}
                     isPresentInUserId={isPresentInUserId}
                     isPresentInId={isPresentInId}
+                    isFriendshipRequested={isFriendshipRequested}
                   />
                 );
               }

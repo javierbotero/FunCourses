@@ -8,6 +8,7 @@ import {
   createSubscription,
   deleteSubscription,
   updateSubscription,
+  createFriendship,
 } from '../actions/interactions';
 
 const initialState = {
@@ -207,6 +208,23 @@ const user = createSlice({
       }
     },
     [updateSubscription.rejected]: (state, action) => {
+      state.status = 'Rejected';
+      state.error = `Something went wrong. ${action.payload}`;
+    },
+    [createFriendship.pending]: state => { state.status = 'pending'; },
+    [createFriendship.fulfilled]: (state, action) => {
+      if (action.payload.friendship) {
+        state.user.pending_requested_friendships.push(action.payload.friendship);
+        state.notification = 'Wait for friendship confirmation';
+      } else if (action.payload.error) {
+        state.error = `Something went wrong. ${action.payload.error}`;
+        state.status = 'Rejected by api';
+      } else {
+        state.status = 'Rejected from unknown error';
+        state.error = `Something went wrong. ${action.payload}`;
+      }
+    },
+    [createFriendship.rejected]: (state, action) => {
       state.status = 'Rejected';
       state.error = `Something went wrong. ${action.payload}`;
     },

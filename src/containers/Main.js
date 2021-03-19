@@ -23,6 +23,7 @@ import {
   createSubscription,
   deleteSubscription,
   updateSubscription,
+  createFriendship,
 } from '../actions/interactions';
 
 const Main = props => {
@@ -50,6 +51,8 @@ const Main = props => {
     delSubs,
     setUserErr,
     updSubs,
+    creFriend,
+    isFriendshipRequested,
   } = props;
   const { path, url } = match;
   const objAuth = useAuth();
@@ -157,6 +160,30 @@ const Main = props => {
       delSubs(payload);
     }
   };
+  const handleCreateFriendship = (
+    tokenPayloadCb,
+    userPayloadCb,
+    id,
+    token,
+    uId,
+    password,
+    receiverId,
+    usernameReceiver,
+    objThunkCb,
+    urlapi,
+  ) => {
+    const init = {
+      ...tokenPayloadCb(id, token),
+      ...userPayloadCb(uId, password),
+    };
+    init.receiver_id = receiverId;
+    const payload = objThunkCb(urlapi, 'POST', init);
+    payload.student = {
+      id: receiverId,
+      username: usernameReceiver,
+    };
+    creFriend(payload);
+  };
   const coursesToDivs = courses => courses.map(course => (
     <div key={course.id}>
       <div>Some picture</div>
@@ -235,6 +262,15 @@ const Main = props => {
               user={user}
               coursesToDivs={coursesToDivs}
               commentsToDivsWithCourse={commentsToDivsWithCourse}
+              handleCreateFriendship={handleCreateFriendship}
+              tokenPayload={tokenPayload}
+              userPayload={userPayload}
+              id={id}
+              token={token}
+              useAuth={useAuth}
+              objThunk={objThunk}
+              urlApi={urlApi}
+              isFriendshipRequested={isFriendshipRequested}
             />
           )}
         />
@@ -444,6 +480,8 @@ Main.propTypes = {
   delSubs: PropTypes.func.isRequired,
   setUserErr: PropTypes.func.isRequired,
   updSubs: PropTypes.func.isRequired,
+  creFriend: PropTypes.func.isRequired,
+  isFriendshipRequested: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -455,6 +493,7 @@ const mapDispatchToProps = dispatch => ({
   creSubs: payload => dispatch(createSubscription(payload)),
   delSubs: payload => dispatch(deleteSubscription(payload)),
   updSubs: payload => dispatch(updateSubscription(payload)),
+  creFriend: payload => dispatch(createFriendship(payload)),
 });
 
 export default connect(null, mapDispatchToProps)(Main);

@@ -11,7 +11,17 @@ const User = props => {
     url,
     coursesToDivs,
     commentsToDivsWithCourse,
+    handleCreateFriendship,
+    tokenPayload,
+    userPayload,
+    id,
+    token,
+    useAuth,
+    urlApi,
+    objThunk,
+    isFriendshipRequested,
   } = props;
+  const objAuth = useAuth();
   const foundUser = (users, id) => users.find(u => u.id === id);
   const infoUser = foundUser([...user.requests, ...user.pendings], parseInt(match.params.id, 10))
     || location.state.user;
@@ -28,15 +38,15 @@ const User = props => {
           </h3>
           <div className="student">
             <h4>As a Student</h4>
-            {coursesToDivs(user.courses_as_student)}
+            {coursesToDivs(obj.courses_as_student)}
           </div>
           <div className="teacher">
             <h4>As a Teacher</h4>
-            {coursesToDivs(user.courses)}
+            {coursesToDivs(obj.courses)}
           </div>
           <div>
             <h4>
-              Comments mady by
+              Comments made by
               {` ${obj.username}`}
             </h4>
             {commentsToDivsWithCourse(obj.comments, location, url)}
@@ -47,7 +57,29 @@ const User = props => {
     return (
       <div>
         <div>Your are not friends yet</div>
-        <button type="button">Add to friend</button>
+        <button
+          type="button"
+          onClick={() => {
+            if (isFriendshipRequested(user.pending_requested_friendships, obj.id)) {
+              console.log('Not friend');
+            } else {
+              handleCreateFriendship(
+                tokenPayload,
+                userPayload,
+                id,
+                token,
+                objAuth.userId,
+                objAuth.userPassword,
+                obj.id,
+                obj.username,
+                objThunk,
+                urlApi,
+              );
+            }
+          }}
+        >
+          { isFriendshipRequested(user.pending_requested_friendships, obj.id) ? 'Cancel request' : 'Add to friend' }
+        </button>
       </div>
     );
   };
@@ -126,6 +158,10 @@ User.propTypes = {
       course_id: PropTypes.number,
     })).isRequired,
     pending_to_accept_friendships: PropTypes.arrayOf(PropTypes.shape({
+      receiver_id: PropTypes.number,
+      sender_id: PropTypes.number,
+    })).isRequired,
+    pending_requested_friendships: PropTypes.arrayOf(PropTypes.shape({
       receiver_id: PropTypes.number,
       sender_id: PropTypes.number,
     })).isRequired,
@@ -208,6 +244,15 @@ User.propTypes = {
   }).isRequired,
   coursesToDivs: PropTypes.func.isRequired,
   commentsToDivsWithCourse: PropTypes.func.isRequired,
+  handleCreateFriendship: PropTypes.func.isRequired,
+  tokenPayload: PropTypes.func.isRequired,
+  userPayload: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  token: PropTypes.string.isRequired,
+  useAuth: PropTypes.func.isRequired,
+  objThunk: PropTypes.func.isRequired,
+  urlApi: PropTypes.string.isRequired,
+  isFriendshipRequested: PropTypes.func.isRequired,
 };
 
 export default User;
