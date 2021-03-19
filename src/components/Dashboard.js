@@ -21,7 +21,9 @@ const Dashboard = props => {
     useAuth,
     handleDeleteSubscription,
     isPresentInUserId,
+    handleDelFriend,
   } = props;
+  const objAuth = useAuth();
 
   const displayPendingSubscriptions = (
     course,
@@ -29,7 +31,6 @@ const Dashboard = props => {
     location,
   ) => course.pendings.map(p => {
     const student = course.pending_students.find(s => s.id === p.user_id);
-    const objAuth = useAuth();
 
     return (
       <div className="request" key={p.id}>
@@ -120,7 +121,7 @@ const Dashboard = props => {
     </div>
   ));
 
-  const displayPendingFriendships = (students, requests, location) => requests.map(r => {
+  const displayPendingFriendships = (students, requests, location) => requests.map((r, i) => {
     const student = students.find(s => s.id === r.sender_id);
     return (
       <div className="request" key={r.id}>
@@ -137,7 +138,27 @@ const Dashboard = props => {
         </Link>
         <div>
           <button type="button">Accept</button>
-          <button type="button">Ignore</button>
+          <button
+            type="button"
+            onClick={() => handleDelFriend(
+              tokenPayload,
+              userPayload,
+              id,
+              token,
+              objAuth.userId,
+              objAuth.userPassword,
+              urlApi,
+              objThunk,
+              {
+                id: r.id,
+                pendigRequested: false,
+                indexRequest: i,
+                studentId: student.id,
+              },
+            )}
+          >
+            Ignore
+          </button>
         </div>
       </div>
     );
@@ -343,6 +364,7 @@ Dashboard.propTypes = {
   useAuth: PropTypes.func.isRequired,
   handleDeleteSubscription: PropTypes.func.isRequired,
   isPresentInUserId: PropTypes.func.isRequired,
+  handleDelFriend: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

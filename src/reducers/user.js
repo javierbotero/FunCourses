@@ -239,7 +239,18 @@ const user = createSlice({
             .findIndex(f => f.id === parseInt(action.payload.friendship.id, 10));
           state.user.pending_requested_friendships.splice(indexRequest, 1);
         } else {
-          console.log('reducer delete friendship');
+          const indexRequest = state
+            .user
+            .friendship_requests
+            .findIndex(f => f.id === parseInt(action.payload.friendship.studentId, 10));
+          state
+            .user
+            .pending_to_accept_friendships
+            .splice(action.payload.friendship.indexRequest, 1);
+          state
+            .user
+            .friendship_requests
+            .splice(indexRequest, 1);
         }
         state.notification = 'The request has been deleted';
         state.error = '';

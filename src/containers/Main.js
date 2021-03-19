@@ -201,7 +201,6 @@ const Main = props => {
       ...tokenPayloadCb(id, token),
       ...userPayloadCb(uId, password),
     };
-    init.id = friendship.id;
     const payload = objThunkCb(urlapi, 'DELETE', init);
     payload.friendship = friendship;
     delFriend(payload);
@@ -321,6 +320,7 @@ const Main = props => {
               isPresentInUserId={isPresentInUserId}
               isPresentInId={isPresentInId}
               setUserErr={setUserErr}
+              handleDelFriend={handleDelFriend}
             />
           )}
         />
