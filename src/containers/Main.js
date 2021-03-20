@@ -57,6 +57,7 @@ const Main = props => {
     isFriendshipRequested,
     delFriend,
     updFriend,
+    findCourses,
   } = props;
   const { path, url } = match;
   const objAuth = useAuth();
@@ -298,6 +299,7 @@ const Main = props => {
           path={`${path}/user/:id`}
           render={({ match, location }) => (
             <User
+              courses={courses}
               match={match}
               location={location}
               url={url}
@@ -314,6 +316,7 @@ const Main = props => {
               urlApi={urlApi}
               isFriendshipRequested={isFriendshipRequested}
               handleDelFriend={handleDelFriend}
+              findCourses={findCourses}
             />
           )}
         />
@@ -529,6 +532,7 @@ Main.propTypes = {
   isFriendshipRequested: PropTypes.func.isRequired,
   delFriend: PropTypes.func.isRequired,
   updFriend: PropTypes.func.isRequired,
+  findCourses: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

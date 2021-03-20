@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const User = props => {
   const {
+    courses,
     user,
     match,
     location,
@@ -21,6 +22,7 @@ const User = props => {
     objThunk,
     isFriendshipRequested,
     handleDelFriend,
+    findCourses,
   } = props;
   const objAuth = useAuth();
   const foundUser = (users, id) => users.find(u => u.id === id);
@@ -37,7 +39,7 @@ const User = props => {
     return result;
   };
   const infoUser = selectUser(foundUser, user, match, location);
-  const infoUserToHtml = obj => {
+  const infoUserToHtml = (obj, courses, findCoursesCb) => {
     if (obj.status) {
       return (
         <div>
@@ -49,12 +51,12 @@ const User = props => {
             {' Courses'}
           </h3>
           <div className="student">
-            <h4>Courses as a Student</h4>
-            {coursesToDivs(obj.courses_as_student)}
+            <h4>Courses as Student</h4>
+            {coursesToDivs(findCoursesCb(courses, obj.courses_as_student))}
           </div>
           <div className="teacher">
-            <h4>Courses as a Teacher</h4>
-            {coursesToDivs(obj.courses)}
+            <h4>Courses as Teacher</h4>
+            {coursesToDivs(findCoursesCb(courses, obj.courses))}
           </div>
           <div>
             <h4>
@@ -122,7 +124,7 @@ const User = props => {
         </ul>
       </nav>
       <h3>{infoUser.username}</h3>
-      {infoUserToHtml(infoUser)}
+      {infoUserToHtml(infoUser, courses, findCourses)}
     </div>
   );
 };
@@ -268,6 +270,41 @@ User.propTypes = {
       })).isRequired,
     })),
   }).isRequired,
+  courses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    teacher_id: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    dates: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    created_at: PropTypes.string.isRequired,
+    updated_at: PropTypes.string.isRequired,
+    teacher: PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+    }).isRequired,
+    favorites: PropTypes.arrayOf(PropTypes.shape({
+      course_id: PropTypes.number,
+      user_id: PropTypes.number,
+    })).isRequired,
+    subscriptions: PropTypes.arrayOf(PropTypes.shape({
+      course_id: PropTypes.number,
+      user_id: PropTypes.number.isRequired,
+      confirmed: PropTypes.bool,
+    })).isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      user_id: PropTypes.number,
+      course_id: PropTypes.number,
+      body: PropTypes.string,
+    })).isRequired,
+    pendings: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      user_id: PropTypes.number,
+      course_id: PropTypes.number,
+      confirmed: PropTypes.bool,
+    })).isRequired,
+  })).isRequired,
   coursesToDivs: PropTypes.func.isRequired,
   commentsToDivsWithCourse: PropTypes.func.isRequired,
   handleCreateFriendship: PropTypes.func.isRequired,
@@ -280,6 +317,7 @@ User.propTypes = {
   urlApi: PropTypes.string.isRequired,
   isFriendshipRequested: PropTypes.func.isRequired,
   handleDelFriend: PropTypes.func.isRequired,
+  findCourses: PropTypes.func.isRequired,
 };
 
 export default User;
