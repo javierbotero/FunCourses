@@ -11,7 +11,7 @@ import * as utils from '../test-util/test-util';
 import '@testing-library/jest-dom/extend-expect';
 
 describe('Tests for Course', () => {
-  it('Checks that', () => {
+  it('Checks that conctent of course is present', () => {
     render(
       <BrowserRouter>
         <Course
@@ -39,7 +39,7 @@ describe('Tests for Course', () => {
     );
     expect(screen.getByText('Karate class')).toHaveTextContent('Karate class');
   });
-  it('Checks that', () => {
+  it('Mkaes sure that mockHandleSubscription is being called when button Subscribe is clicked', () => {
     render(
       <BrowserRouter>
         <Course
@@ -68,7 +68,7 @@ describe('Tests for Course', () => {
     fireEvent.click(screen.getByText('Subscribe'));
     expect(utils.mockHandleSubscription.mock.calls.length).toBe(1);
   });
-  it('Checks that', () => {
+  it('Makes sure that mockUsersListToDiv is being called', () => {
     render(
       <BrowserRouter>
         <Course
@@ -96,7 +96,7 @@ describe('Tests for Course', () => {
     );
     expect(utils.mockUsersListToDiv.mock.calls.length).toBe(2);
   });
-  it('Checks that', () => {
+  it('Checks that information of teacher is present', () => {
     render(
       <BrowserRouter>
         <Course

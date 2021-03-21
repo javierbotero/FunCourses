@@ -1,6 +1,7 @@
 import fetchMock from 'fetch-mock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import { URL } from '../constants/constants';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -31,6 +32,21 @@ const mockCourses = [
     confirmed_students: [],
   },
 ];
+const mockUser = {
+  id: 17,
+  status: 'Student',
+  username: 'Javier 4',
+  courses_as_student: [],
+  pending_courses_as_student: [],
+  comments: [],
+  favorites: [],
+  pending_to_accept_friendships: [],
+  pending_requested_friendships: [],
+  friendship_requests: [],
+  requests: [],
+  pendings: [],
+  courses: [],
+};
 const mockTeacherCourses = [];
 const mockLocation = {
   from: { pathname: 'url' },
@@ -41,7 +57,14 @@ const mockLocation = {
 const mockUrl = 'url';
 const mockUsersListToDiv = jest.fn();
 const mockCommentsToDivs = jest.fn();
-const mockUseAuth = (() => ({ userPassword: 'Javier', userId: 1 }));
+const mockUseAuth = (() => (
+  {
+    userPassword: 'Javier',
+    userId: 1,
+    setUserId: jest.fn(),
+    setUserPassword: jest.fn(),
+  }
+));
 const mockIsPresentInUserId = jest.fn();
 const mockIsPresentInId = jest.fn();
 const mockHandleLike = jest.fn();
@@ -53,6 +76,13 @@ const mockTokenPayload = jest.fn();
 const mockUserPayload = jest.fn();
 const mockId = 1;
 const mockSetUserErr = jest.fn();
+const mockCoursesToDivs = jest.fn();
+const mockHandleUpdateSubscription = jest.fn();
+const mockHandleDeleteSubscription = jest.fn();
+const mockHandleDelFriend = jest.fn();
+const mockHandleUpdFriend = jest.fn();
+const mockResetUser = jest.fn();
+const mockResetCourses = jest.fn();
 
 export {
   mockStore,
@@ -76,4 +106,12 @@ export {
   mockUserPayload,
   mockId,
   mockSetUserErr,
+  mockUser,
+  mockCoursesToDivs,
+  mockHandleUpdateSubscription,
+  mockHandleDeleteSubscription,
+  mockHandleDelFriend,
+  mockHandleUpdFriend,
+  mockResetUser,
+  mockResetCourses,
 };

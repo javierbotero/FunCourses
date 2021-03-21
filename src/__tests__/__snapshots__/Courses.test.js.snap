@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for courses Renders Courses component 1`] = `
+<div
+  className="courses"
+>
+  <header>
+    <div
+      className="avatar"
+    >
+      Avatar
+    </div>
+    <ul>
+      <li>
+        <a
+          href="url/dashboard"
+          onClick={[Function]}
+        >
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a
+          href="url/create"
+          onClick={[Function]}
+        >
+          Create
+        </a>
+      </li>
+      <li>
+        <a
+          href="url/report"
+          onClick={[Function]}
+        >
+          Report
+        </a>
+      </li>
+    </ul>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Log out
+    </button>
+  </header>
+  <div
+    className="list-courses"
+  />
+</div>
+`;
