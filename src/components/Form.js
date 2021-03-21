@@ -83,7 +83,7 @@ const Form = props => {
           )}
         <div>
           <label htmlFor="password">
-            <div>password</div>
+            <div>Password</div>
             <input type="password" onChange={e => handleChange(e, setPassword)} value={password} id="password" placeholder="password" />
           </label>
         </div>
@@ -108,7 +108,7 @@ Form.propTypes = {
   tokenPayload: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   handleApiRequest: PropTypes.func.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
   setUserErr: PropTypes.func.isRequired,
@@ -122,3 +122,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(null, mapDispatchToProps)(Form);
+export { Form };

@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for Form Makes sure prints correctly 1`] = `
+<div
+  className="form login"
+>
+  <div
+    className="auth-title"
+  >
+    Log in
+  </div>
+  <p>
+    Hello there! it's time to learn with fun courses
+  </p>
+  <form
+    onSubmit={[Function]}
+  >
+    <div>
+      <label
+        htmlFor="username"
+      >
+        <div>
+          Username
+        </div>
+        <input
+          id="username"
+          onChange={[Function]}
+          placeholder="User"
+          type="text"
+          value=""
+        />
+      </label>
+    </div>
+    <div>
+      <label
+        htmlFor="password"
+      >
+        <div>
+          Password
+        </div>
+        <input
+          id="password"
+          onChange={[Function]}
+          placeholder="password"
+          type="password"
+          value=""
+        />
+      </label>
+    </div>
+    <div>
+      <input
+        className="btn"
+        type="submit"
+        value="Submit"
+      />
+    </div>
+  </form>
+</div>
+`;

@@ -354,23 +354,23 @@ Dashboard.propTypes = {
       favorites: PropTypes.arrayOf(PropTypes.shape({
         course_id: PropTypes.number,
         user_id: PropTypes.number,
-      })).isRequired,
+      })),
       subscriptions: PropTypes.arrayOf(PropTypes.shape({
         course_id: PropTypes.number,
         user_id: PropTypes.number.isRequired,
         confirmed: PropTypes.bool,
-      })).isRequired,
+      })),
       comments: PropTypes.arrayOf(PropTypes.shape({
         user_id: PropTypes.number,
         course_id: PropTypes.number,
         body: PropTypes.string,
-      })).isRequired,
+      })),
       pendings: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number,
         user_id: PropTypes.number,
         course_id: PropTypes.number,
         confirmed: PropTypes.bool,
-      })).isRequired,
+      })),
     })),
   }).isRequired,
   coursesToDivs: PropTypes.func.isRequired,
@@ -396,3 +396,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(Dashboard);
+export { Dashboard };

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for Dashboard Makes sure renders correctly 1`] = `
+<div>
+  <nav>
+    <ul>
+      <li>
+        <a
+          href="url"
+          onClick={[Function]}
+        >
+          &lt;
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <header>
+    <h2>
+      Dashboard
+    </h2>
+    <p>
+      Hi
+       Javier 4 
+      !
+    </p>
+  </header>
+  <main>
+    <h3>
+      Your Courses
+    </h3>
+    <div
+      className="student"
+    >
+      <h4>
+        As a Student
+      </h4>
+    </div>
+    <div
+      className="teacher"
+    >
+      <h4>
+        As a Teacher
+      </h4>
+      <div
+        className="teacher-course"
+      >
+        <h4>
+          Karate class
+        </h4>
+        <section>
+          <h4>
+            Enrollment Requests
+          </h4>
+          <p>
+            0
+             students waiting
+          </p>
+        </section>
+        <aside>
+          <h4>
+            Accepted Students
+          </h4>
+          <div />
+          <p>
+            0
+             students are confirmed
+          </p>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <aside>
+    <div>
+      <h4>
+        Friendship Requests
+      </h4>
+      <div />
+    </div>
+  </aside>
+</div>
+`;

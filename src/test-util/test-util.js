@@ -33,7 +33,7 @@ const mockCourses = [
   },
 ];
 const mockUser = {
-  id: 17,
+  id: 7,
   status: 'Student',
   username: 'Javier 4',
   courses_as_student: [],
@@ -45,7 +45,28 @@ const mockUser = {
   friendship_requests: [],
   requests: [],
   pendings: [],
-  courses: [],
+  courses: [
+    {
+      id: 5,
+      title: 'Karate class',
+      content: 'Nice Karate class',
+      teacher_id: 7,
+      status: 'Open',
+      dates: '2021-03-25T00:00:00.000Z 2021-03-29T00:00:00.000Z ',
+      price: 10,
+      created_at: '2021-03-07T17:56:22.487Z',
+      updated_at: '2021-03-15T04:21:24.489Z',
+      teacher: {
+        id: 7,
+        username: 'Adele',
+      },
+      pendings: [],
+      pending_students: [],
+      favorites: [],
+      subscriptions: [],
+      confirmed_students: [],
+    },
+  ],
 };
 const mockTeacherCourses = [];
 const mockLocation = {
@@ -63,6 +84,7 @@ const mockUseAuth = (() => (
     userId: 1,
     setUserId: jest.fn(),
     setUserPassword: jest.fn(),
+    authenticate: jest.fn(),
   }
 ));
 const mockIsPresentInUserId = jest.fn();
@@ -83,6 +105,9 @@ const mockHandleDelFriend = jest.fn();
 const mockHandleUpdFriend = jest.fn();
 const mockResetUser = jest.fn();
 const mockResetCourses = jest.fn();
+const mockInitCreator = jest.fn();
+const mockHandleApiRequest = jest.fn();
+const mockRemoveUserErr = jest.fn();
 
 export {
   mockStore,
@@ -114,4 +139,8 @@ export {
   mockHandleUpdFriend,
   mockResetUser,
   mockResetCourses,
+  mockInitCreator,
+  mockHandleApiRequest,
+  mockRemoveUserErr,
+  URL,
 };
