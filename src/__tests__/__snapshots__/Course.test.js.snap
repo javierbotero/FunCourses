@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for Course renders correctly 1`] = `
+<div>
+  <nav>
+    <ul>
+      <li>
+        <a
+          href="/url"
+          onClick={[Function]}
+        >
+          &lt;
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div>
+    <div>
+      Karate class
+    </div>
+    <div>
+      <a
+        href="url/user/7"
+        onClick={[Function]}
+      >
+        Teacher:
+         Adele
+      </a>
+    </div>
+  </div>
+  <div>
+    Start:
+     3/24/2021
+    <br />
+    End:
+     3/28/2021
+  </div>
+  <div>
+    Nice Karate class
+  </div>
+  <div>
+    status:
+     Open
+  </div>
+  <div>
+    price:
+     $10
+  </div>
+  <div>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      <i
+        className="fa far,heart"
+      />
+    </button>
+     0
+  </div>
+  <div>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      
+      
+      Subscribe
+    </button>
+  </div>
+  <div>
+    <div>
+      <h4>
+        Students confirmed
+      </h4>
+      <div />
+    </div>
+    <div>
+      <h4>
+        Students waiting for confirmation
+      </h4>
+      <div />
+    </div>
+  </div>
+  <div>
+    <h4>
+      Comments
+    </h4>
+    <div />
+  </div>
+</div>
+`;

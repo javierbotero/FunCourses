@@ -8,7 +8,7 @@ const FontAwesomeIcon = props => {
 
 FontAwesomeIcon.propTypes = {
   icon: PropTypes.node.isRequired,
-}
+};
 
 export {
   // eslint-disable-next-line import/prefer-default-export
