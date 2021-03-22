@@ -108,6 +108,7 @@ const mockResetCourses = jest.fn();
 const mockInitCreator = jest.fn();
 const mockHandleApiRequest = jest.fn();
 const mockRemoveUserErr = jest.fn();
+const mockDispatchCourse = jest.fn();
 
 export {
   mockStore,
@@ -143,4 +144,5 @@ export {
   mockHandleApiRequest,
   mockRemoveUserErr,
   URL,
+  mockDispatchCourse,
 };

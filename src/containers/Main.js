@@ -14,8 +14,8 @@ import { useAuth } from '../helpers/authHelpers';
 import { resetStateCourses } from '../reducers/courses';
 import { resetStateUser, setUserError } from '../reducers/user';
 import Courses from '../components/Courses';
-import Dashboard from '../components/Dashboard';
-import FormCourse from '../components/FormCourse';
+import DashboardComponent from '../components/Dashboard';
+import FormCourseComponent from '../components/FormCourse';
 import Report from '../components/Report';
 import {
   createLike,
@@ -324,7 +324,7 @@ const Main = props => {
           exact
           path={`${path}/dashboard`}
           render={({ location }) => (
-            <Dashboard
+            <DashboardComponent
               user={user}
               location={location}
               url={url}
@@ -353,7 +353,7 @@ const Main = props => {
           exact
           path={`${path}/create`}
           render={({ location }) => (
-            <FormCourse
+            <FormCourseComponent
               location={location}
               userId={objAuth.userId}
               password={objAuth.userPassword}
