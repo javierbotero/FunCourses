@@ -74,6 +74,15 @@ const mockLocation = {
   hash: 'some-hash',
   pathname: 'url',
   search: 'default',
+  state: {
+    user: {
+      id: 1,
+      username: 'Paco',
+    },
+    from: {
+      pathname: 'url',
+    },
+  },
 };
 const mockUrl = 'url';
 const mockUsersListToDiv = jest.fn();
@@ -109,6 +118,10 @@ const mockInitCreator = jest.fn();
 const mockHandleApiRequest = jest.fn();
 const mockRemoveUserErr = jest.fn();
 const mockDispatchCourse = jest.fn();
+const mockCommentsToDivsWithCourse = jest.fn();
+const mockHandleCreateFriendship = jest.fn();
+const mockIsFriendshipRequested = jest.fn();
+const mockFindCourses = jest.fn();
 
 export {
   mockStore,
@@ -145,4 +158,8 @@ export {
   mockRemoveUserErr,
   URL,
   mockDispatchCourse,
+  mockCommentsToDivsWithCourse,
+  mockHandleCreateFriendship,
+  mockIsFriendshipRequested,
+  mockFindCourses,
 };
