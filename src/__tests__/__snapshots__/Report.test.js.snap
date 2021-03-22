@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for Report Prints correctly 1`] = `
+<div
+  className="report"
+>
+  <header>
+    <ul>
+      <li>
+        <a
+          href="/url"
+          onClick={[Function]}
+        >
+          &lt;
+        </a>
+      </li>
+    </ul>
+    <div>
+      Hello 
+      Javier 4
+      , these are metrics of your actions
+    </div>
+  </header>
+  <main>
+    <div>
+      <div>
+        Courses created: 
+      </div>
+      <div>
+        1
+      </div>
+    </div>
+    <div>
+      <div>
+        Total Students: 
+      </div>
+      <div>
+        0
+      </div>
+    </div>
+    <div>
+      <div>
+        Total students waiting for confirmation: 
+      </div>
+      <div>
+        0
+      </div>
+    </div>
+    <div>
+      <div>
+        Total favorites received: 
+      </div>
+      <div>
+        0
+      </div>
+    </div>
+    <div>
+      <div>
+        Courses as student: 
+      </div>
+      <div>
+        0
+      </div>
+    </div>
+    <div>
+      <div>
+        Total friends: 
+      </div>
+      <div>
+        0
+      </div>
+    </div>
+    <div>
+      <div>
+        Your comments: 
+      </div>
+      <div>
+        0
+      </div>
+    </div>
+    <div>
+      <div>
+        Your favorites: 
+      </div>
+      <div>
+        0
+      </div>
+    </div>
+  </main>
+</div>
+`;
