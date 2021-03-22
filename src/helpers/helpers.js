@@ -97,6 +97,8 @@ const usersListToDiv = (users, location, url) => users.map(u => (
   </div>
 ));
 const findCourses = (courses, subcourses) => subcourses.map(s => courses.find(c => c.id === s.id));
+const findCoursesFromCoursesId = (courses, relation) => relation
+  .map(r => courses.find(c => c.id === r.course_id));
 const isPresentInUserId = (arr, id) => arr.find(item => item.user_id === parseInt(id, 10));
 const isPresentInId = (arr, id) => arr.find(item => item.id === parseInt(id, 10));
 const isFriendshipRequested = (arr, id) => arr.find(f => f.receiver_id === parseInt(id, 10));
@@ -114,4 +116,5 @@ export {
   isPresentInId,
   isFriendshipRequested,
   findCourses,
+  findCoursesFromCoursesId,
 };

@@ -30,6 +30,7 @@ import {
   isPresentInId,
   isFriendshipRequested,
   findCourses,
+  findCoursesFromCoursesId,
 } from '../helpers/helpers';
 import { removeCourseError, removeNotificationCourses } from '../reducers/courses';
 import { removeUserError, removeNotificationUser } from '../reducers/user';
@@ -165,6 +166,7 @@ const App = props => {
                     isPresentInId={isPresentInId}
                     isFriendshipRequested={isFriendshipRequested}
                     findCourses={findCourses}
+                    findCoursesFromCoursesId={findCoursesFromCoursesId}
                   />
                 );
               }

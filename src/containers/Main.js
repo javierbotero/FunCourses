@@ -58,6 +58,7 @@ const Main = props => {
     delFriend,
     updFriend,
     findCourses,
+    findCoursesFromCoursesId,
   } = props;
   const { path, url } = match;
   const objAuth = useAuth();
@@ -325,6 +326,7 @@ const Main = props => {
           path={`${path}/dashboard`}
           render={({ location }) => (
             <DashboardComponent
+              courses={courses}
               user={user}
               location={location}
               url={url}
@@ -346,6 +348,7 @@ const Main = props => {
               setUserErr={setUserErr}
               handleDelFriend={handleDelFriend}
               handleUpdFriend={handleUpdFriend}
+              findCoursesFromCoursesId={findCoursesFromCoursesId}
             />
           )}
         />
@@ -533,6 +536,7 @@ Main.propTypes = {
   delFriend: PropTypes.func.isRequired,
   updFriend: PropTypes.func.isRequired,
   findCourses: PropTypes.func.isRequired,
+  findCoursesFromCoursesId: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

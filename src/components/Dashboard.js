@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = props => {
   const {
+    courses,
     user,
     location,
     url,
@@ -23,6 +24,7 @@ const Dashboard = props => {
     isPresentInUserId,
     handleDelFriend,
     handleUpdFriend,
+    findCoursesFromCoursesId,
   } = props;
   const objAuth = useAuth();
 
@@ -220,6 +222,10 @@ const Dashboard = props => {
           <h4>As a Teacher</h4>
           {teacherCoursesToDivs(user.courses, url, location)}
         </div>
+        <div className="teacher">
+          <h4>Favorites</h4>
+          {coursesToDivs(findCoursesFromCoursesId(courses, user.favorites), url, location)}
+        </div>
       </main>
       <aside>
         <div>
@@ -373,6 +379,41 @@ Dashboard.propTypes = {
       })),
     })),
   }).isRequired,
+  courses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    teacher_id: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    dates: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    created_at: PropTypes.string.isRequired,
+    updated_at: PropTypes.string.isRequired,
+    teacher: PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+    }).isRequired,
+    favorites: PropTypes.arrayOf(PropTypes.shape({
+      course_id: PropTypes.number,
+      user_id: PropTypes.number,
+    })).isRequired,
+    subscriptions: PropTypes.arrayOf(PropTypes.shape({
+      course_id: PropTypes.number,
+      user_id: PropTypes.number.isRequired,
+      confirmed: PropTypes.bool,
+    })).isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      user_id: PropTypes.number,
+      course_id: PropTypes.number,
+      body: PropTypes.string,
+    })).isRequired,
+    pendings: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      user_id: PropTypes.number,
+      course_id: PropTypes.number,
+      confirmed: PropTypes.bool,
+    })).isRequired,
+  })).isRequired,
   coursesToDivs: PropTypes.func.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   url: PropTypes.string.isRequired,
@@ -389,6 +430,7 @@ Dashboard.propTypes = {
   isPresentInUserId: PropTypes.func.isRequired,
   handleDelFriend: PropTypes.func.isRequired,
   handleUpdFriend: PropTypes.func.isRequired,
+  findCoursesFromCoursesId: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
