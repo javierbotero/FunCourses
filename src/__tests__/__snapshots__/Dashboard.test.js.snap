@@ -68,6 +68,13 @@ exports[`Tests for Dashboard Makes sure renders correctly 1`] = `
         </aside>
       </div>
     </div>
+    <div
+      className="teacher"
+    >
+      <h4>
+        Favorites
+      </h4>
+    </div>
   </main>
   <aside>
     <div>

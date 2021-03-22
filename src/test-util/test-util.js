@@ -122,6 +122,7 @@ const mockCommentsToDivsWithCourse = jest.fn();
 const mockHandleCreateFriendship = jest.fn();
 const mockIsFriendshipRequested = jest.fn();
 const mockFindCourses = jest.fn();
+const mockFindCoursesFromCoursesId = jest.fn();
 
 export {
   mockStore,
@@ -162,4 +163,5 @@ export {
   mockHandleCreateFriendship,
   mockIsFriendshipRequested,
   mockFindCourses,
+  mockFindCoursesFromCoursesId,
 };

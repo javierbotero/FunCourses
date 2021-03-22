@@ -15,6 +15,7 @@ describe('Tests for Dashboard', () => {
     render(
       <BrowserRouter>
         <Dashboard
+          courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
@@ -36,6 +37,7 @@ describe('Tests for Dashboard', () => {
           setUserErr={util.mockSetUserErr}
           handleDelFriend={util.mockHandleDelFriend}
           handleUpdFriend={util.mockHandleUpdFriend}
+          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
@@ -45,6 +47,7 @@ describe('Tests for Dashboard', () => {
     render(
       <BrowserRouter>
         <Dashboard
+          courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
@@ -66,6 +69,7 @@ describe('Tests for Dashboard', () => {
           setUserErr={util.mockSetUserErr}
           handleDelFriend={util.mockHandleDelFriend}
           handleUpdFriend={util.mockHandleUpdFriend}
+          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
@@ -75,6 +79,7 @@ describe('Tests for Dashboard', () => {
     render(
       <BrowserRouter>
         <Dashboard
+          courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
@@ -96,6 +101,7 @@ describe('Tests for Dashboard', () => {
           setUserErr={util.mockSetUserErr}
           handleDelFriend={util.mockHandleDelFriend}
           handleUpdFriend={util.mockHandleUpdFriend}
+          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
@@ -105,6 +111,7 @@ describe('Tests for Dashboard', () => {
     render(
       <BrowserRouter>
         <Dashboard
+          courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
@@ -126,6 +133,7 @@ describe('Tests for Dashboard', () => {
           setUserErr={util.mockSetUserErr}
           handleDelFriend={util.mockHandleDelFriend}
           handleUpdFriend={util.mockHandleUpdFriend}
+          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
@@ -135,6 +143,7 @@ describe('Tests for Dashboard', () => {
     render(
       <BrowserRouter>
         <Dashboard
+          courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
@@ -156,6 +165,7 @@ describe('Tests for Dashboard', () => {
           setUserErr={util.mockSetUserErr}
           handleDelFriend={util.mockHandleDelFriend}
           handleUpdFriend={util.mockHandleUpdFriend}
+          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
@@ -165,6 +175,7 @@ describe('Tests for Dashboard', () => {
     const tree = renderer.create(
       <BrowserRouter>
         <Dashboard
+          courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
@@ -186,6 +197,7 @@ describe('Tests for Dashboard', () => {
           setUserErr={util.mockSetUserErr}
           handleDelFriend={util.mockHandleDelFriend}
           handleUpdFriend={util.mockHandleUpdFriend}
+          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
         />
       </BrowserRouter>,
     ).toJSON();
