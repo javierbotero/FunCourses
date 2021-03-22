@@ -11,7 +11,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faHeart as fasFaHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
-import Form from '../components/Form';
+import {
+  faLinkedin,
+  faFacebook,
+  faTwitterSquare,
+  faInstagramSquare,
+} from '@fortawesome/free-brands-svg-icons';
+import FormComponent from '../components/Form';
 import Landing from '../components/Landing';
 import { useAuth } from '../helpers/authHelpers';
 import Main from './Main';
@@ -28,7 +34,14 @@ import {
 import { removeCourseError, removeNotificationCourses } from '../reducers/courses';
 import { removeUserError, removeNotificationUser } from '../reducers/user';
 
-library.add(fasFaHeart, farFaHeart);
+library.add(
+  fasFaHeart,
+  farFaHeart,
+  faLinkedin,
+  faFacebook,
+  faTwitterSquare,
+  faInstagramSquare,
+);
 dom.watch();
 
 const App = props => {
@@ -78,7 +91,6 @@ const App = props => {
           <li><Link to="/signup">Sign up</Link></li>
           <li><Link to="/login">Log in</Link></li>
         </ul>
-        <h1>Find a fun course!</h1>
       </header>
       <Landing />
     </div>
@@ -188,7 +200,7 @@ const App = props => {
                       <li><Link to="/login">Log in</Link></li>
                     </ul>
                   </header>
-                  <Form
+                  <FormComponent
                     initCreator={initCreator}
                     tokenPayload={tokenPayload}
                     handleApiRequest={handleApiRequest}
