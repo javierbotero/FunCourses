@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for Landing Prints correctly 1`] = `
+<div
+  className="info-landing"
+>
+  <header>
+    <div
+      className="logo"
+    />
+    <div>
+      Fun Courses
+    </div>
+  </header>
+  <main>
+    <section>
+      <h4>
+        Find a course of any theme
+      </h4>
+      <p>
+        The best courses for you about any theme you can think of, taught by professionals.
+      </p>
+      <a
+        href="/signin"
+        onClick={[Function]}
+      >
+        Start Free
+      </a>
+    </section>
+    <section>
+      <h4>
+        Interesting courses from reliable teachers
+      </h4>
+      <div>
+        <div>
+          <h4>
+            All stats at your fingerprints
+          </h4>
+          <p>
+            All the information about the number of students, your courses, comments and interactions will be available to you to measure your performance.
+          </p>
+        </div>
+        <div
+          className="stats"
+        />
+      </div>
+    </section>
+    <section>
+      <div
+        className="stats"
+      />
+      <div>
+        <div>
+          <h4>
+            Talk with professionals
+          </h4>
+          <p>
+            The best professionals around the world will be reachable through live courses. take the opportunity to enhance your skills in any matter.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div>
+        PEOPLE ARE ALREADY TAKING FUN COURSES
+      </div>
+      <h4>
+        Look what these are saying
+      </h4>
+      <div
+        className="opinions"
+      >
+        <div
+          className="opinion"
+        >
+          <div
+            style={
+              Object {
+                "backgroundImage": "user1.jpg",
+              }
+            }
+          />
+          <div>
+            The best place to to teach about fashion in a fun way
+          </div>
+        </div>
+        <div
+          className="opinion"
+        >
+          <div
+            style={
+              Object {
+                "backgroundImage": "user2.jpeg",
+              }
+            }
+          />
+          <div>
+            The best place to to teach about fashion in a fun way
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div>
+      <h4>
+        Learn everything at home
+      </h4>
+      <a
+        href="/signin"
+        onClick={[Function]}
+      >
+        Start free
+      </a>
+    </div>
+    <div>
+      <div
+        className="logo"
+      />
+      <div>
+        Fun Courses
+      </div>
+    </div>
+    <div>
+      <i
+        className="fa fab,linkedin"
+      />
+      <i
+        className="fa fab,facebook"
+      />
+      <i
+        className="fa fab,twitter-square"
+      />
+      <i
+        className="fa fab,instagram-square"
+      />
+    </div>
+  </footer>
+</div>
+`;

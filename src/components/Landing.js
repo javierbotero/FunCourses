@@ -72,7 +72,7 @@ const Landing = () => {
       </main>
       <footer>
         <div>
-          <h4>Learb everything at home</h4>
+          <h4>Learn everything at home</h4>
           <Link to="/signin">Start free</Link>
         </div>
         <div>
