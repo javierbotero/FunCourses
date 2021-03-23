@@ -1,7 +1,7 @@
 import user1 from '../assets/images/user1.jpg';
 import user2 from '../assets/images/user2.jpeg';
 
-const URL = 'http://localhost:3000/';
+const URL = process.env.REACT_APP_FUN_DOMAIN;
 const TOKEN = process.env.REACT_APP_FUN_COURSES;
 const ID = process.env.REACT_APP_FUN_ID;
 const OPINIONS = [

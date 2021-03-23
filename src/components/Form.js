@@ -55,6 +55,9 @@ const Form = props => {
       `${url}${match.params.identifier === 'signup' ? 'signup' : 'login'}`,
       match.params.identifier === 'signup' ? dataSignUp : dataLogIn,
     );
+    setUserName('');
+    setPassword('');
+    setPassConf('');
   };
   const handleChange = (e, cb) => {
     removeUserErr();
