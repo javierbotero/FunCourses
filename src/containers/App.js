@@ -33,7 +33,13 @@ import {
   findCoursesFromCoursesId,
 } from '../helpers/helpers';
 import { removeCourseError, removeNotificationCourses } from '../reducers/courses';
-import { removeUserError, removeNotificationUser } from '../reducers/user';
+import {
+  removeUserError,
+  removeNotificationUser,
+  setTrueLoading,
+  setFalseLoading,
+} from '../reducers/user';
+import '../css/style.css';
 
 library.add(
   fasFaHeart,
@@ -67,6 +73,7 @@ const App = props => {
   const errorUser = useSelector(state => state.user.error);
   const notificationUser = useSelector(state => state.user.notification);
   const notificationCourses = useSelector(state => state.courses.notification);
+  const loading = useSelector(state => state.user.loading);
   const tokenData = tokenPayload(id, token);
   const userData = userPayload(authObject.userId, authObject.userPassword);
   const dataThunkCourses = objThunk(
@@ -125,6 +132,7 @@ const App = props => {
           {notificationUser}
           {notificationCourses}
         </div>
+        <div className={loading ? 'loading' : ''} />
         <Switch>
           <Route
             exact
@@ -147,28 +155,33 @@ const App = props => {
             path="/app"
             render={({ match, location }) => {
               if (authObject.userId && authObject.userPassword) {
-                return (
-                  <Main
-                    match={match}
-                    courses={courses}
-                    user={user}
-                    location={location}
-                    objThunk={objThunk}
-                    userPayload={userPayload}
-                    tokenPayload={tokenPayload}
-                    id={id}
-                    token={token}
-                    urlApi={url}
-                    commentsToDivsWithCourse={commentsToDivsWithCourse}
-                    commentsToDivs={commentsToDivs}
-                    usersListToDiv={usersListToDiv}
-                    isPresentInUserId={isPresentInUserId}
-                    isPresentInId={isPresentInId}
-                    isFriendshipRequested={isFriendshipRequested}
-                    findCourses={findCourses}
-                    findCoursesFromCoursesId={findCoursesFromCoursesId}
-                  />
-                );
+                if (user.status) {
+                  dispatch(setFalseLoading());
+                  return (
+                    <Main
+                      match={match}
+                      courses={courses}
+                      user={user}
+                      location={location}
+                      objThunk={objThunk}
+                      userPayload={userPayload}
+                      tokenPayload={tokenPayload}
+                      id={id}
+                      token={token}
+                      urlApi={url}
+                      commentsToDivsWithCourse={commentsToDivsWithCourse}
+                      commentsToDivs={commentsToDivs}
+                      usersListToDiv={usersListToDiv}
+                      isPresentInUserId={isPresentInUserId}
+                      isPresentInId={isPresentInId}
+                      isFriendshipRequested={isFriendshipRequested}
+                      findCourses={findCourses}
+                      findCoursesFromCoursesId={findCoursesFromCoursesId}
+                    />
+                  );
+                }
+                dispatch(setTrueLoading());
+                return <div>We are loading...</div>;
               }
               return (
                 <Redirect

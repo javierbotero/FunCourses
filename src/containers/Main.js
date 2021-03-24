@@ -60,6 +60,7 @@ const Main = props => {
     findCourses,
     findCoursesFromCoursesId,
   } = props;
+  console.log(user);
   const { path, url } = match;
   const objAuth = useAuth();
   const handleLike = (userId, courseId, cb, favorites) => {
@@ -259,8 +260,10 @@ const Main = props => {
         <Route exact path={`${path}`}>
           <Courses
             coursesToDivs={coursesToDivs}
+            avatar={user.url_avatar}
             courses={courses}
             url={url}
+            urlApi={urlApi}
             location={location}
             useAuth={useAuth}
             resetUser={resetUser}
@@ -427,6 +430,7 @@ Main.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     username: PropTypes.string.isRequired,
+    url_avatar: PropTypes.string.isRequired,
     courses_as_student: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,

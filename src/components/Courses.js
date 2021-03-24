@@ -13,6 +13,8 @@ const Courses = props => {
     useAuth,
     resetUser,
     resetCourses,
+    urlApi,
+    avatar,
   } = props;
   const authObject = useAuth();
   const logout = () => {
@@ -27,7 +29,12 @@ const Courses = props => {
   return (
     <div className="courses">
       <header>
-        <div className="avatar">Avatar</div>
+        <div
+          className="avatar"
+          style={{
+            backgroundImage: `url(${urlApi}${avatar.slice(1, avatar.length)})`,
+          }}
+        />
         <ul>
           <li>
             <Link to={{
@@ -108,6 +115,8 @@ Courses.propTypes = {
   useAuth: PropTypes.func.isRequired,
   resetUser: PropTypes.func.isRequired,
   resetCourses: PropTypes.func.isRequired,
+  urlApi: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
 };
 
 export default Courses;

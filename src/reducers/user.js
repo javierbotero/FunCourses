@@ -18,6 +18,7 @@ const initialState = {
   status: 'idle',
   error: '',
   notification: '',
+  loading: false,
 };
 
 const user = createSlice({
@@ -32,6 +33,8 @@ const user = createSlice({
       state.error = '';
     },
     removeNotificationUser: state => { state.notification = ''; },
+    setTrueLoading: state => { state.loading = true; },
+    setFalseLoading: state => { state.loading = false; },
   },
   extraReducers: {
     [getUser.pending]: state => { state.status = 'pending'; },
@@ -307,6 +310,8 @@ const {
   setUserError,
   resetStateUser,
   removeNotificationUser,
+  setTrueLoading,
+  setFalseLoading,
 } = user.actions;
 
 export default user.reducer;
@@ -315,4 +320,6 @@ export {
   setUserError,
   resetStateUser,
   removeNotificationUser,
+  setTrueLoading,
+  setFalseLoading,
 };
