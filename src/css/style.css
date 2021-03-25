@@ -27,6 +27,27 @@
   background-repeat: no-repeat;
 }
 
+.course {
+  width: 15em;
+  height: 20em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.main-picture {
+  width: 100%;
+  height: 20em;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.pictures-course {
+  width: 30%;
+  height: 100%;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

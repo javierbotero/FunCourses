@@ -31,6 +31,8 @@ import {
   isFriendshipRequested,
   findCourses,
   findCoursesFromCoursesId,
+  mainUrl,
+  picturesToDivs,
 } from '../helpers/helpers';
 import { removeCourseError, removeNotificationCourses } from '../reducers/courses';
 import {
@@ -177,6 +179,8 @@ const App = props => {
                       isFriendshipRequested={isFriendshipRequested}
                       findCourses={findCourses}
                       findCoursesFromCoursesId={findCoursesFromCoursesId}
+                      mainUrl={mainUrl}
+                      picturesToDivs={picturesToDivs}
                     />
                   );
                 }

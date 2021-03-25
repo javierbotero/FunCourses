@@ -102,6 +102,21 @@ const findCoursesFromCoursesId = (courses, relation) => relation
 const isPresentInUserId = (arr, id) => arr.find(item => item.user_id === parseInt(id, 10));
 const isPresentInId = (arr, id) => arr.find(item => item.id === parseInt(id, 10));
 const isFriendshipRequested = (arr, id) => arr.find(f => f.receiver_id === parseInt(id, 10));
+const mainUrl = c => {
+  if (c.main_image_url) {
+    return c.main_image_url.slice(1, c.main_image_url.length);
+  }
+  return 'default';
+};
+const picturesToDivs = (images, urlApi, cssClases) => images.map(img => (
+  <div
+    key={img.slice(img.length - 30, img.length)}
+    className={cssClases}
+    style={{
+      backgroundImage: `url(${urlApi}${img})`,
+    }}
+  />
+));
 
 export {
   initCreator,
@@ -117,4 +132,6 @@ export {
   isFriendshipRequested,
   findCourses,
   findCoursesFromCoursesId,
+  mainUrl,
+  picturesToDivs,
 };

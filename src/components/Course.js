@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from '../css/Course.module.css';
 
 const Course = props => {
   const {
@@ -25,6 +26,8 @@ const Course = props => {
     userPayload,
     id,
     setUserErr,
+    mainUrl,
+    picturesToDivs,
   } = props;
   const objAuth = useAuth();
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
@@ -56,6 +59,12 @@ const Course = props => {
         </ul>
       </nav>
       <div>
+        <div
+          style={{
+            backgroundImage: `url(${urlApi}${mainUrl(course)})`,
+          }}
+          className="main-picture"
+        />
         <div>{course.title}</div>
         <div>
           <Link
@@ -127,6 +136,9 @@ const Course = props => {
             {!isPresentInUserId(course.subscriptions, objAuth.userId) && !isPresentInId(course.pending_students, objAuth.userId) ? 'Subscribe' : ''}
           </button>
         ) }
+      </div>
+      <div className={`${styles.pictures}`}>
+        {picturesToDivs(course.images_url, urlApi, `${styles.picture}`)}
       </div>
       <div>
         <div>
@@ -234,6 +246,8 @@ Course.propTypes = {
   userPayload: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   setUserErr: PropTypes.func.isRequired,
+  mainUrl: PropTypes.func.isRequired,
+  picturesToDivs: PropTypes.func.isRequired,
 };
 
 export default Course;

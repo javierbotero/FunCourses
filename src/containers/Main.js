@@ -59,6 +59,8 @@ const Main = props => {
     updFriend,
     findCourses,
     findCoursesFromCoursesId,
+    mainUrl,
+    picturesToDivs,
   } = props;
   const { path, url } = match;
   const objAuth = useAuth();
@@ -230,7 +232,12 @@ const Main = props => {
   };
   const coursesToDivs = courses => courses.map(course => (
     <div key={course.id}>
-      <div>Some picture</div>
+      <div
+        className="course"
+        style={{
+          backgroundImage: `url(${urlApi}${mainUrl(course)})`,
+        }}
+      />
       <div>{course.title}</div>
       <div>
         <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
@@ -294,6 +301,8 @@ const Main = props => {
               tokenPayload={tokenPayload}
               userPayload={userPayload}
               id={id}
+              mainUrl={mainUrl}
+              picturesToDivs={picturesToDivs}
             />
           )}
         />
@@ -540,6 +549,8 @@ Main.propTypes = {
   updFriend: PropTypes.func.isRequired,
   findCourses: PropTypes.func.isRequired,
   findCoursesFromCoursesId: PropTypes.func.isRequired,
+  mainUrl: PropTypes.func.isRequired,
+  picturesToDivs: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -1,0 +1,9 @@
+.pictures {
+  width: 100%;
+  height: 30em;
+}
+
+.picture {
+  width: 30%;
+  height: 100%;
+}
