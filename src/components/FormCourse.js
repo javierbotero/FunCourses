@@ -86,7 +86,7 @@ const FormCourse = props => {
         Array.prototype
           .forEach
           .call(e.target.files, f => saveFileToBase64(f, cb, pushToStrs));
-      } else {
+      } else if (e.target.files[0]) {
         saveFileToBase64(e.target.files[0], cb);
       }
     } else {
@@ -174,13 +174,13 @@ const FormCourse = props => {
           <div>
             <label htmlFor="main-picture">
               <div>Main picture</div>
-              <input type="file" id="main-picture" name="main-picture" onChange={e => handleChange(e, setMainPicture, true)} />
+              <input type="file" id="main-picture" name="main-picture" onChange={e => handleChange(e, setMainPicture, true)} accept="image/*" />
             </label>
           </div>
           <div>
             <label htmlFor="main-picture">
               <div>Add 3 more engaging pictures</div>
-              <input type="file" id="main-picture" name="main-picture" onChange={e => handleChange(e, setPictures, true)} multiple />
+              <input type="file" id="main-picture" name="main-picture" onChange={e => handleChange(e, setPictures, true)} multiple accept="image/*" />
             </label>
           </div>
           <div>

@@ -71,7 +71,7 @@ const Form = props => {
   };
   const handleChange = (e, cb, attach = false) => {
     removeUserErr();
-    if (attach) {
+    if (attach && e.target.files[0]) {
       const pictureData = new FileReader();
       pictureData.onloadstart = () => setTrueLoad();
       pictureData.onloadend = () => setFalseLoad();
@@ -130,7 +130,7 @@ const Form = props => {
           <div>
             <label htmlFor="avatar">
               <div>Image Profile</div>
-              <input type="file" alt="avatar" onChange={e => handleChange(e, setAvatar, true)} id="avatar" name="avatar" />
+              <input type="file" alt="avatar" onChange={e => handleChange(e, setAvatar, true)} id="avatar" name="avatar" accept="image/*" />
             </label>
           </div>
         )}
