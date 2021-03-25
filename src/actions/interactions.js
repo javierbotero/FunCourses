@@ -2,9 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const createCourse = createAsyncThunk(
   'courses/createCourse',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}courses/create`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return payload;
   },
@@ -12,9 +16,13 @@ const createCourse = createAsyncThunk(
 
 const createLike = createAsyncThunk(
   'createLike',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}favorites`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return payload;
   },
@@ -22,9 +30,13 @@ const createLike = createAsyncThunk(
 
 const deleteLike = createAsyncThunk(
   'deleteLike',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}/favorites/${objThunk.id}`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return payload;
   },
@@ -32,9 +44,13 @@ const deleteLike = createAsyncThunk(
 
 const createSubscription = createAsyncThunk(
   'createSubscription',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}/subscriptions`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return {
       ...payload,
@@ -46,9 +62,13 @@ const createSubscription = createAsyncThunk(
 
 const deleteSubscription = createAsyncThunk(
   'deleteSubscription',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}/subscriptions/${objThunk.id}`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return {
       ...payload,
@@ -61,9 +81,13 @@ const deleteSubscription = createAsyncThunk(
 
 const updateSubscription = createAsyncThunk(
   'updateSubscription',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}/subscriptions/${objThunk.id}`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return { ...payload, student: objThunk.student };
   },
@@ -71,9 +95,13 @@ const updateSubscription = createAsyncThunk(
 
 const createFriendship = createAsyncThunk(
   'createFriendship',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}/friendships`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return {
       ...payload,
@@ -84,9 +112,13 @@ const createFriendship = createAsyncThunk(
 
 const deleteFriendship = createAsyncThunk(
   'deleteFriendship',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}/friendships/${objThunk.friendship.id}`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return {
       ...payload,
@@ -97,9 +129,13 @@ const deleteFriendship = createAsyncThunk(
 
 const updateFriendship = createAsyncThunk(
   'updateFriendship',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}/friendships/${objThunk.friendship.id}`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return {
       ...payload,

@@ -38,8 +38,6 @@ import { removeCourseError, removeNotificationCourses } from '../reducers/course
 import {
   removeUserError,
   removeNotificationUser,
-  setTrueLoading,
-  setFalseLoading,
 } from '../reducers/user';
 import '../css/style.css';
 
@@ -158,7 +156,6 @@ const App = props => {
             render={({ match, location }) => {
               if (authObject.userId && authObject.userPassword) {
                 if (user.status) {
-                  dispatch(setFalseLoading());
                   return (
                     <Main
                       match={match}
@@ -184,7 +181,6 @@ const App = props => {
                     />
                   );
                 }
-                dispatch(setTrueLoading());
                 return <div>We are loading...</div>;
               }
               return (

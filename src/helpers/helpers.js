@@ -106,7 +106,7 @@ const mainUrl = c => {
   if (c.main_image_url) {
     return c.main_image_url.slice(1, c.main_image_url.length);
   }
-  return 'default';
+  return '#';
 };
 const picturesToDivs = (images, urlApi, cssClases) => images.map(img => (
   <div

@@ -2,9 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const getCourses = createAsyncThunk(
   'courses/getCourses',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}courses`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return payload;
   },
@@ -12,9 +16,13 @@ const getCourses = createAsyncThunk(
 
 const getUser = createAsyncThunk(
   'user/getUser',
-  async objThunk => {
+  async (objThunk, { dispatch }) => {
+    dispatch({ type: 'items/setTrueLoading' });
     const payload = await fetch(`${objThunk.url}user`, objThunk.init)
-      .then(data => data.json().then(res => res))
+      .then(data => {
+        dispatch({ type: 'items/setFalseLoading' });
+        return data.json().then(res => res);
+      })
       .catch(err => `Network error. ${err.error}`);
     return payload;
   },
