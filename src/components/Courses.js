@@ -13,7 +13,6 @@ const Courses = props => {
     useAuth,
     resetUser,
     resetCourses,
-    urlApi,
     avatar,
   } = props;
   const authObject = useAuth();
@@ -32,7 +31,7 @@ const Courses = props => {
         <div
           className="avatar"
           style={{
-            backgroundImage: `url(${urlApi}${avatar.slice(1, avatar.length)})`,
+            backgroundImage: `url(${avatar})`,
           }}
         />
         <ul>

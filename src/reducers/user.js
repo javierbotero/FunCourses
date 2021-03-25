@@ -12,6 +12,7 @@ import {
   deleteFriendship,
   updateFriendship,
 } from '../actions/interactions';
+import avatar from '../assets/images/avatar.jpg';
 
 const initialState = {
   user: {},
@@ -35,6 +36,7 @@ const user = createSlice({
     removeNotificationUser: state => { state.notification = ''; },
     setTrueLoading: state => { state.loading = true; },
     setFalseLoading: state => { state.loading = false; },
+    defaultAvatar: state => { state.user.avatar = avatar; },
   },
   extraReducers: {
     [getUser.pending]: state => { state.status = 'pending'; },
@@ -43,6 +45,9 @@ const user = createSlice({
         state.status = 'Fulfilled';
         state.user = action.payload.user;
         state.error = '';
+        if (!state.user.url_avatar) {
+          state.user.url_avatar = avatar;
+        }
       } else if (action.payload.error) {
         state.status = 'Rejected';
         state.error = `Some error happened please try later. ${action.payload.error}`;

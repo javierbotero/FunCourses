@@ -4,6 +4,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../css/Course.module.css';
+import avatar from '../assets/images/avatar.jpg';
 
 const Course = props => {
   const {
@@ -61,7 +62,7 @@ const Course = props => {
       <div>
         <div
           style={{
-            backgroundImage: `url(${urlApi}${mainUrl(course)})`,
+            backgroundImage: course.main_image_url ? `url(${urlApi}${mainUrl(course)})` : `url(${avatar})`,
           }}
           className="main-picture"
         />
@@ -138,7 +139,7 @@ const Course = props => {
         ) }
       </div>
       <div className={`${styles.pictures}`}>
-        {picturesToDivs(course.images_url, urlApi, `${styles.picture}`)}
+        {course.images_url.length > 0 ? picturesToDivs(course.images_url, urlApi, `${styles.picture}`) : <div className="no-images">No images</div>}
       </div>
       <div>
         <div>
