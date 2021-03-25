@@ -60,7 +60,6 @@ const Main = props => {
     findCourses,
     findCoursesFromCoursesId,
   } = props;
-  console.log(user);
   const { path, url } = match;
   const objAuth = useAuth();
   const handleLike = (userId, courseId, cb, favorites) => {

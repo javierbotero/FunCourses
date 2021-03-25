@@ -65,17 +65,12 @@ const user = createSlice({
         state.error = '';
         state.notification = 'The course was created successfully';
       } else if (action.payload.error) {
-        state.error = action.payload.error;
-        state.status = `Something went wrong. ${action.payload.error}`;
+        state.status = 'Rejected by Api';
       } else {
         state.status = 'Rejected from unknown error';
-        state.error = `Something went wrong. ${action.payload}`;
       }
     },
-    [createCourse.rejected]: (state, action) => {
-      state.status = 'Rejected';
-      state.error = `Something went wrong. ${action.payload}`;
-    },
+    [createCourse.rejected]: state => { state.status = 'Rejected'; },
     [createLike.pending]: state => { state.status = 'pending'; },
     [createLike.fulfilled]: (state, action) => {
       if (action.payload.favorite) {

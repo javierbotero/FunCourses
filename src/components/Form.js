@@ -72,7 +72,6 @@ const Form = props => {
   const handleChange = (e, cb, attach = false) => {
     removeUserErr();
     if (attach) {
-      console.log(e.target.files[0]);
       const pictureData = new FileReader();
       pictureData.onloadstart = () => setTrueLoad();
       pictureData.onloadend = () => setFalseLoad();
@@ -91,7 +90,6 @@ const Form = props => {
     } else {
       cb(e.target.value);
     }
-    console.log(avatar);
   };
 
   return (

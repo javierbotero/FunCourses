@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { createCourse } from '../actions/interactions';
+import {
+  setUserError,
+  setTrueLoading,
+  setFalseLoading,
+} from '../reducers/user';
 
 const FormCourse = props => {
   const {
@@ -18,6 +23,9 @@ const FormCourse = props => {
     id,
     token,
     dispatchCourse,
+    setUserErr,
+    setTrueLoad,
+    setFalseLoad,
   } = props;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -27,12 +35,16 @@ const FormCourse = props => {
   const [provider, setProvider] = useState('zoom');
   const [link, setLink] = useState('');
   const [status, setStatus] = useState('Closed');
+  const [mainPicture, setMainPicture] = useState('');
+  const [pictures, setPictures] = useState([]);
 
   const handleSubmit = e => {
     e.preventDefault();
     const init = {
       ...userPayload(userId, password),
       ...tokenPayload(id, token),
+      main: mainPicture,
+      images: pictures,
       course: {
         link,
         provider,
@@ -46,7 +58,41 @@ const FormCourse = props => {
     const payload = objThunk(urlApi, 'POST', init);
     dispatchCourse(payload);
   };
-  const handleChange = (e, cb) => cb(e.target.value);
+  const saveFileToBase64 = (file, cb, cb2 = false) => {
+    const newFile = new FileReader();
+    newFile.onloadstart = () => { setTrueLoad(); };
+    newFile.onloadend = () => { setFalseLoad(); };
+    newFile.readAsDataURL(file);
+    newFile.onload = () => {
+      if (cb2) {
+        cb2({
+          io: newFile.result.split(',')[1],
+          filename: file.name,
+        }, cb);
+      } else {
+        cb({
+          io: newFile.result.split(',')[1],
+          filename: file.name,
+        });
+      }
+    };
+  };
+  const handleChange = (e, cb, attach = false) => {
+    if (attach) {
+      if (e.target.files.length > 3) {
+        setUserErr('Maximum number of pictures is 3');
+      } else if (e.target.files.length > 1) {
+        const pushToStrs = (obj, locCb) => locCb(state => [...state, obj]);
+        Array.prototype
+          .forEach
+          .call(e.target.files, f => saveFileToBase64(f, cb, pushToStrs));
+      } else {
+        saveFileToBase64(e.target.files[0], cb);
+      }
+    } else {
+      cb(e.target.value);
+    }
+  };
   return (
     <div>
       <nav>
@@ -126,6 +172,18 @@ const FormCourse = props => {
             </label>
           </div>
           <div>
+            <label htmlFor="main-picture">
+              <div>Main picture</div>
+              <input type="file" id="main-picture" name="main-picture" onChange={e => handleChange(e, setMainPicture, true)} />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="main-picture">
+              <div>Add 3 more engaging pictures</div>
+              <input type="file" id="main-picture" name="main-picture" onChange={e => handleChange(e, setPictures, true)} multiple />
+            </label>
+          </div>
+          <div>
             <input type="submit" value="Submit" />
           </div>
         </form>
@@ -146,10 +204,16 @@ FormCourse.propTypes = {
   tokenPayload: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
+  setUserErr: PropTypes.func.isRequired,
+  setTrueLoad: PropTypes.func.isRequired,
+  setFalseLoad: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
   dispatchCourse: payload => dispatch(createCourse(payload)),
+  setUserErr: payload => dispatch(setUserError(payload)),
+  setTrueLoad: () => dispatch(setTrueLoading()),
+  setFalseLoad: () => dispatch(setFalseLoading()),
 });
 
 export default connect(null, mapDispatchToProps)(FormCourse);

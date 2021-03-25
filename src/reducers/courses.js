@@ -59,8 +59,8 @@ const courses = createSlice({
         state.status = 'fulfilled';
         state.error = '';
       } else if (action.payload.error) {
-        state.error = action.payload.error;
-        state.status = `Something went wrong ${action.payload.error}`;
+        state.status = 'Rejected by Api create course';
+        state.error = `Something went wrong ${action.payload.error}`;
       } else {
         state.status = 'Rejected from unknown error';
         state.error = `Something went wrong ${action.payload}`;
@@ -94,7 +94,6 @@ const courses = createSlice({
         state.error = '';
         state.notification = '';
       } else if (action.payload.error) {
-        state.error = '';
         state.status = 'Rejected by api';
       } else {
         state.status = 'Rejected from unknown error';
