@@ -8,6 +8,13 @@
 
 */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+  list-style-type: none;
+}
+
 .loading {
   border: 16px solid #E6F0FE;
   border-top: 16px solid #4333B3;
@@ -15,6 +22,12 @@
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .avatar {
@@ -48,7 +61,10 @@
   height: 100%;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+.bg-purple {
+  background-color: #E6F0FE;
 }

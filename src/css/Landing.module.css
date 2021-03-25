@@ -1,0 +1,67 @@
+/*
+
+  orange: #F5531F
+  fuchsia: #4F1D9F
+  purple: #4333B3
+  white: #FFFFFF
+  light-fuchsia: #E6F0FE
+
+*/
+
+.containers {
+  min-height: 25em;
+  padding: 0 10%;
+}
+
+.verticalCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginMenu {
+  display: flex;
+}
+
+.loginMenu li {
+  padding-left: 0;
+}
+
+.headerPar {
+  padding-top: 5em;
+}
+
+.navHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2em 0;
+}
+
+.footerLook {
+  min-height: 25em;
+  text-align: center;
+}
+
+.socialMedia {
+  height: 300px;
+}
+
+.socialImage {
+  height: 8em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media screen and (min-width: 600px) {
+  .navHeader {
+    flex-direction: row;
+  }
+  .loginMenu li {
+    padding-left: 1em;
+  }
+}

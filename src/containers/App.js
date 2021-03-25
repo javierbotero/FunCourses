@@ -93,13 +93,6 @@ const App = props => {
   );
   const landingInfo = (
     <div className="landing">
-      <div className="logo">Logo</div>
-      <header>
-        <ul>
-          <li><Link to="/signup">Sign up</Link></li>
-          <li><Link to="/login">Log in</Link></li>
-        </ul>
-      </header>
       <Landing />
     </div>
   );

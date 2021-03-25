@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OPINIONS } from '../constants/constants';
+import image1 from '../assets/images/fun1.jpeg';
+import styles from '../css/Landing.module.css';
 
 const Landing = () => {
   const displayOpinions = opinions => opinions.map(o => (
@@ -16,21 +18,24 @@ const Landing = () => {
 
   return (
     <div className="info-landing">
-      <header>
-        <div className="logo" />
-        <div>Fun Courses</div>
+      <header className={`${styles.containers} ${styles.containerHeader}`} style={{ backgroundImage: `url(${image1})` }}>
+        <nav className={`${styles.navHeader}`}>
+          <div className="logo">Logo</div>
+          <ul className={`${styles.loginMenu}`}>
+            <li><Link to="/signup">Sign up</Link></li>
+            <li><Link to="/login">Log in</Link></li>
+          </ul>
+        </nav>
+        <h4 className={styles.headerPar}>Find a course of any theme</h4>
+        <p>
+          The best courses for you about any
+          theme you can think of, taught by
+          professionals.
+        </p>
+        <Link to="/signin">Start Free</Link>
       </header>
       <main>
-        <section>
-          <h4>Find a course of any theme</h4>
-          <p>
-            The best courses for you about any
-            theme you can think of, taught by
-            professionals.
-          </p>
-          <Link to="/signin">Start Free</Link>
-        </section>
-        <section>
+        <section className={`${styles.containers} ${styles.verticalCenter} bg-white`}>
           <h4>Interesting courses from reliable teachers</h4>
           <div>
             <div>
@@ -47,7 +52,7 @@ const Landing = () => {
             <div className="stats" />
           </div>
         </section>
-        <section>
+        <section className={`${styles.containers} ${styles.verticalCenter} bg-purple`}>
           <div className="stats" />
           <div>
             <div>
@@ -62,7 +67,7 @@ const Landing = () => {
             </div>
           </div>
         </section>
-        <section>
+        <section className={`${styles.containers} ${styles.verticalCenter} bg-white`}>
           <div>PEOPLE ARE ALREADY TAKING FUN COURSES</div>
           <h4>Look what these are saying</h4>
           <div className="opinions">
@@ -70,20 +75,22 @@ const Landing = () => {
           </div>
         </section>
       </main>
-      <footer>
-        <div>
+      <footer className={`${styles.footerLook} bg-white`}>
+        <div className={`${styles.socialImage}`} style={{ backgroundImage: `url(${image1})` }}>
           <h4>Learn everything at home</h4>
           <Link to="/signin">Start free</Link>
         </div>
-        <div>
-          <div className="logo" />
-          <div>Fun Courses</div>
-        </div>
-        <div>
-          <FontAwesomeIcon icon={['fab', 'linkedin']} />
-          <FontAwesomeIcon icon={['fab', 'facebook']} />
-          <FontAwesomeIcon icon={['fab', 'twitter-square']} />
-          <FontAwesomeIcon icon={['fab', 'instagram-square']} />
+        <div className={`${styles.verticalCenter} ${styles.socialMedia}`}>
+          <div>
+            <div className="logo" />
+            <div>Fun Courses</div>
+          </div>
+          <div>
+            <FontAwesomeIcon icon={['fab', 'linkedin']} />
+            <FontAwesomeIcon icon={['fab', 'facebook']} />
+            <FontAwesomeIcon icon={['fab', 'twitter-square']} />
+            <FontAwesomeIcon icon={['fab', 'instagram-square']} />
+          </div>
         </div>
       </footer>
     </div>
