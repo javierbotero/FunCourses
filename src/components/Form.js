@@ -8,6 +8,7 @@ import {
   setTrueLoading,
   setFalseLoading,
 } from '../reducers/user';
+// import formCss from '../css/Form.module.css';
 
 const Form = props => {
   const {
@@ -23,16 +24,18 @@ const Form = props => {
     removeUserErr,
     setTrueLoad,
     setFalseLoad,
+    history,
   } = props;
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [passConf, setPassConf] = useState('');
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [matcher, setMatcher] = useState(match.params.identifier);
   const authObject = useAuth();
   const handleSubmit = async e => {
     e.preventDefault();
-    if (match.params.identifier === 'signup') {
+    if (matcher === 'signup') {
       if (password.length < 5 || userName.length < 5 || email.length < 5 || password !== passConf) {
         setUserErr('Please fill the form correctly, Username and password should be more than 4 characters, password and confirmation must be equal');
         return;
@@ -61,8 +64,8 @@ const Form = props => {
       handleApiRequest,
       initCreator,
       'POST',
-      `${url}${match.params.identifier === 'signup' ? 'signup' : 'login'}`,
-      match.params.identifier === 'signup' ? dataSignUp : dataLogIn,
+      `${url}${matcher === 'signup' ? 'signup' : 'login'}`,
+      matcher === 'signup' ? dataSignUp : dataLogIn,
     );
     setUserName('');
     setEmail('');
@@ -91,11 +94,34 @@ const Form = props => {
       cb(e.target.value);
     }
   };
+  const changeHistory = str => {
+    setMatcher(str);
+    history.push(`/${str}`);
+  };
+
+  const infoSign = (signup = false) => {
+    if (signup) {
+      return (
+        <div>
+          {'Hello there! join our community and start '}
+          {'enjoying fun courses. If you have an account please '}
+          <button type="button" onClick={() => changeHistory('login')}>Log in</button>
+        </div>
+      );
+    }
+    return (
+      <div>
+        {'Hello there! it\'s time to learn with fun courses. '}
+        {"If you don't have an account please "}
+        <button type="button" onClick={() => changeHistory('signup')}>Sign in</button>
+      </div>
+    );
+  };
 
   return (
-    <div className={`form ${match.params.identifier === 'signup' ? 'signup' : 'login'}`}>
-      <div className="auth-title">{match.params.identifier === 'signup' ? 'Sign Up' : 'Log in'}</div>
-      <p>{match.params.identifier === 'signup' ? 'Hello there! join our community and start enjoying fun courses' : 'Hello there! it\'s time to learn with fun courses'}</p>
+    <div className={`form ${matcher === 'signup' ? 'signup' : 'login'}`}>
+      <h3 className="auth-title">{matcher === 'signup' ? 'Sign Up' : 'Log in'}</h3>
+      <p>{matcher === 'signup' ? infoSign(true) : infoSign()}</p>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">
@@ -103,7 +129,7 @@ const Form = props => {
             <input type="text" onChange={e => handleChange(e, setUserName)} value={userName} id="username" placeholder="User" />
           </label>
         </div>
-        {match.params.identifier === 'signup'
+        {matcher === 'signup'
           && (
             <div>
               <label htmlFor="email">
@@ -118,7 +144,7 @@ const Form = props => {
             <input type="password" onChange={e => handleChange(e, setPassword)} value={password} id="password" placeholder="password" />
           </label>
         </div>
-        { match.params.identifier === 'signup' && (
+        { matcher === 'signup' && (
           <div>
             <label htmlFor="passwordConfirmation">
               <div>Password confirmation</div>
@@ -126,7 +152,7 @@ const Form = props => {
             </label>
           </div>
         )}
-        { match.params.identifier === 'signup' && (
+        { matcher === 'signup' && (
           <div>
             <label htmlFor="avatar">
               <div>Image Profile</div>
@@ -155,6 +181,7 @@ Form.propTypes = {
   removeUserErr: PropTypes.func.isRequired,
   setTrueLoad: PropTypes.func.isRequired,
   setFalseLoad: PropTypes.func.isRequired,
+  history: ReactRouterPropTypes.history.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -18,7 +18,7 @@ const Landing = () => {
 
   return (
     <div className="info-landing">
-      <header className={`${styles.containers} ${styles.containerHeader}`} style={{ backgroundImage: `url(${image1})` }}>
+      <header className={`${styles.containers} ${styles.positionImage}`} style={{ backgroundImage: `url(${image1})` }}>
         <nav className={`${styles.navHeader}`}>
           <div className="logo">Logo</div>
           <ul className={`${styles.loginMenu}`}>
@@ -76,7 +76,7 @@ const Landing = () => {
         </section>
       </main>
       <footer className={`${styles.footerLook} bg-white`}>
-        <div className={`${styles.socialImage}`} style={{ backgroundImage: `url(${image1})` }}>
+        <div className={`${styles.socialImage} ${styles.positionImage}`} style={{ backgroundImage: `url(${image1})` }}>
           <h4>Learn everything at home</h4>
           <Link to="/signin">Start free</Link>
         </div>

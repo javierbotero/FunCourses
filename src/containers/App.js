@@ -4,7 +4,6 @@ import {
   BrowserRouter,
   Switch,
   Route,
-  Link,
   Redirect,
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -189,7 +188,7 @@ const App = props => {
           <Route
             exact
             path="/:identifier"
-            render={({ location, match }) => {
+            component={({ location, match, history }) => {
               if (authObject.userId && authObject.userPassword) {
                 return (
                   <Redirect
@@ -202,12 +201,6 @@ const App = props => {
               }
               return (
                 <div>
-                  <header>
-                    <ul>
-                      <li><Link to="/signup">Sign up</Link></li>
-                      <li><Link to="/login">Log in</Link></li>
-                    </ul>
-                  </header>
                   <FormComponent
                     initCreator={initCreator}
                     tokenPayload={tokenPayload}
@@ -217,6 +210,7 @@ const App = props => {
                     url={url}
                     match={match}
                     useAuth={useAuth}
+                    history={history}
                   />
                 </div>
               );
