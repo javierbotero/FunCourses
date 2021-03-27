@@ -113,7 +113,7 @@
   flex-direction: column;
   height: 80%;
   margin: auto 1em;
-  border: 1px solid black;
+  background-color: #FFFFFF;
 }
 
 .hide {
@@ -130,12 +130,14 @@
 
 .navMenu {
   width: 100vw;
-  height: 2em;
+  height: 3em;
   position: fixed;
   left: 0;
   display: flex;
   align-items: center;
-  padding: 0 1em;
+  justify-content: space-between;
+  padding: 1em;
+  background-color: #E6F0FE;
 }
 
 @media screen and (min-width: 600px) {

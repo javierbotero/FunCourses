@@ -11,6 +11,7 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import {
   faHeart as fasFaHeart,
   faBars as fasFaBars,
+  faEllipsisV as fasFaEllipsisV,
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -51,6 +52,7 @@ library.add(
   faTwitterSquare,
   faInstagramSquare,
   fasFaBars,
+  fasFaEllipsisV,
 );
 dom.watch();
 

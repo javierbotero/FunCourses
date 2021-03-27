@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import dashCss from '../css/Dashboard.module.css';
+import CoursesCss from '../css/Courses.module.css';
 
 const Dashboard = props => {
   const {
@@ -25,6 +28,7 @@ const Dashboard = props => {
     handleDelFriend,
     handleUpdFriend,
     findCoursesFromCoursesId,
+    findCourses,
   } = props;
   const objAuth = useAuth();
 
@@ -51,8 +55,14 @@ const Dashboard = props => {
           {'Student: '}
           <Link
             to={{
-              pathname: `${url}/user/${course.id}`,
-              state: { from: location },
+              pathname: `${url}/user/${student.id}`,
+              state: {
+                from: location,
+                user: {
+                  id: student.id,
+                  username: student.username,
+                },
+              },
             }}
           >
             {student.username}
@@ -188,50 +198,80 @@ const Dashboard = props => {
       </div>
     );
   });
+  const completeInfoCourses = (courses, userCourses, cb) => {
+    const found = cb(courses, userCourses);
+    return found.map(f => {
+      const userCourse = userCourses.find(c => c.id === f.id);
+      return {
+        ...f,
+        link: userCourse.link,
+        provider: userCourse.provider,
+      };
+    });
+  };
 
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to={{
-              pathname: location.state ? location.state.from.pathname : `${url}`,
-              state: { from: location },
-            }}
-            >
-              &#60;
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      <header>
-        <h2>Dashboard</h2>
-        <p>
-          Hi
-          {` ${user.username} `}
-          !
-        </p>
-      </header>
-      <main>
-        <h3>Your Courses</h3>
-        <div className="student">
-          <h4>As a Student</h4>
-          {coursesToDivs(user.courses_as_student)}
-        </div>
-        <div className="teacher">
-          <h4>As a Teacher</h4>
-          {teacherCoursesToDivs(user.courses, url, location)}
-        </div>
-        <div className="teacher">
-          <h4>Favorites</h4>
-          {coursesToDivs(findCoursesFromCoursesId(courses, user.favorites), url, location)}
-        </div>
-      </main>
-      <aside>
+    <div className={`${dashCss.container}`}>
+      <nav className="navMenu">
         <div>
+          <Link to={{
+            pathname: location.state ? location.state.from.pathname : `${url}`,
+            state: { from: location },
+          }}
+          >
+            &#60;
+          </Link>
+        </div>
+        <div>
+          Dashboard
+        </div>
+        <div>
+          <FontAwesomeIcon icon="ellipsis-v" />
+        </div>
+      </nav>
+      <header className={`${dashCss.header}`}>
+        <div className={`${CoursesCss.avatarZone}`}>
+          <div
+            className={`avatar ${CoursesCss.avatarPic}`}
+            style={{
+              backgroundImage: `url(${user.url_avatar})`,
+            }}
+          />
           <h4>
-            Friendship Requests
+            {'Hi '}
+            {user.username}
+            !
           </h4>
+        </div>
+      </header>
+      <main className={`${dashCss.main}`}>
+        <h3>Your Courses</h3>
+        <section className={`${dashCss.interactions}`}>
+          <h4>As a Student</h4>
+          <div className="student">
+            {coursesToDivs(findCourses(courses, user.courses_as_student))}
+          </div>
+        </section>
+        <section className={`${dashCss.interactions}`}>
+          <h4>As a Teacher</h4>
+          <div className="teacher">
+            {teacherCoursesToDivs(
+              completeInfoCourses(courses, user.courses, findCourses),
+              url,
+              location,
+            )}
+          </div>
+        </section>
+        <section className={`${dashCss.interactions}`}>
+          <h4>Favorites</h4>
+          <div className="teacher">
+            {coursesToDivs(findCoursesFromCoursesId(courses, user.favorites), url, location)}
+          </div>
+        </section>
+      </main>
+      <aside className={`${dashCss.aside}`}>
+        <h3>Friendship Requests</h3>
+        <section className={`${dashCss.interactions}`}>
           <div>
             {displayPendingFriendships(
               user.friendship_requests,
@@ -239,7 +279,7 @@ const Dashboard = props => {
               location,
             )}
           </div>
-        </div>
+        </section>
       </aside>
     </div>
   );
@@ -249,6 +289,7 @@ Dashboard.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     username: PropTypes.string.isRequired,
+    url_avatar: PropTypes.string.isRequired,
     courses_as_student: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
@@ -431,6 +472,7 @@ Dashboard.propTypes = {
   handleDelFriend: PropTypes.func.isRequired,
   handleUpdFriend: PropTypes.func.isRequired,
   findCoursesFromCoursesId: PropTypes.func.isRequired,
+  findCourses: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

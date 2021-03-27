@@ -363,6 +363,7 @@ const Main = props => {
               handleDelFriend={handleDelFriend}
               handleUpdFriend={handleUpdFriend}
               findCoursesFromCoursesId={findCoursesFromCoursesId}
+              findCourses={findCourses}
             />
           )}
         />
