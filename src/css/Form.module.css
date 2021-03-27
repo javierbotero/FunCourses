@@ -1,0 +1,33 @@
+/*
+
+  orange: #F5531F
+  fuchsia: #4F1D9F
+  purple: #4333B3
+  white: #FFFFFF
+  light-fuchsia: #E6F0FE
+
+*/
+
+.buttonSubmit {
+  padding-top: 3em;
+}
+.index2 {
+  z-index: 2;
+}
+
+.signup {
+  background-color: #FFFFFF;
+}
+
+.login {
+  background-color: #E6F0FE;
+}
+
+.layer {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+};

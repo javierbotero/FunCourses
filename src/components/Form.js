@@ -8,7 +8,9 @@ import {
   setTrueLoading,
   setFalseLoading,
 } from '../reducers/user';
-// import formCss from '../css/Form.module.css';
+import formCss from '../css/Form.module.css';
+import fun1 from '../assets/images/fun1.jpeg';
+import fun2 from '../assets/images/fun2.jpg';
 
 const Form = props => {
   const {
@@ -66,6 +68,8 @@ const Form = props => {
       'POST',
       `${url}${matcher === 'signup' ? 'signup' : 'login'}`,
       matcher === 'signup' ? dataSignUp : dataLogIn,
+      setTrueLoading,
+      setFalseLoading,
     );
     setUserName('');
     setEmail('');
@@ -119,10 +123,14 @@ const Form = props => {
   };
 
   return (
-    <div className={`form ${matcher === 'signup' ? 'signup' : 'login'}`}>
-      <h3 className="auth-title">{matcher === 'signup' ? 'Sign Up' : 'Log in'}</h3>
-      <p>{matcher === 'signup' ? infoSign(true) : infoSign()}</p>
-      <form onSubmit={handleSubmit}>
+    <div
+      className="form positionImage"
+      style={{ backgroundImage: matcher === 'signup' ? `url(${fun1})` : `url(${fun2})` }}
+    >
+      <div className={`${formCss.layer} ${matcher === 'signup' ? formCss.signup : formCss.login}`} />
+      <h3 className={`${formCss.index2} form-item`}>{matcher === 'signup' ? 'Sign Up' : 'Log in'}</h3>
+      <p className={`form-item ${formCss.index2}`}>{matcher === 'signup' ? infoSign(true) : infoSign()}</p>
+      <form className={`form-item ${formCss.index2}`} onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">
             <div>Username</div>
@@ -160,7 +168,7 @@ const Form = props => {
             </label>
           </div>
         )}
-        <div>
+        <div className={`${formCss.buttonSubmit}`}>
           <input type="submit" value="Submit" className="btn" />
         </div>
       </form>

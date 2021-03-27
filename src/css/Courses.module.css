@@ -1,0 +1,52 @@
+/*
+
+  orange: #F5531F
+  fuchsia: #4F1D9F
+  purple: #4333B3
+  white: #FFFFFF
+  light-fuchsia: #E6F0FE
+
+*/
+
+.courses {
+  display: flex;
+  height: 100vh;
+  position: static;
+  overflow-x: auto;
+  background-color: #E6F0FE;
+}
+
+.coursesMenu {
+  flex: 0 0 50%;
+  height: 80%;
+  margin: auto;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 2em;
+}
+
+.coursesItems {
+  display: flex;
+}
+
+.avatarZone {
+  flex: 1 0 auto;
+}
+
+.avatarPic {
+  margin: 1em 0;
+}
+
+.menu {
+  flex: 5 0 auto;
+}
+
+.menu li {
+  padding: 1em 0;
+}
+
+.btn {
+  flex: 0 0 auto;
+}

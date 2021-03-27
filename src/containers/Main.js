@@ -231,31 +231,33 @@ const Main = props => {
     updFriend(payload);
   };
   const coursesToDivs = courses => courses.map(course => (
-    <div key={course.id}>
+    <div key={course.id} className="course-container">
       <div
         className="course"
         style={{
           backgroundImage: `url(${urlApi}${mainUrl(course)})`,
         }}
       />
-      <div>{course.title}</div>
-      <div>
-        <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
-          <FontAwesomeIcon icon={
-            isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
-            }
-          />
-        </button>
-        {` ${course.favorites.length}`}
-      </div>
-      <div>
-        <Link to={{
-          pathname: `${url}/course/${course.id}`,
-          state: { from: location },
-        }}
-        >
-          More Info
-        </Link>
+      <div className="info-course">
+        <div className="linkCourse">
+          <div>{course.title}</div>
+          <Link to={{
+            pathname: `${url}/course/${course.id}`,
+            state: { from: location },
+          }}
+          >
+            More Info
+          </Link>
+        </div>
+        <div className="likes">
+          <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
+            <FontAwesomeIcon icon={
+              isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
+              }
+            />
+          </button>
+          {` ${course.favorites.length}`}
+        </div>
       </div>
     </div>
   ));
@@ -267,6 +269,7 @@ const Main = props => {
           <Courses
             coursesToDivs={coursesToDivs}
             avatar={user.url_avatar}
+            username={user.username}
             courses={courses}
             url={url}
             urlApi={urlApi}

@@ -8,7 +8,10 @@ import {
 } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faHeart as fasFaHeart } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHeart as fasFaHeart,
+  faBars as fasFaBars,
+} from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
 import {
   faLinkedin,
@@ -47,6 +50,7 @@ library.add(
   faFacebook,
   faTwitterSquare,
   faInstagramSquare,
+  fasFaBars,
 );
 dom.watch();
 

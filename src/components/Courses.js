@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import CoursesCss from '../css/Courses.module.css';
 
 const Courses = props => {
   const {
@@ -14,7 +15,26 @@ const Courses = props => {
     resetUser,
     resetCourses,
     avatar,
+    username,
   } = props;
+  const popUpMenu = () => {
+    const div = document.getElementsByClassName('scrollContainer')[0];
+    const navMenu = () => document.querySelector('.navMenu');
+    if (div.scrollLeft < 200) {
+      navMenu().classList.add('hide');
+      navMenu().classList.remove('show');
+    } else {
+      navMenu().classList.remove('hide');
+      navMenu().classList.add('show');
+    }
+  };
+  useEffect(() => {
+    const div = document.getElementsByClassName('scrollContainer')[0];
+    div.addEventListener('scroll', popUpMenu);
+    return () => {
+      div.removeEventListener('scroll', popUpMenu);
+    };
+  }, []);
   const authObject = useAuth();
   const logout = () => {
     localStorage.removeItem('currentUserIdFunCourses');
@@ -26,15 +46,23 @@ const Courses = props => {
   };
 
   return (
-    <div className="courses">
-      <header>
-        <div
-          className="avatar"
-          style={{
-            backgroundImage: `url(${avatar})`,
-          }}
-        />
-        <ul>
+    <div
+      className={`${CoursesCss.courses} scrollContainer`}
+    >
+      <nav className="navMenu hide">
+        <FontAwesomeIcon icon="bars" />
+      </nav>
+      <header className={`${CoursesCss.coursesMenu}`}>
+        <div className={`${CoursesCss.avatarZone}`}>
+          <div
+            className={`avatar ${CoursesCss.avatarPic}`}
+            style={{
+              backgroundImage: `url(${avatar})`,
+            }}
+          />
+          <h4>{username}</h4>
+        </div>
+        <ul className={`${CoursesCss.menu}`}>
           <li>
             <Link to={{
               pathname: `${url}/dashboard`,
@@ -63,9 +91,9 @@ const Courses = props => {
             </Link>
           </li>
         </ul>
-        <button type="button" onClick={logout}>Log out</button>
+        <button className={`${CoursesCss.btn}`} type="button" onClick={logout}>Log out</button>
       </header>
-      <div className="list-courses">
+      <div className={`${CoursesCss.coursesItems}`}>
         {coursesToDivs(courses, FontAwesomeIcon)}
       </div>
     </div>
@@ -114,8 +142,8 @@ Courses.propTypes = {
   useAuth: PropTypes.func.isRequired,
   resetUser: PropTypes.func.isRequired,
   resetCourses: PropTypes.func.isRequired,
-  urlApi: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 export default Courses;

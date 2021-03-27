@@ -4,7 +4,10 @@ import {
   createContext,
 } from 'react';
 import store from '../store/store';
-import { setUserError, removeUserError } from '../reducers/user';
+import {
+  setUserError,
+  removeUserError,
+} from '../reducers/user';
 
 const authContext = createContext();
 
@@ -19,11 +22,15 @@ const useAuthState = () => {
     verb,
     url,
     data,
+    setTrueLoadCb,
+    setFalseLoadCb,
   ) => {
+    setTrueLoadCb();
     handleApiRequest(initCreator, verb, url, data)
       .then(resp => (
         resp.json().then(res => {
           if (res.user) {
+            setFalseLoadCb();
             localStorage.setItem('currentUserIdFunCourses', res.user.id);
             localStorage.setItem(
               'currentUserPasswordFunCourses',
