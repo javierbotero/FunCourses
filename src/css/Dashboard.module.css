@@ -47,3 +47,8 @@
   border-bottom: 1em solid #E6F0FE;
   padding: 1em 0;
 }
+
+.scrollUsers {
+  width: 90%;
+  margin: 0 auto;
+}

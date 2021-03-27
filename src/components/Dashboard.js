@@ -113,9 +113,12 @@ const Dashboard = props => {
   const teacherCoursesToDivs = (courses, url, location) => courses.map(c => (
     <div className="teacher-course" key={c.id}>
       <h4>{c.title}</h4>
+      <a href={c.link}>Join class</a>
       <section>
         <h4>Enrollment Requests</h4>
-        {displayPendingSubscriptions(c, url, location)}
+        <div className={`${dashCss.scrollUsers}`}>
+          {displayPendingSubscriptions(c, url, location)}
+        </div>
         <p>
           {c.pendings.length}
           {' students waiting'}
@@ -123,13 +126,13 @@ const Dashboard = props => {
       </section>
       <aside>
         <h4>Accepted Students</h4>
-        <div>
-          {usersListToDiv(c.confirmed_students, location, url)}
-        </div>
         <p>
           {c.subscriptions.length}
           {' students are confirmed'}
         </p>
+        <div className={`${dashCss.scrollUsers}`}>
+          {usersListToDiv(c.confirmed_students, location, url)}
+        </div>
       </aside>
     </div>
   ));

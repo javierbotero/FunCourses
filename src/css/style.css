@@ -140,6 +140,11 @@
   background-color: #E6F0FE;
 }
 
+.user {
+  display: inline-block;
+  border: 1em solid transparent;
+}
+
 @media screen and (min-width: 600px) {
   .form {
     padding: 0 30%;

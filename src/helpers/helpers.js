@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import avatar from '../assets/images/avatar.jpg';
 
 const initCreator = obj => ({
   method: obj.verb,
@@ -76,11 +77,12 @@ const commentsToDivs = (comments, location, url) => comments.map(c => (
     <div>{c.body}</div>
   </div>
 ));
-const usersListToDiv = (users, location, url) => users.map(u => (
+const usersListToDiv = (users, location, url, urlApi) => users.map(u => (
   <div className="user" key={u.id}>
-    <div style={{ backgroundImage: 'url(u.avatar)' }}>
-      avatar
-    </div>
+    <div
+      style={{ backgroundImage: `url(${u.url_avatar ? `${urlApi}${u.avatar.slice(1, u.avatar.length)}` : avatar}` }}
+      className="avatar"
+    />
     <div>
       <Link
         to={{
