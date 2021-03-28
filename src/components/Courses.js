@@ -94,7 +94,7 @@ const Courses = props => {
         <button className={`${CoursesCss.btn}`} type="button" onClick={logout}>Log out</button>
       </header>
       <div className={`${CoursesCss.coursesItems}`}>
-        {coursesToDivs(courses, FontAwesomeIcon)}
+        {coursesToDivs(courses, url, location)}
       </div>
     </div>
   );

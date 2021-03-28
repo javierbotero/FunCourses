@@ -46,18 +46,24 @@
   border-top: 1em solid #FFFFFF;
   border-bottom: 1em solid #FFFFFF;
   padding: 1em 0;
+  width: 90vw;
 }
 
 .scrollUsers {
   width: 90%;
   margin: 0 auto;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .teacherCourse {
   background-color: #E6F0FE;
-  border-bottom: 1em solid white;
-  padding: 1em 0;
+  border: 5px solid white;
   border-radius: 5px;
+  width: 90vw;
+  flex: 1 0 90vw;
 }
 
 .headerCourse {
@@ -65,7 +71,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 1em 0;
 }
 
 .sectionCourse {
@@ -77,10 +82,21 @@
   padding-top: 1em;
 }
 
+.studentCourses {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
 .studentCourses .course-container {
   height: 400px;
 }
 
 .titleCourse {
   padding: 1em 0;
+}
+
+.request {
+  
 }

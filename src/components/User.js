@@ -52,11 +52,11 @@ const User = props => {
           </h3>
           <div className="student">
             <h4>Courses as Student</h4>
-            {coursesToDivs(findCoursesCb(courses, obj.courses_as_student))}
+            {coursesToDivs(findCoursesCb(courses, obj.courses_as_student), url, location)}
           </div>
           <div className="teacher">
             <h4>Courses as Teacher</h4>
-            {coursesToDivs(findCoursesCb(courses, obj.courses))}
+            {coursesToDivs(findCoursesCb(courses, obj.courses), url, location)}
           </div>
           <div>
             <h4>

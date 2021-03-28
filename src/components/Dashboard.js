@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dashCss from '../css/Dashboard.module.css';
 import CoursesCss from '../css/Courses.module.css';
+import avatarImage from '../assets/images/avatar.jpg';
 
 const Dashboard = props => {
   const {
@@ -39,19 +40,8 @@ const Dashboard = props => {
     location,
   ) => course.pendings.map(p => {
     const student = course.pending_students.find(s => s.id === p.user_id);
-
     return (
-      <div className="request" key={p.id}>
-        <div>
-          {'Course: '}
-          <Link to={{
-            pathname: `${url}/course/${course.id}`,
-            state: { from: location },
-          }}
-          >
-            {course.title}
-          </Link>
-        </div>
+      <div className={`${dashCss.request}`} key={p.id}>
         <div>
           {'Student: '}
           <Link
@@ -66,6 +56,12 @@ const Dashboard = props => {
               },
             }}
           >
+            <div
+              className="avatar"
+              style={{
+                backgroundImage: student.url_avatar ? `url(${urlApi}${student.url_avatar.slice(1, student.url_avatar.length)})` : `url(${avatarImage})`,
+              }}
+            />
             {student.username}
           </Link>
         </div>
@@ -261,7 +257,7 @@ const Dashboard = props => {
         <section className={`${dashCss.interactions}`}>
           <h4>As a Student</h4>
           <div className={`${dashCss.studentCourses}`}>
-            {coursesToDivs(findCourses(courses, user.courses_as_student))}
+            {coursesToDivs(findCourses(courses, user.courses_as_student), url, location, true)}
           </div>
         </section>
         <section className={`${dashCss.interactions}`}>

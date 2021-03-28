@@ -230,7 +230,7 @@ const Main = props => {
     payload.friendship = friendship;
     updFriend(payload);
   };
-  const coursesToDivs = courses => courses.map(course => (
+  const coursesToDivs = (courses, url, location, access = false) => courses.map(course => (
     <div key={course.id} className="course-container">
       <div
         className="course"
@@ -238,26 +238,35 @@ const Main = props => {
           backgroundImage: `url(${mainUrl(course)})`,
         }}
       />
-      <div className="info-course">
-        <div className="linkCourse">
-          <div>{course.title}</div>
-          <Link to={{
-            pathname: `${url}/course/${course.id}`,
-            state: { from: location },
-          }}
-          >
-            More Info
-          </Link>
+      <div className="info-section">
+        <div className="info-course">
+          <div className="linkCourse">
+            <div>{course.title}</div>
+            <Link to={{
+              pathname: `${url}/course/${course.id}`,
+              state: { from: location },
+            }}
+            >
+              More Info
+            </Link>
+          </div>
+          <div className="likes">
+            <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
+              <FontAwesomeIcon icon={
+                isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
+                }
+              />
+            </button>
+            {` ${course.favorites.length}`}
+          </div>
         </div>
-        <div className="likes">
-          <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
-            <FontAwesomeIcon icon={
-              isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
-              }
-            />
-          </button>
-          {` ${course.favorites.length}`}
-        </div>
+        {
+          access && (
+            <div>
+              <a href={`${course.link}`}>Join Class</a>
+            </div>
+          )
+        }
       </div>
     </div>
   ));
