@@ -47,6 +47,7 @@
   background-size: cover;
   background-position: center;
   flex: 4 0 70%;
+  margin: auto
 }
 
 .info-course {
@@ -111,9 +112,9 @@
 .course-container {
   display: flex;
   flex-direction: column;
-  height: 80%;
-  margin: auto 1em;
-  background-color: #FFFFFF;
+  background-color: #E6F0FE;
+  padding: 1em 0;
+  min-height: 400px;
 }
 
 .hide {
@@ -137,7 +138,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1em;
-  background-color: #E6F0FE;
+  background-color: #FFFFFF;
 }
 
 .user {

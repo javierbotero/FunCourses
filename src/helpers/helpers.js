@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import avatar from '../assets/images/avatar.jpg';
+import fun2 from '../assets/images/fun2.jpg';
+import { URL } from '../constants/constants';
 
 const initCreator = obj => ({
   method: obj.verb,
@@ -106,9 +108,9 @@ const isPresentInId = (arr, id) => arr.find(item => item.id === parseInt(id, 10)
 const isFriendshipRequested = (arr, id) => arr.find(f => f.receiver_id === parseInt(id, 10));
 const mainUrl = c => {
   if (c.main_image_url) {
-    return c.main_image_url.slice(1, c.main_image_url.length);
+    return c.main_image_url ? `${URL}${c.main_image_url.slice(1, c.main_image_url.length)}` : fun2;
   }
-  return '#';
+  return fun2;
 };
 const picturesToDivs = (images, urlApi, cssClases) => images.map(img => (
   <div

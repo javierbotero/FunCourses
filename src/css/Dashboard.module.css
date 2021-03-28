@@ -11,7 +11,7 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  background-color: #E6F0FE;
+  background-color: #FFFFFF;
   padding: 0 1em;
   text-align: center;
 }
@@ -43,12 +43,44 @@
 .interactions {
   flex: 3 0 15vh;
   background-color: #FFFFFF;
-  border-top: 1em solid #E6F0FE;
-  border-bottom: 1em solid #E6F0FE;
+  border-top: 1em solid #FFFFFF;
+  border-bottom: 1em solid #FFFFFF;
   padding: 1em 0;
 }
 
 .scrollUsers {
   width: 90%;
   margin: 0 auto;
+}
+
+.teacherCourse {
+  background-color: #E6F0FE;
+  border-bottom: 1em solid white;
+  padding: 1em 0;
+  border-radius: 5px;
+}
+
+.headerCourse {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 1em 0;
+}
+
+.sectionCourse {
+  padding: 1em 0;
+  min-height: 6em;
+}
+
+.metricsCourses {
+  padding-top: 1em;
+}
+
+.studentCourses .course-container {
+  height: 400px;
+}
+
+.titleCourse {
+  padding: 1em 0;
 }

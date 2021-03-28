@@ -29,6 +29,7 @@ const Dashboard = props => {
     handleUpdFriend,
     findCoursesFromCoursesId,
     findCourses,
+    mainUrl,
   } = props;
   const objAuth = useAuth();
 
@@ -111,29 +112,37 @@ const Dashboard = props => {
   });
 
   const teacherCoursesToDivs = (courses, url, location) => courses.map(c => (
-    <div className="teacher-course" key={c.id}>
-      <h4>{c.title}</h4>
-      <a href={c.link}>Join class</a>
-      <section>
+    <div className={`${dashCss.teacherCourse}`} key={c.id}>
+      <header className={`${dashCss.headerCourse}`}>
+        <div
+          className="course"
+          style={{
+            backgroundImage: `url(${mainUrl(c)})`,
+          }}
+        />
+        <h4 className={`${dashCss.titleCourse}`}>{c.title}</h4>
+        <a className={`${dashCss.join}`} href={c.link}>Join Class</a>
+      </header>
+      <section className={`${dashCss.sectionCourse}`}>
         <h4>Enrollment Requests</h4>
         <div className={`${dashCss.scrollUsers}`}>
           {displayPendingSubscriptions(c, url, location)}
         </div>
-        <p>
+        <p className={`${dashCss.metricsCourses}`}>
           {c.pendings.length}
           {' students waiting'}
         </p>
       </section>
-      <aside>
+      <section className={`${dashCss.sectionCourse}`}>
         <h4>Accepted Students</h4>
-        <p>
+        <p className={`${dashCss.metricsCourses}`}>
           {c.subscriptions.length}
           {' students are confirmed'}
         </p>
         <div className={`${dashCss.scrollUsers}`}>
           {usersListToDiv(c.confirmed_students, location, url)}
         </div>
-      </aside>
+      </section>
     </div>
   ));
 
@@ -248,10 +257,10 @@ const Dashboard = props => {
         </div>
       </header>
       <main className={`${dashCss.main}`}>
-        <h3>Your Courses</h3>
+        <h3>Courses</h3>
         <section className={`${dashCss.interactions}`}>
           <h4>As a Student</h4>
-          <div className="student">
+          <div className={`${dashCss.studentCourses}`}>
             {coursesToDivs(findCourses(courses, user.courses_as_student))}
           </div>
         </section>
@@ -476,6 +485,7 @@ Dashboard.propTypes = {
   handleUpdFriend: PropTypes.func.isRequired,
   findCoursesFromCoursesId: PropTypes.func.isRequired,
   findCourses: PropTypes.func.isRequired,
+  mainUrl: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

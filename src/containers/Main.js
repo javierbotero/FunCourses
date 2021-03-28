@@ -235,7 +235,7 @@ const Main = props => {
       <div
         className="course"
         style={{
-          backgroundImage: `url(${urlApi}${mainUrl(course)})`,
+          backgroundImage: `url(${mainUrl(course)})`,
         }}
       />
       <div className="info-course">
@@ -364,6 +364,7 @@ const Main = props => {
               handleUpdFriend={handleUpdFriend}
               findCoursesFromCoursesId={findCoursesFromCoursesId}
               findCourses={findCourses}
+              mainUrl={mainUrl}
             />
           )}
         />
