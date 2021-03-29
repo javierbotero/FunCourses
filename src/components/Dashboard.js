@@ -244,7 +244,7 @@ const Dashboard = props => {
           <div
             className={`avatar ${CoursesCss.avatarPic}`}
             style={{
-              backgroundImage: `url(${user.url_avatar})`,
+              backgroundImage: user.url_avatar ? `url(${urlApi}${user.url_avatar.slice(1, user.url_avatar.length)})` : `url(${avatarImage})`,
             }}
           />
           <h4 className={dashCss.welcome}>

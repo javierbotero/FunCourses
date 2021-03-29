@@ -19,6 +19,7 @@
   align-items: flex-end;
   justify-content: space-between;
   color: #FFFFFF;
+  position: relative;
 }
 
 .infoTeacher {
@@ -113,4 +114,8 @@
 
 .comments {
   padding: 2em 0;
+}
+
+.commentsTitle {
+  padding-bottom: 1em;
 }

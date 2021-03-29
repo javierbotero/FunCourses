@@ -4,6 +4,7 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CoursesCss from '../css/Courses.module.css';
+import avatarImage from '../assets/images/avatar.jpg';
 
 const Courses = props => {
   const {
@@ -16,6 +17,7 @@ const Courses = props => {
     resetCourses,
     avatar,
     username,
+    urlApi,
   } = props;
   const popUpMenu = () => {
     const div = document.getElementsByClassName('scrollContainer')[0];
@@ -57,7 +59,7 @@ const Courses = props => {
           <div
             className={`avatar ${CoursesCss.avatarPic}`}
             style={{
-              backgroundImage: `url(${avatar})`,
+              backgroundImage: avatar ? `url(${urlApi}${avatar.slice(1, avatar.length)})` : `url(${avatarImage})`,
             }}
           />
           <h4 className={CoursesCss.username}>{username}</h4>
@@ -144,6 +146,7 @@ Courses.propTypes = {
   resetCourses: PropTypes.func.isRequired,
   avatar: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
+  urlApi: PropTypes.string.isRequired,
 };
 
 export default Courses;

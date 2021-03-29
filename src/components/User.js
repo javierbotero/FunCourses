@@ -2,6 +2,10 @@ import React from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from '../css/User.module.css';
+import course from '../css/Course.module.css';
+import avatarImage from '../assets/images/avatar.jpg';
 
 const User = props => {
   const {
@@ -42,26 +46,40 @@ const User = props => {
   const infoUserToHtml = (obj, courses, findCoursesCb) => {
     if (obj.status) {
       return (
-        <div>
-          <div>
-            {obj.status}
+        <div className={styles.friendTrue}>
+          <div
+            style={{
+              backgroundImage: obj.url_avatar ? `url(${urlApi}${obj.url_avatar.slice(1, obj.url_avatar.length)})` : `url(${avatarImage})`,
+            }}
+            className={`${course.mainPic}`}
+          >
+            <div className={course.degrade} />
+            <div className={course.infoTeacher}>
+              <div>
+                {obj.status}
+              </div>
+            </div>
+            <div className={course.price}>
+              <h3>{obj.username}</h3>
+            </div>
           </div>
-          <h3>
-            {obj.username}
-            {' Courses'}
-          </h3>
-          <div className="student">
-            <h4>Courses as Student</h4>
-            {coursesToDivs(findCoursesCb(courses, obj.courses_as_student), url, location)}
+          <h3 className={styles.courses}>Courses</h3>
+          <div className={styles.interactions}>
+            <h4>Student</h4>
+            <div className={styles.courses}>
+              {coursesToDivs(findCoursesCb(courses, obj.courses_as_student), url, location)}
+            </div>
           </div>
-          <div className="teacher">
-            <h4>Courses as Teacher</h4>
-            {coursesToDivs(findCoursesCb(courses, obj.courses), url, location)}
+          <div className={styles.interactions}>
+            <h4>Teacher</h4>
+            <div className={styles.courses}>
+              {coursesToDivs(findCoursesCb(courses, obj.courses), url, location)}
+            </div>
           </div>
-          <div>
-            <h4>
-              Comments made by
-              {` ${obj.username}`}
+          <div className={styles.comments}>
+            <h4 className={course.commentsTitle}>
+              {infoUser.username}
+              &apos;s opinions
             </h4>
             {commentsToDivsWithCourse(obj.comments, location, url)}
           </div>
@@ -69,8 +87,15 @@ const User = props => {
       );
     }
     return (
-      <div>
-        <div>Your are not friends yet</div>
+      <div className={styles.friendFalse}>
+        <div
+          style={{
+            backgroundImage: infoUser.url_avatar ? `url(${urlApi}${infoUser.url_avatar.slice(1, infoUser.url_avatar.length)})` : `url(${avatarImage})`,
+          }}
+          className="avatar"
+        />
+        <h3 className={styles.username}>{infoUser.username}</h3>
+        <div className={styles.notFriends}>Your are not friends yet</div>
         <button
           type="button"
           onClick={() => {
@@ -114,17 +139,22 @@ const User = props => {
 
   return (
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to={location.state ? location.state.from.pathname : `${url}`}>
-              &#60;
-            </Link>
-          </li>
-        </ul>
+      <nav className="navMenu">
+        <div>
+          <Link to={location.state ? location.state.from.pathname : `${url}`}>
+            &#60;
+          </Link>
+        </div>
+        <div>
+          {infoUser.username}
+        </div>
+        <div>
+          <FontAwesomeIcon icon="ellipsis-v" />
+        </div>
       </nav>
-      <h3>{infoUser.username}</h3>
-      {infoUserToHtml(infoUser, courses, findCourses)}
+      <div className={styles.container}>
+        {infoUserToHtml(infoUser, courses, findCourses)}
+      </div>
     </div>
   );
 };

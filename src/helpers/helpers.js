@@ -46,9 +46,9 @@ const handleApiRequest = async (initCreator, verb, url, data) => {
 };
 
 const commentsToDivsWithCourse = (comments, location, url) => comments.map(c => (
-  <div key={c.id}>
-    <div>
-      {'In course: '}
+  <div key={c.id} className="comment">
+    <div className="username">
+      {'In: '}
       <Link to={{
         pathname: `${url}/course/${c.course_id}`,
         state: {
@@ -59,7 +59,7 @@ const commentsToDivsWithCourse = (comments, location, url) => comments.map(c => 
         {c.course.title}
       </Link>
     </div>
-    <div>{c.body}</div>
+    <div className="comment-body">{c.body}</div>
   </div>
 ));
 const commentsToDivs = (comments, location, url) => comments.map(c => (
