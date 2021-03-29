@@ -81,10 +81,6 @@ const commentsToDivs = (comments, location, url) => comments.map(c => (
 ));
 const usersListToDiv = (users, location, url, urlApi) => users.map(u => (
   <div className="user" key={u.id}>
-    <div
-      style={{ backgroundImage: `url(${u.url_avatar ? `${urlApi}${u.avatar.slice(1, u.avatar.length)}` : avatar}` }}
-      className="avatar"
-    />
     <div>
       <Link
         to={{
@@ -95,7 +91,13 @@ const usersListToDiv = (users, location, url, urlApi) => users.map(u => (
           },
         }}
       >
-        {u.username}
+        <div
+          style={{ backgroundImage: `url(${u.url_avatar ? `${urlApi}${u.url_avatar.slice(1, u.url_avatar.length)}` : avatar}` }}
+          className="avatar"
+        />
+        <div style={{ padding: '5px 0' }}>
+          {u.username}
+        </div>
       </Link>
     </div>
   </div>

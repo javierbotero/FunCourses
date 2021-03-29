@@ -38,6 +38,7 @@
   border-radius: 50%;
   background-size: cover;
   background-repeat: no-repeat;
+  margin: auto;
 }
 
 .course {
@@ -158,6 +159,7 @@
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  padding-top: 10px;
 }
 
 @media screen and (min-width: 600px) {

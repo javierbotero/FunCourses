@@ -43,7 +43,6 @@ const Dashboard = props => {
     return (
       <div className={`${dashCss.request}`} key={p.id}>
         <div>
-          {'Student: '}
           <Link
             to={{
               pathname: `${url}/user/${student.id}`,
@@ -62,10 +61,10 @@ const Dashboard = props => {
                 backgroundImage: student.url_avatar ? `url(${urlApi}${student.url_avatar.slice(1, student.url_avatar.length)})` : `url(${avatarImage})`,
               }}
             />
-            {student.username}
+            <div className={dashCss.username}>{student.username}</div>
           </Link>
         </div>
-        <div>
+        <div className={dashCss.acceptance}>
           <button
             type="button"
             onClick={() => handleUpdateSubscription(
@@ -120,21 +119,19 @@ const Dashboard = props => {
         <a className={`${dashCss.join}`} href={c.link}>Join Class</a>
       </header>
       <section className={`${dashCss.sectionCourse}`}>
-        <h4>Enrollment Requests</h4>
+        <h4>
+          {c.pendings.length}
+          {' Enrollment Requests'}
+        </h4>
         <div className={`${dashCss.scrollUsers}`}>
           {displayPendingSubscriptions(c, url, location)}
         </div>
-        <p className={`${dashCss.metricsCourses}`}>
-          {c.pendings.length}
-          {' students waiting'}
-        </p>
       </section>
       <section className={`${dashCss.sectionCourse}`}>
-        <h4>Accepted Students</h4>
-        <p className={`${dashCss.metricsCourses}`}>
+        <h4>
           {c.subscriptions.length}
-          {' students are confirmed'}
-        </p>
+          {' Accepted Students'}
+        </h4>
         <div className={`${dashCss.scrollUsers}`}>
           {usersListToDiv(c.confirmed_students, location, url)}
         </div>
@@ -145,19 +142,24 @@ const Dashboard = props => {
   const displayPendingFriendships = (students, requests, location) => requests.map((r, i) => {
     const student = students.find(s => s.id === r.sender_id);
     return (
-      <div className="request" key={r.id}>
-        <div style={{ backgroundImage: 'url(#)' }}>
-          avatar
-        </div>
+      <div className={`${dashCss.request}`} key={r.id}>
         <Link
           to={{
             pathname: `${url}/user/${student.id}`,
             state: { from: location },
           }}
         >
-          {student.username}
+          <div
+            style={{
+              backgroundImage: student.url_avatar ? `url(${urlApi}${student.url_avatar.slice(1, student.url_avatar.length)})` : `url(${avatarImage})`,
+            }}
+            className="avatar"
+          />
+          <div className={dashCss.username}>
+            {student.username}
+          </div>
         </Link>
-        <div>
+        <div className={dashCss.acceptance}>
           <button
             type="button"
             onClick={() => {
@@ -245,7 +247,7 @@ const Dashboard = props => {
               backgroundImage: `url(${user.url_avatar})`,
             }}
           />
-          <h4>
+          <h4 className={dashCss.welcome}>
             {'Hi '}
             {user.username}
             !
@@ -280,7 +282,7 @@ const Dashboard = props => {
       <aside className={`${dashCss.aside}`}>
         <h3>Friendship Requests</h3>
         <section className={`${dashCss.interactions}`}>
-          <div>
+          <div className={dashCss.requests}>
             {displayPendingFriendships(
               user.friendship_requests,
               user.pending_to_accept_friendships,

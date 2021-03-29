@@ -60,7 +60,7 @@ const Courses = props => {
               backgroundImage: `url(${avatar})`,
             }}
           />
-          <h4>{username}</h4>
+          <h4 className={CoursesCss.username}>{username}</h4>
         </div>
         <ul className={`${CoursesCss.menu}`}>
           <li>
