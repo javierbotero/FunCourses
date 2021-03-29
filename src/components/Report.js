@@ -2,12 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Dashboard from '../css/Dashboard.module.css';
+import report from '../css/Report.module.css';
+import Circle from './Circle';
 
 const Report = props => {
   const {
     user,
     location,
     url,
+    findCourses,
+    courses,
   } = props;
   const getMetrics = courses => {
     let students = 0;
@@ -24,33 +30,83 @@ const Report = props => {
       favorites,
     };
   };
-  const metrics = getMetrics(user.courses);
+  const metrics = getMetrics(findCourses(courses, user.courses));
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const maxCoursesMonth = (courses, max) => {
+    let total = 0;
+    courses.forEach(c => {
+      if (c.dates) {
+        const dates = c.dates.split(' ').slice(0, -1);
+        if (dates.length > 0) {
+          const date = new Date(dates[dates.length - 2]);
+          const today = new Date();
+          const month = date.getMonth();
+          const year = date.getFullYear();
+          const todayMonth = today.getMonth();
+          const todayYear = today.getFullYear();
+          console.log(date, today, todayMonth, year, todayYear);
+          if (month === todayMonth && year === todayYear) {
+            total += 1;
+          }
+        }
+      }
+    });
+    const result = (total / max) * 100;
+    return {
+      percentage: result > 100 ? 100 : result,
+      total,
+    };
+  };
   return (
-    <div className="report">
-      <header>
-        <ul>
-          <li>
-            <Link to={location.state ? location.state.from.pathname : `${url}`}>
-              &#60;
-            </Link>
-          </li>
-        </ul>
+    <div className={report.report}>
+      <nav className="navMenu">
+        <div>
+          <Link to={{
+            pathname: location.state ? location.state.from.pathname : `${url}`,
+            state: { from: location },
+          }}
+          >
+            &#60;
+          </Link>
+        </div>
+        <div>
+          Dashboard
+        </div>
+        <div>
+          <FontAwesomeIcon icon="ellipsis-v" />
+        </div>
+      </nav>
+      <header className={Dashboard.header}>
         <div>
           {'Hello '}
           {user.username}
           {', these are metrics of your actions'}
         </div>
       </header>
-      <main>
-        <div>
+      <main className={report.main}>
+        <div className={report.field}>
           <div>
-            {'Courses created: '}
+            {`Courses opened in: ${months[new Date().getMonth()]}`}
           </div>
           <div>
-            {user.courses.length}
+            <Circle quantity={maxCoursesMonth(findCourses(courses, user.courses), 5).percentage} />
+            {maxCoursesMonth(findCourses(courses, user.courses)).total}
           </div>
         </div>
-        <div>
+        <div className={report.field}>
           <div>
             {'Total Students: '}
           </div>
@@ -58,7 +114,7 @@ const Report = props => {
             {metrics.students}
           </div>
         </div>
-        <div>
+        <div className={report.field}>
           <div>
             {'Total students waiting for confirmation: '}
           </div>
@@ -66,7 +122,7 @@ const Report = props => {
             {metrics.pendings}
           </div>
         </div>
-        <div>
+        <div className={report.field}>
           <div>
             {'Total favorites received: '}
           </div>
@@ -74,15 +130,21 @@ const Report = props => {
             {metrics.favorites}
           </div>
         </div>
-        <div>
+        <div className={report.field}>
           <div>
-            {'Courses as student: '}
+            {`Taking courses in: ${months[new Date().getMonth()]}`}
           </div>
           <div>
-            {user.courses_as_student.length}
+            <Circle
+              quantity={maxCoursesMonth(
+                findCourses(courses, user.courses_as_student),
+                10,
+              ).percentage}
+            />
+            {maxCoursesMonth(findCourses(courses, user.courses_as_student)).total}
           </div>
         </div>
-        <div>
+        <div className={report.field}>
           <div>
             {'Total friends: '}
           </div>
@@ -90,7 +152,7 @@ const Report = props => {
             {user.requests.length + user.pendings.length}
           </div>
         </div>
-        <div>
+        <div className={report.field}>
           <div>
             {'Your comments: '}
           </div>
@@ -98,7 +160,7 @@ const Report = props => {
             {user.comments.length}
           </div>
         </div>
-        <div>
+        <div className={report.field}>
           <div>
             {'Your favorites: '}
           </div>
@@ -245,8 +307,44 @@ Report.propTypes = {
       })).isRequired,
     })),
   }).isRequired,
+  courses: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    teacher_id: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    dates: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    created_at: PropTypes.string.isRequired,
+    updated_at: PropTypes.string.isRequired,
+    teacher: PropTypes.shape({
+      id: PropTypes.number,
+      username: PropTypes.string,
+    }).isRequired,
+    favorites: PropTypes.arrayOf(PropTypes.shape({
+      course_id: PropTypes.number,
+      user_id: PropTypes.number,
+    })).isRequired,
+    subscriptions: PropTypes.arrayOf(PropTypes.shape({
+      course_id: PropTypes.number,
+      user_id: PropTypes.number.isRequired,
+      confirmed: PropTypes.bool,
+    })).isRequired,
+    comments: PropTypes.arrayOf(PropTypes.shape({
+      user_id: PropTypes.number,
+      course_id: PropTypes.number,
+      body: PropTypes.string,
+    })).isRequired,
+    pendings: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      user_id: PropTypes.number,
+      course_id: PropTypes.number,
+      confirmed: PropTypes.bool,
+    })).isRequired,
+  })).isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   url: PropTypes.string.isRequired,
+  findCourses: PropTypes.func.isRequired,
 };
 
 export default Report;

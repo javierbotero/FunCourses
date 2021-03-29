@@ -1,0 +1,28 @@
+/*
+
+  orange: #F5531F
+  fuchsia: #4F1D9F
+  purple: #4333B3
+  white: #FFFFFF
+  light-fuchsia: #E6F0FE
+  orange2: #E04534
+
+*/
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.field {
+  flex: 1 0 40vw;
+  height: 25vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.report {
+  padding: 1em;
+}

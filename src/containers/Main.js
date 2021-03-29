@@ -403,6 +403,8 @@ const Main = props => {
               location={location}
               url={url}
               user={user}
+              findCourses={findCourses}
+              courses={courses}
             />
           )}
         />
