@@ -50,110 +50,135 @@ const Course = props => {
 
   return (
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to={location.state ? location.state.from.pathname : `${url}`}>
-              &#60;
-            </Link>
-          </li>
-        </ul>
+      <nav className="navMenu">
+        <div>
+          <Link to={location.state ? location.state.from.pathname : `${url}`}>
+            &#60;
+          </Link>
+        </div>
+        <div>
+          {course.title}
+        </div>
+        <div>
+          <FontAwesomeIcon icon="ellipsis-v" />
+        </div>
       </nav>
       <div>
         <div
           style={{
             backgroundImage: course.main_image_url ? `url(${urlApi}${mainUrl(course)})` : `url(${avatar})`,
           }}
-          className="main-picture"
-        />
-        <div>{course.title}</div>
-        <div>
-          <Link
-            to={{
-              pathname: `${url}/user/${course.teacher_id}`,
-              state: {
-                from: location,
-                user: course.teacher,
-              },
-            }}
-          >
-            Teacher:
-            {` ${course.teacher.username}`}
-          </Link>
+          className={`${styles.mainPic}`}
+        >
+          <div className={styles.degrade} />
+          <div className={styles.infoTeacher}>
+            <Link
+              to={{
+                pathname: `${url}/user/${course.teacher_id}`,
+                state: {
+                  from: location,
+                  user: course.teacher,
+                },
+              }}
+            >
+              <div
+                style={{
+                  backgroundImage: course.teacher.url_avatar ? `url(${urlApi}${course.teacher.url_avatar.slice(1, course.teacher.url_avatar.length)})` : `url(${avatar})`,
+                }}
+                className="avatar"
+              />
+            </Link>
+            <div className={styles.teacherDetails}>
+              <div>
+                {` ${course.teacher.username}`}
+              </div>
+              <div className={styles.likes}>
+                <button className="like" type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
+                  <FontAwesomeIcon icon={
+                    isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
+                    }
+                  />
+                </button>
+                <div>
+                  {` ${course.favorites.length}`}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.price}>
+            {'$ '}
+            {`${course.price}`}
+          </div>
         </div>
       </div>
-      <div>
-        Start:
-        {` ${start()}`}
-        <br />
-        End:
-        {` ${finish()}`}
-      </div>
-      <div>{course.content}</div>
-      <div>
-        status:
-        {` ${course.status}`}
-      </div>
-      <div>
-        price:
-        {` $${course.price}`}
-      </div>
-      <div>
-        <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
-          <FontAwesomeIcon icon={
-            isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
-            }
-          />
+      {course.status !== 'Closed'
+      && (
+        <button
+          className={styles.subscribe}
+          type="button"
+          onClick={() => handleSubscription(
+            isPresentInUserId,
+            isPresentInId,
+            setUserErr,
+            objAuth.userId,
+            objAuth.userPassword,
+            course.subscriptions,
+            teacherCourses,
+            course.pending_students,
+            course.pendings,
+            objThunk,
+            urlApi,
+            tokenPayload,
+            userPayload,
+            id,
+            token,
+            course.id,
+            course.title,
+          )}
+        >
+          {isPresentInUserId(course.subscriptions, objAuth.userId) ? 'Unsubscribe' : ''}
+          {isPresentInId(course.pending_students, objAuth.userId) ? 'Cancel' : ''}
+          {!isPresentInUserId(course.subscriptions, objAuth.userId) && !isPresentInId(course.pending_students, objAuth.userId) ? 'Subscribe' : ''}
         </button>
-        { ` ${course.favorites.length}`}
+      ) }
+      <div className={styles.basicInfo}>
+        <h3 className={styles.title}>{course.title}</h3>
+        <div className={styles.dates}>
+          Start:
+          {` ${start()}`}
+          <br />
+          End:
+          {` ${finish()}`}
+        </div>
+        <div className={styles.content}>{course.content}</div>
+        <div className={styles.status}>
+          status:
+          {` ${course.status}`}
+        </div>
+        <a href="#images" aria-label="images" className={styles.jump1}><FontAwesomeIcon icon="chevron-down" /></a>
       </div>
-      <div>
-        {course.status !== 'Closed'
-        && (
-          <button
-            type="button"
-            onClick={() => handleSubscription(
-              isPresentInUserId,
-              isPresentInId,
-              setUserErr,
-              objAuth.userId,
-              objAuth.userPassword,
-              course.subscriptions,
-              teacherCourses,
-              course.pending_students,
-              course.pendings,
-              objThunk,
-              urlApi,
-              tokenPayload,
-              userPayload,
-              id,
-              token,
-              course.id,
-              course.title,
-            )}
-          >
-            {isPresentInUserId(course.subscriptions, objAuth.userId) ? 'Unsubscribe' : ''}
-            {isPresentInId(course.pending_students, objAuth.userId) ? 'Cancel' : ''}
-            {!isPresentInUserId(course.subscriptions, objAuth.userId) && !isPresentInId(course.pending_students, objAuth.userId) ? 'Subscribe' : ''}
-          </button>
-        ) }
-      </div>
-      <div className={`${styles.pictures}`}>
-        {course.images_url.length > 0 ? picturesToDivs(course.images_url, urlApi, `${styles.picture}`) : <div className="no-images">No images</div>}
-      </div>
-      <div>
-        <div>
-          <h4>Students confirmed</h4>
-          <div>{usersListToDiv(course.confirmed_students, location, url)}</div>
+      <div className={styles.public}>
+        <div className={`${styles.pictures}`} id="images">
+          {course.images_url.length > 0 ? picturesToDivs(course.images_url, urlApi, styles.picture) : <div className="no-images">No images</div>}
         </div>
         <div>
-          <h4>Students waiting for confirmation</h4>
-          <div>{usersListToDiv(course.pending_students, location, url)}</div>
+          <div className={styles.interactions}>
+            <h4>Confirmed</h4>
+            <div className={styles.students}>
+              {usersListToDiv(course.confirmed_students, location, url)}
+            </div>
+          </div>
+          <div className={styles.interactions}>
+            <h4>Pendings</h4>
+            <div className={styles.students}>
+              {usersListToDiv(course.pending_students, location, url)}
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <h4>Comments</h4>
-        <div>{commentsToDivs(course.comments, location, url)}</div>
+        <div className={styles.comments}>
+          <h4 className={styles.commentsTitle}>Comments</h4>
+          <div>{commentsToDivs(course.comments, location, url)}</div>
+        </div>
       </div>
     </div>
   );

@@ -63,8 +63,8 @@ const commentsToDivsWithCourse = (comments, location, url) => comments.map(c => 
   </div>
 ));
 const commentsToDivs = (comments, location, url) => comments.map(c => (
-  <div key={c.id}>
-    <div>
+  <div key={c.id} className="comment">
+    <div className="username">
       <Link to={{
         pathname: `${url}/user/${c.user.id}`,
         state: {
@@ -76,7 +76,7 @@ const commentsToDivs = (comments, location, url) => comments.map(c => (
         {c.user.username}
       </Link>
     </div>
-    <div>{c.body}</div>
+    <div className="comment-body">{c.body}</div>
   </div>
 ));
 const usersListToDiv = (users, location, url, urlApi) => users.map(u => (
