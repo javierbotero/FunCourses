@@ -23,12 +23,17 @@ const Courses = props => {
   const popUpMenu = () => {
     const div = document.getElementsByClassName('scrollContainer')[0];
     const navMenu = () => document.querySelector('.navMenu');
+    const deskMenu = () => document.querySelector('.desktopMenu');
     if (div.scrollLeft < 200) {
       navMenu().classList.add('hide');
       navMenu().classList.remove('show');
+      deskMenu().classList.add('hide');
+      deskMenu().classList.remove('show');
     } else {
-      navMenu().classList.remove('hide');
       navMenu().classList.add('show');
+      navMenu().classList.remove('hide');
+      deskMenu().classList.add('show');
+      deskMenu().classList.remove('hide');
     }
   };
   useEffect(() => {
@@ -36,6 +41,7 @@ const Courses = props => {
     div.addEventListener('scroll', popUpMenu);
     return () => {
       div.removeEventListener('scroll', popUpMenu);
+      document.querySelector('.desktopMenu').classList.remove('hide', 'show');
     };
   }, []);
   const authObject = useAuth();

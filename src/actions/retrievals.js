@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const getCourses = createAsyncThunk(

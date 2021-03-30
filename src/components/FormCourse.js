@@ -63,6 +63,16 @@ const FormCourse = props => {
     };
     const payload = objThunk(urlApi, 'POST', init);
     dispatchCourse(payload);
+    setTitle('');
+    setContent('');
+    setDateStart(new Date().toLocaleDateString());
+    setDateEnd(new Date().toLocaleDateString());
+    setPrice('');
+    setProvider('zoom');
+    setLink('');
+    setStatus('Closed');
+    setMainPicture('');
+    setPictures([]);
   };
   const saveFileToBase64 = (file, cb, cb2 = false) => {
     const newFile = new FileReader();
@@ -119,7 +129,14 @@ const FormCourse = props => {
         <div>
           Create
         </div>
-        <button className="removeButtonStyles" type="button" onClick={() => setShowMenu(true)}>
+        <button
+          className="removeButtonStyles"
+          type="button"
+          onClick={() => {
+            console.log('fired button menu dots');
+            setShowMenu(true);
+          }}
+        >
           <FontAwesomeIcon icon="ellipsis-v" />
         </button>
       </nav>

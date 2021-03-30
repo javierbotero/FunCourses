@@ -11,6 +11,7 @@
 
 .container {
   padding: 3em 1em 1em 1em;
+  text-align: center;
 }
 
 .friendFalse {
@@ -51,4 +52,8 @@
 
 .comments {
   padding: 1em 0;
+}
+
+.titleCourses {
+  padding: 2em 0 1em 0;
 }

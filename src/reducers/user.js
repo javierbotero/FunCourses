@@ -17,7 +17,7 @@ const initialState = {
   status: 'idle',
   error: '',
   notification: '',
-  loading: false,
+  loading: true,
 };
 
 const user = createSlice({

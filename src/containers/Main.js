@@ -279,7 +279,7 @@ const Main = props => {
       <div className={showMenu ? 'menuMobile' : 'hide-menu'}>
         <button type="button" onClick={() => setShowMenu(false)}>x</button>
         <ul className="ulMenuMobile">
-          <li>
+          <li role="menuitem" onKeyPress={() => setShowMenu(false)} onClick={() => setShowMenu(false)}>
             <Link
               to={{
                 pathname: path,
@@ -289,7 +289,7 @@ const Main = props => {
               Courses
             </Link>
           </li>
-          <li>
+          <li role="menuitem" onKeyPress={() => setShowMenu(false)} onClick={() => setShowMenu(false)}>
             <Link
               to={{
                 pathname: `${path}/dashboard`,
@@ -299,7 +299,7 @@ const Main = props => {
               Dashboard
             </Link>
           </li>
-          <li>
+          <li role="menuitem" onKeyPress={() => setShowMenu(false)} onClick={() => setShowMenu(false)}>
             <Link
               to={{
                 pathname: `${path}/create`,
@@ -309,7 +309,7 @@ const Main = props => {
               Create
             </Link>
           </li>
-          <li>
+          <li role="menuitem" onKeyPress={() => setShowMenu(false)} onClick={() => setShowMenu(false)}>
             <Link
               to={{
                 pathname: `${path}/report`,
@@ -321,6 +321,48 @@ const Main = props => {
           </li>
         </ul>
       </div>
+      <ul className="desktopMenu">
+        <li role="menuitem" onKeyPress={() => setShowMenu(false)} onClick={() => setShowMenu(false)}>
+          <Link
+            to={{
+              pathname: path,
+              state: { from: location },
+            }}
+          >
+            Courses
+          </Link>
+        </li>
+        <li role="menuitem" onKeyPress={() => setShowMenu(false)} onClick={() => setShowMenu(false)}>
+          <Link
+            to={{
+              pathname: `${path}/dashboard`,
+              state: { from: location },
+            }}
+          >
+            Dashboard
+          </Link>
+        </li>
+        <li role="menuitem" onKeyPress={() => setShowMenu(false)} onClick={() => setShowMenu(false)}>
+          <Link
+            to={{
+              pathname: `${path}/create`,
+              state: { from: location },
+            }}
+          >
+            Create
+          </Link>
+        </li>
+        <li role="menuitem" onKeyPress={() => setShowMenu(false)} onClick={() => setShowMenu(false)}>
+          <Link
+            to={{
+              pathname: `${path}/report`,
+              state: { from: location },
+            }}
+          >
+            Report
+          </Link>
+        </li>
+      </ul>
       <Switch>
         <Route exact path={`${path}`}>
           <Courses
@@ -459,6 +501,7 @@ const Main = props => {
               user={user}
               findCourses={findCourses}
               courses={courses}
+              setShowMenu={setShowMenu}
             />
           )}
         />

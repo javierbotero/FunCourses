@@ -64,7 +64,7 @@ const User = props => {
               <h3>{obj.username}</h3>
             </div>
           </div>
-          <h3 className={styles.courses}>Courses</h3>
+          <h3 className={styles.titleCourses}>Courses</h3>
           <div className={styles.interactions}>
             <h4>Student</h4>
             <div className={styles.courses}>

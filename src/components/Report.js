@@ -100,7 +100,7 @@ const Report = props => {
         <main className={report.main}>
           <div className={report.field}>
             <div>
-              {`Courses opened in: ${months[new Date().getMonth()]}`}
+              {`Courses opened in ${months[new Date().getMonth()]}`}
             </div>
             <div>
               <Circle quantity={maxCoursesMonth(
@@ -110,6 +110,20 @@ const Report = props => {
                 .percentage}
               />
               {maxCoursesMonth(findCourses(courses, user.courses)).total}
+            </div>
+          </div>
+          <div className={report.field}>
+            <div>
+              {`Taking courses in ${months[new Date().getMonth()]}`}
+            </div>
+            <div>
+              <Circle
+                quantity={maxCoursesMonth(
+                  findCourses(courses, user.courses_as_student),
+                  10,
+                ).percentage}
+              />
+              {maxCoursesMonth(findCourses(courses, user.courses_as_student)).total}
             </div>
           </div>
           <div className={report.field}>
@@ -134,20 +148,6 @@ const Report = props => {
             </div>
             <div>
               {metrics.favorites}
-            </div>
-          </div>
-          <div className={report.field}>
-            <div>
-              {`Taking courses in: ${months[new Date().getMonth()]}`}
-            </div>
-            <div>
-              <Circle
-                quantity={maxCoursesMonth(
-                  findCourses(courses, user.courses_as_student),
-                  10,
-                ).percentage}
-              />
-              {maxCoursesMonth(findCourses(courses, user.courses_as_student)).total}
             </div>
           </div>
           <div className={report.field}>

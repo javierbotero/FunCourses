@@ -22,7 +22,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 25vh;
+  height: 45vh;
   padding-top: 4em;
 }
 
@@ -50,6 +50,7 @@
   border-top: 1em solid #FFFFFF;
   border-bottom: 1em solid #FFFFFF;
   width: 90vw;
+  margin: 0 auto;
 }
 
 .scrollUsers {
@@ -126,4 +127,25 @@
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+}
+
+@media screen and (min-width: 600px) {
+  .teacherCourse {
+    width: 60vw;
+    flex: 1 0 60vw;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .teacherCourse {
+    width: 40vw;
+    flex: 1 0 40vw;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .teacherCourse {
+    width: 25vw;
+    flex: 1 0 25vw;
+  }
 }
