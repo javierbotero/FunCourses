@@ -19,10 +19,22 @@
   height: 25vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  background-color: #FFFFFF;
+  border-bottom: 1em solid #E6F0FE;
+  border: 10px solid #E6F0FE;
+  text-align: center;
 }
 
 .report {
+  background-color: #E6F0FE;
+  padding: 4em 1em 1em 1em;
+}
+
+.header {
+  background-color: #FFFFFF;
   padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 5px;
 }

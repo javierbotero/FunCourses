@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Switch,
   Route,
@@ -63,6 +63,7 @@ const Main = props => {
     picturesToDivs,
   } = props;
   const { path, url } = match;
+  const [showMenu, setShowMenu] = useState(false);
   const objAuth = useAuth();
   const handleLike = (userId, courseId, cb, favorites) => {
     const init = {
@@ -247,23 +248,25 @@ const Main = props => {
               state: { from: location },
             }}
             >
-              More Info
+              <div className="button-4">
+                More Info
+              </div>
             </Link>
           </div>
           <div className="likes">
-            <button type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
+            <button type="button" className="like" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
               <FontAwesomeIcon icon={
                 isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
                 }
               />
             </button>
-            {` ${course.favorites.length}`}
+            <div className="numberLikes">{` ${course.favorites.length}`}</div>
           </div>
         </div>
         {
           access && (
             <div>
-              <a href={`${course.link}`}>Join Class</a>
+              <a className="button-2" href={`${course.link}`}>Join Class</a>
             </div>
           )
         }
@@ -273,6 +276,51 @@ const Main = props => {
 
   return (
     <div>
+      <div className={showMenu ? 'menuMobile' : 'hide-menu'}>
+        <button type="button" onClick={() => setShowMenu(false)}>x</button>
+        <ul className="ulMenuMobile">
+          <li>
+            <Link
+              to={{
+                pathname: path,
+                state: { from: location },
+              }}
+            >
+              Courses
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={{
+                pathname: `${path}/dashboard`,
+                state: { from: location },
+              }}
+            >
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={{
+                pathname: `${path}/create`,
+                state: { from: location },
+              }}
+            >
+              Create
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={{
+                pathname: `${path}/report`,
+                state: { from: location },
+              }}
+            >
+              Report
+            </Link>
+          </li>
+        </ul>
+      </div>
       <Switch>
         <Route exact path={`${path}`}>
           <Courses
@@ -287,6 +335,7 @@ const Main = props => {
             resetUser={resetUser}
             resetCourses={resetCourses}
             isPresentInUserId={isPresentInUserId}
+            setShowMenu={setShowMenu}
           />
         </Route>
         <Route
@@ -315,6 +364,7 @@ const Main = props => {
               id={id}
               mainUrl={mainUrl}
               picturesToDivs={picturesToDivs}
+              setShowMenu={setShowMenu}
             />
           )}
         />
@@ -341,6 +391,7 @@ const Main = props => {
               isFriendshipRequested={isFriendshipRequested}
               handleDelFriend={handleDelFriend}
               findCourses={findCourses}
+              setShowMenu={setShowMenu}
             />
           )}
         />
@@ -374,6 +425,7 @@ const Main = props => {
               findCoursesFromCoursesId={findCoursesFromCoursesId}
               findCourses={findCourses}
               mainUrl={mainUrl}
+              setShowMenu={setShowMenu}
             />
           )}
         />
@@ -392,6 +444,8 @@ const Main = props => {
               objThunk={objThunk}
               userPayload={userPayload}
               tokenPayload={tokenPayload}
+              url={url}
+              setShowMenu={setShowMenu}
             />
           )}
         />

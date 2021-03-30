@@ -27,6 +27,7 @@ const User = props => {
     isFriendshipRequested,
     handleDelFriend,
     findCourses,
+    setShowMenu,
   } = props;
   const objAuth = useAuth();
   const foundUser = (users, id) => users.find(u => u.id === id);
@@ -148,9 +149,9 @@ const User = props => {
         <div>
           {infoUser.username}
         </div>
-        <div>
+        <button className="removeButtonStyles" type="button" onClick={() => setShowMenu(true)}>
           <FontAwesomeIcon icon="ellipsis-v" />
-        </div>
+        </button>
       </nav>
       <div className={styles.container}>
         {infoUserToHtml(infoUser, courses, findCourses)}
@@ -348,6 +349,7 @@ User.propTypes = {
   isFriendshipRequested: PropTypes.func.isRequired,
   handleDelFriend: PropTypes.func.isRequired,
   findCourses: PropTypes.func.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
 };
 
 export default User;

@@ -29,6 +29,7 @@ const Course = props => {
     setUserErr,
     mainUrl,
     picturesToDivs,
+    setShowMenu,
   } = props;
   const objAuth = useAuth();
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
@@ -59,9 +60,9 @@ const Course = props => {
         <div>
           {course.title}
         </div>
-        <div>
+        <button className="removeButtonStyles" type="button" onClick={() => setShowMenu(true)}>
           <FontAwesomeIcon icon="ellipsis-v" />
-        </div>
+        </button>
       </nav>
       <div>
         <div
@@ -274,6 +275,7 @@ Course.propTypes = {
   setUserErr: PropTypes.func.isRequired,
   mainUrl: PropTypes.func.isRequired,
   picturesToDivs: PropTypes.func.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
 };
 
 export default Course;

@@ -14,6 +14,7 @@ const Report = props => {
     url,
     findCourses,
     courses,
+    setShowMenu,
   } = props;
   const getMetrics = courses => {
     let students = 0;
@@ -57,7 +58,6 @@ const Report = props => {
           const year = date.getFullYear();
           const todayMonth = today.getMonth();
           const todayYear = today.getFullYear();
-          console.log(date, today, todayMonth, year, todayYear);
           if (month === todayMonth && year === todayYear) {
             total += 1;
           }
@@ -71,7 +71,7 @@ const Report = props => {
     };
   };
   return (
-    <div className={report.report}>
+    <div>
       <nav className="navMenu">
         <div>
           <Link to={{
@@ -83,92 +83,99 @@ const Report = props => {
           </Link>
         </div>
         <div>
-          Dashboard
+          Report
         </div>
-        <div>
+        <button className="removeButtonStyles" type="button" onClick={() => setShowMenu(true)}>
           <FontAwesomeIcon icon="ellipsis-v" />
-        </div>
+        </button>
       </nav>
-      <header className={Dashboard.header}>
-        <div>
-          {'Hello '}
-          {user.username}
-          {', these are metrics of your actions'}
-        </div>
-      </header>
-      <main className={report.main}>
-        <div className={report.field}>
+      <div className={report.report}>
+        <header className={`${Dashboard.header} ${report.header}`}>
           <div>
-            {`Courses opened in: ${months[new Date().getMonth()]}`}
+            {'Hello '}
+            {user.username}
+            {', these are metrics of your actions'}
           </div>
-          <div>
-            <Circle quantity={maxCoursesMonth(findCourses(courses, user.courses), 5).percentage} />
-            {maxCoursesMonth(findCourses(courses, user.courses)).total}
+        </header>
+        <main className={report.main}>
+          <div className={report.field}>
+            <div>
+              {`Courses opened in: ${months[new Date().getMonth()]}`}
+            </div>
+            <div>
+              <Circle quantity={maxCoursesMonth(
+                findCourses(courses, user.courses),
+                5,
+              )
+                .percentage}
+              />
+              {maxCoursesMonth(findCourses(courses, user.courses)).total}
+            </div>
           </div>
-        </div>
-        <div className={report.field}>
-          <div>
-            {'Total Students: '}
+          <div className={report.field}>
+            <div>
+              {'Total Students: '}
+            </div>
+            <div>
+              {metrics.students}
+            </div>
           </div>
-          <div>
-            {metrics.students}
+          <div className={report.field}>
+            <div>
+              {'Total students waiting for confirmation: '}
+            </div>
+            <div>
+              {metrics.pendings}
+            </div>
           </div>
-        </div>
-        <div className={report.field}>
-          <div>
-            {'Total students waiting for confirmation: '}
+          <div className={report.field}>
+            <div>
+              {'Total favorites received: '}
+            </div>
+            <div>
+              {metrics.favorites}
+            </div>
           </div>
-          <div>
-            {metrics.pendings}
+          <div className={report.field}>
+            <div>
+              {`Taking courses in: ${months[new Date().getMonth()]}`}
+            </div>
+            <div>
+              <Circle
+                quantity={maxCoursesMonth(
+                  findCourses(courses, user.courses_as_student),
+                  10,
+                ).percentage}
+              />
+              {maxCoursesMonth(findCourses(courses, user.courses_as_student)).total}
+            </div>
           </div>
-        </div>
-        <div className={report.field}>
-          <div>
-            {'Total favorites received: '}
+          <div className={report.field}>
+            <div>
+              {'Total friends: '}
+            </div>
+            <div>
+              {user.requests.length + user.pendings.length}
+            </div>
           </div>
-          <div>
-            {metrics.favorites}
+          <div className={report.field}>
+            <div>
+              {'Your comments: '}
+            </div>
+            <div>
+              {user.comments.length}
+            </div>
           </div>
-        </div>
-        <div className={report.field}>
-          <div>
-            {`Taking courses in: ${months[new Date().getMonth()]}`}
+          <div className={report.field}>
+            <div>
+              {'Your favorites: '}
+            </div>
+            <div>
+              {user.favorites.length}
+            </div>
           </div>
-          <div>
-            <Circle
-              quantity={maxCoursesMonth(
-                findCourses(courses, user.courses_as_student),
-                10,
-              ).percentage}
-            />
-            {maxCoursesMonth(findCourses(courses, user.courses_as_student)).total}
-          </div>
-        </div>
-        <div className={report.field}>
-          <div>
-            {'Total friends: '}
-          </div>
-          <div>
-            {user.requests.length + user.pendings.length}
-          </div>
-        </div>
-        <div className={report.field}>
-          <div>
-            {'Your comments: '}
-          </div>
-          <div>
-            {user.comments.length}
-          </div>
-        </div>
-        <div className={report.field}>
-          <div>
-            {'Your favorites: '}
-          </div>
-          <div>
-            {user.favorites.length}
-          </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };
@@ -345,6 +352,7 @@ Report.propTypes = {
   location: ReactRouterPropTypes.location.isRequired,
   url: PropTypes.string.isRequired,
   findCourses: PropTypes.func.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
 };
 
 export default Report;

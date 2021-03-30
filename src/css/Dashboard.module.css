@@ -65,6 +65,12 @@
 .request {
   flex: 1 0 150px;
   text-align: center;
+  margin: 0 10px;
+}
+
+.acceptance {
+  display: flex;
+  justify-content: space-around;
 }
 
 .acceptance button {

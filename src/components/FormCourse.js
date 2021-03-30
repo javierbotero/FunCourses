@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { createCourse } from '../actions/interactions';
 import {
   setUserError,
   setTrueLoading,
   setFalseLoading,
 } from '../reducers/user';
+import image from '../assets/images/fun1.jpeg';
+import form from '../css/Form.module.css';
+import styles from '../css/FormCourse.module.css';
 
 const FormCourse = props => {
   const {
@@ -26,6 +30,8 @@ const FormCourse = props => {
     setUserErr,
     setTrueLoad,
     setFalseLoad,
+    url,
+    setShowMenu,
   } = props;
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -94,18 +100,32 @@ const FormCourse = props => {
     }
   };
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to={location.state ? location.state.from.pathname : `${urlApi}`}>
-              &#60;
-            </Link>
-          </li>
-        </ul>
+    <div
+      className={`${styles.container} positionImage`}
+      style={{
+        backgroundImage: `url(${image})`,
+      }}
+    >
+      <nav className={`${styles.navBar} navMenu show`}>
+        <div>
+          <Link to={{
+            pathname: location.state ? location.state.from.pathname : `${url}`,
+            state: { from: location },
+          }}
+          >
+            &#60;
+          </Link>
+        </div>
+        <div>
+          Create
+        </div>
+        <button className="removeButtonStyles" type="button" onClick={() => setShowMenu(true)}>
+          <FontAwesomeIcon icon="ellipsis-v" />
+        </button>
       </nav>
-      <div className="form-course">
-        <header>
+      <div className={`${form.layer} ${styles.bgImage}`} id="layer" />
+      <div className={styles.form}>
+        <header className={`${styles.header}`}>
           <div>
             <h3>
               {username}
@@ -113,17 +133,24 @@ const FormCourse = props => {
             <h4>create a fun course!</h4>
           </div>
         </header>
-        <form onSubmit={handleSubmit}>
+        <form className={`form ${styles.correctForm}`} onSubmit={handleSubmit}>
           <div>
             <label htmlFor="title">
               <div>Title</div>
-              <input type="text" onChange={e => handleChange(e, setTitle)} value={title} id="title" placeholder="User" />
+              <input type="text" onChange={e => handleChange(e, setTitle)} value={title} id="title" placeholder="Title" />
             </label>
           </div>
           <div>
             <label htmlFor="content">
               <div>Content</div>
-              <input type="text" onChange={e => handleChange(e, setContent)} value={content} id="content" placeholder="User" />
+              <textarea
+                type="text"
+                onChange={e => handleChange(e, setContent)}
+                value={content}
+                id="content"
+                placeholder="Be concise"
+                className="long-text"
+              />
             </label>
           </div>
           <div>
@@ -139,7 +166,7 @@ const FormCourse = props => {
           <div>
             <label htmlFor="price">
               <div>Price</div>
-              <input type="text" onChange={e => handleChange(e, setPrice)} value={price} id="price" placeholder="User" />
+              <input type="text" onChange={e => handleChange(e, setPrice)} value={price} id="price" placeholder="Price" />
             </label>
           </div>
           <div>
@@ -158,8 +185,8 @@ const FormCourse = props => {
           </div>
           <div>
             <label htmlFor="link">
-              <div>Videocall provider link</div>
-              <input type="text" onChange={e => handleChange(e, setLink)} value={link} id="link" placeholder="Copy the link" />
+              <div>link</div>
+              <input type="text" onChange={e => handleChange(e, setLink)} value={link} id="link" placeholder="Paste the link" />
             </label>
           </div>
           <div>
@@ -183,8 +210,8 @@ const FormCourse = props => {
               <input type="file" id="main-picture" name="main-picture" onChange={e => handleChange(e, setPictures, true)} multiple accept="image/*" />
             </label>
           </div>
-          <div>
-            <input type="submit" value="Submit" />
+          <div className={styles.submit}>
+            <input type="submit" value="Submit" className="button" />
           </div>
         </form>
       </div>
@@ -207,6 +234,8 @@ FormCourse.propTypes = {
   setUserErr: PropTypes.func.isRequired,
   setTrueLoad: PropTypes.func.isRequired,
   setFalseLoad: PropTypes.func.isRequired,
+  url: PropTypes.func.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

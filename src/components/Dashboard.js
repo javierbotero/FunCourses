@@ -31,6 +31,7 @@ const Dashboard = props => {
     findCoursesFromCoursesId,
     findCourses,
     mainUrl,
+    setShowMenu,
   } = props;
   const objAuth = useAuth();
 
@@ -66,6 +67,7 @@ const Dashboard = props => {
         </div>
         <div className={dashCss.acceptance}>
           <button
+            className="button-3"
             type="button"
             onClick={() => handleUpdateSubscription(
               student,
@@ -83,6 +85,7 @@ const Dashboard = props => {
             Accept
           </button>
           <button
+            className="button-3"
             type="button"
             onClick={() => handleDeleteSubscription(
               id,
@@ -116,7 +119,7 @@ const Dashboard = props => {
           }}
         />
         <h4 className={`${dashCss.titleCourse}`}>{c.title}</h4>
-        <a className={`${dashCss.join}`} href={c.link}>Join Class</a>
+        <a className={`${dashCss.join} button-2`} href={c.link}>Join Class</a>
       </header>
       <section className={`${dashCss.sectionCourse}`}>
         <h4>
@@ -161,6 +164,7 @@ const Dashboard = props => {
         </Link>
         <div className={dashCss.acceptance}>
           <button
+            className="button-3"
             type="button"
             onClick={() => {
               handleUpdFriend(
@@ -184,6 +188,7 @@ const Dashboard = props => {
             Accept
           </button>
           <button
+            className="button-3"
             type="button"
             onClick={() => handleDelFriend(
               tokenPayload,
@@ -235,9 +240,9 @@ const Dashboard = props => {
         <div>
           Dashboard
         </div>
-        <div>
+        <button className="removeButtonStyles" type="button" onClick={() => setShowMenu(true)}>
           <FontAwesomeIcon icon="ellipsis-v" />
-        </div>
+        </button>
       </nav>
       <header className={`${dashCss.header}`}>
         <div className={`${CoursesCss.avatarZone}`}>
@@ -484,6 +489,7 @@ Dashboard.propTypes = {
   findCoursesFromCoursesId: PropTypes.func.isRequired,
   findCourses: PropTypes.func.isRequired,
   mainUrl: PropTypes.func.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

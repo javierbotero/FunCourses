@@ -18,6 +18,7 @@ const Courses = props => {
     avatar,
     username,
     urlApi,
+    setShowMenu,
   } = props;
   const popUpMenu = () => {
     const div = document.getElementsByClassName('scrollContainer')[0];
@@ -52,7 +53,9 @@ const Courses = props => {
       className={`${CoursesCss.courses} scrollContainer`}
     >
       <nav className="navMenu hide">
-        <FontAwesomeIcon icon="bars" />
+        <button className="removeButtonStyles" type="button" onClick={() => setShowMenu(true)}>
+          <FontAwesomeIcon icon="bars" />
+        </button>
       </nav>
       <header className={`${CoursesCss.coursesMenu}`}>
         <div className={`${CoursesCss.avatarZone}`}>
@@ -147,6 +150,7 @@ Courses.propTypes = {
   avatar: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   urlApi: PropTypes.string.isRequired,
+  setShowMenu: PropTypes.func.isRequired,
 };
 
 export default Courses;

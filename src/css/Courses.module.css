@@ -5,6 +5,7 @@
   purple: #4333B3
   white: #FFFFFF
   light-fuchsia: #E6F0FE
+  gray: #313131
 
 */
 
@@ -25,10 +26,16 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 0 2em;
+  color: #313131;
+}
+
+.coursesMenu a {
+  color: #313131;
 }
 
 .coursesItems {
   display: flex;
+  border-left: 2em solid #FFFFFF;
 }
 
 .avatarZone {
@@ -49,6 +56,9 @@
 
 .btn {
   flex: 0 0 auto;
+  background-color: transparent;
+  border: 0;
+  text-align: initial;
 }
 
 .username {
