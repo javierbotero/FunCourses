@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
@@ -31,6 +31,12 @@ const Course = props => {
     picturesToDivs,
     setShowMenu,
   } = props;
+  useEffect(() => {
+    const deskTopMenu = document.querySelector('.desktopMenu');
+    if (deskTopMenu.classList.contains('hide')) {
+      deskTopMenu.classList.remove('hide');
+    }
+  });
   const objAuth = useAuth();
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
   const dates = course.dates.split(' ').slice(0, -1);
@@ -142,43 +148,45 @@ const Course = props => {
           {!isPresentInUserId(course.subscriptions, objAuth.userId) && !isPresentInId(course.pending_students, objAuth.userId) ? 'Subscribe' : ''}
         </button>
       ) }
-      <div className={styles.basicInfo}>
-        <h3 className={styles.title}>{course.title}</h3>
-        <div className={styles.dates}>
-          Start:
-          {` ${start()}`}
-          <br />
-          End:
-          {` ${finish()}`}
+      <div className={styles.contentCourse}>
+        <div className={styles.basicInfo}>
+          <h3 className={styles.title}>{course.title}</h3>
+          <div className={styles.dates}>
+            Start:
+            {` ${start()}`}
+            <br />
+            End:
+            {` ${finish()}`}
+          </div>
+          <div className={styles.content}>{course.content}</div>
+          <div className={styles.status}>
+            status:
+            {` ${course.status}`}
+          </div>
+          <a href="#images" aria-label="images" className={styles.jump1}><FontAwesomeIcon icon="chevron-down" /></a>
         </div>
-        <div className={styles.content}>{course.content}</div>
-        <div className={styles.status}>
-          status:
-          {` ${course.status}`}
-        </div>
-        <a href="#images" aria-label="images" className={styles.jump1}><FontAwesomeIcon icon="chevron-down" /></a>
-      </div>
-      <div className={styles.public}>
-        <div className={`${styles.pictures}`} id="images">
-          {course.images_url.length > 0 ? picturesToDivs(course.images_url, urlApi, styles.picture) : <div className="no-images">No images</div>}
-        </div>
-        <div>
-          <div className={styles.interactions}>
-            <h4>Confirmed</h4>
-            <div className={styles.students}>
-              {usersListToDiv(course.confirmed_students, location, url)}
+        <div className={styles.public}>
+          <div className={`${styles.pictures}`} id="images">
+            {course.images_url.length > 0 ? picturesToDivs(course.images_url, urlApi, styles.picture) : <div className="no-images">No images</div>}
+          </div>
+          <div>
+            <div className={styles.interactions}>
+              <h4>Confirmed</h4>
+              <div className={styles.students}>
+                {usersListToDiv(course.confirmed_students, location, url)}
+              </div>
+            </div>
+            <div className={styles.interactions}>
+              <h4>Pendings</h4>
+              <div className={styles.students}>
+                {usersListToDiv(course.pending_students, location, url)}
+              </div>
             </div>
           </div>
-          <div className={styles.interactions}>
-            <h4>Pendings</h4>
-            <div className={styles.students}>
-              {usersListToDiv(course.pending_students, location, url)}
-            </div>
+          <div className={styles.comments}>
+            <h4 className={styles.commentsTitle}>Comments</h4>
+            <div>{commentsToDivs(course.comments, location, url)}</div>
           </div>
-        </div>
-        <div className={styles.comments}>
-          <h4 className={styles.commentsTitle}>Comments</h4>
-          <div>{commentsToDivs(course.comments, location, url)}</div>
         </div>
       </div>
     </div>

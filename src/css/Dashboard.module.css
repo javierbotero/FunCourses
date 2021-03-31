@@ -149,3 +149,7 @@
     flex: 1 0 25vw;
   }
 }
+
+@media screen and (min-height: 350px) {
+  
+}

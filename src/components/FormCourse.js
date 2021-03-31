@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -33,6 +33,12 @@ const FormCourse = props => {
     url,
     setShowMenu,
   } = props;
+  useEffect(() => {
+    const deskTopMenu = document.querySelector('.desktopMenu');
+    if (deskTopMenu.classList.contains('hide')) {
+      deskTopMenu.classList.remove('hide');
+    }
+  });
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [dateStart, setDateStart] = useState(new Date().toLocaleDateString());

@@ -14,18 +14,19 @@
   height: 100vh;
   position: static;
   overflow-x: auto;
-  background-color: #E6F0FE;
+  background-color: #FFFFFF;
 }
 
 .coursesMenu {
   flex: 0 0 50%;
-  height: 80%;
+  height: 100%;
   margin: auto;
   width: 50vw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2em 2em 1em 2em ;
+  padding: 2em 2em 3em 2em;
+  background-color: #E6F0FE;
   color: #313131;
 }
 
@@ -39,8 +40,12 @@
 }
 
 .avatarZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex: 2 0 auto;
-  padding-top: 1em;
+  padding-top: 0;
 }
 
 .menu {
@@ -75,7 +80,6 @@
 }
 
 @media screen and (min-width: 1000px) {
-
 }
 
 @media screen and (min-width: 1500px) {
@@ -83,5 +87,16 @@
     flex: 0 0 20vw;
     width: 20vw;
     padding: 0 2em;
+  }
+}
+
+@media screen and (min-height: 600px) {
+  .coursesItems {
+    height: 80vh;
+    margin: auto;
+  }
+
+  .coursesMenu {
+    padding: 4em 2em 6em 2em;
   }
 }

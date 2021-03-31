@@ -321,7 +321,7 @@ const Main = props => {
           </li>
         </ul>
       </div>
-      <ul className="desktopMenu">
+      <ul className="desktopMenu hide">
         <li role="menuitem" onKeyPress={() => setShowMenu(false)} onClick={() => setShowMenu(false)}>
           <Link
             to={{

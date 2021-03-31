@@ -57,3 +57,11 @@
 .titleCourses {
   padding: 2em 0 1em 0;
 }
+
+.avatar {
+  margin: auto;
+}
+
+.avatarNotFriend {
+  margin-top: 5em;
+}

@@ -36,14 +36,19 @@ const Courses = props => {
       deskMenu().classList.remove('hide');
     }
   };
+  const desktopMenu = () => document.querySelector('.desktopMenu');
   useEffect(() => {
     const div = document.getElementsByClassName('scrollContainer')[0];
+    const menu = desktopMenu();
+    if (menu.classList.contains('show') && div.scrollLeft < 200) {
+      menu.classList.remove('show');
+      menu.classList.add('hide');
+    }
     div.addEventListener('scroll', popUpMenu);
     return () => {
       div.removeEventListener('scroll', popUpMenu);
-      document.querySelector('.desktopMenu').classList.remove('hide', 'show');
     };
-  }, []);
+  }, [desktopMenu]);
   const authObject = useAuth();
   const logout = () => {
     localStorage.removeItem('currentUserIdFunCourses');

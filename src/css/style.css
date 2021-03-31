@@ -22,15 +22,16 @@ a {
 
 input {
   border: 0;
-  height: 1.5em;
+  border-radius: 5px;
+  height: 2.5em;
+  text-align: center;
 }
 
 input[type=text] {
-  text-align: center;
   width: 80%
 }
 
-input[type=file], input[type=date], input[type=submit] {
+input[type=file], input[type=date], input[type=submit], input[type=password] {
   width: 100%;
 }
 
@@ -43,6 +44,8 @@ select {
   border: 0;
   height: 1.5em;
   width: 100%;
+  border-radius: 5px;
+  text-align: center;
 }
 
 select option {
@@ -52,6 +55,7 @@ select option {
 textarea {
   border: 0;
   border-radius: 5px;
+  text-align: center;
 }
 
 .loading {
@@ -81,7 +85,8 @@ textarea {
   border-radius: 50%;
   background-size: cover;
   background-repeat: no-repeat;
-  margin: auto;
+  margin-bottom: 1em;
+  display: none;
 }
 
 .course {
@@ -185,8 +190,8 @@ textarea {
 }
 
 .hide {
-  top: 2em;
   opacity: 0;
+  z-index: -10;
   transition: top 0.5s, opacity 0.5s;
 }
 
@@ -438,10 +443,28 @@ textarea {
   .course-container {
     flex: 1 0 30vw;
   }
+
+  .loading {
+    width: 20vw;
+    height: 20vw;
+    left: 40vw;
+  }
 }
 
 @media screen and (min-width: 1500px) {
   .course-container {
     flex: 1 0 20vw;
+  }
+}
+
+@media screen and (min-height: 400px) {
+  .avatar {
+    display: block;
+  }
+
+  .loading {
+    width: 15vw;
+    height: 15vw;
+    left: 42vw;
   }
 }

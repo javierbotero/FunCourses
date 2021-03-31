@@ -123,3 +123,20 @@
 .commentsTitle {
   padding-bottom: 1em;
 }
+
+.contentCourse {
+  width: 100ww;
+}
+
+@media screen and (min-width: 600px) {
+  .contentCourse {
+    width: 80vw;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .contentCourse {
+    width: 70vw;
+  }
+}

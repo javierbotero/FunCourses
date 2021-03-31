@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -29,6 +29,12 @@ const User = props => {
     findCourses,
     setShowMenu,
   } = props;
+  useEffect(() => {
+    const deskTopMenu = document.querySelector('.desktopMenu');
+    if (deskTopMenu.classList.contains('hide')) {
+      deskTopMenu.classList.remove('hide');
+    }
+  });
   const objAuth = useAuth();
   const foundUser = (users, id) => users.find(u => u.id === id);
   const selectUser = (foundUser, user, match, location) => {
@@ -93,11 +99,12 @@ const User = props => {
           style={{
             backgroundImage: infoUser.url_avatar ? `url(${urlApi}${infoUser.url_avatar.slice(1, infoUser.url_avatar.length)})` : `url(${avatarImage})`,
           }}
-          className="avatar"
+          className={`${styles.avatar} avatar ${styles.avatarNotFriend}`}
         />
         <h3 className={styles.username}>{infoUser.username}</h3>
         <div className={styles.notFriends}>Your are not friends yet</div>
         <button
+          className="button-3"
           type="button"
           onClick={() => {
             const isRequested = isFriendshipRequested(user.pending_requested_friendships, obj.id);

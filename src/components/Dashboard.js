@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
@@ -34,7 +34,12 @@ const Dashboard = props => {
     setShowMenu,
   } = props;
   const objAuth = useAuth();
-
+  useEffect(() => {
+    const deskTopMenu = document.querySelector('.desktopMenu');
+    if (deskTopMenu.classList.contains('hide')) {
+      deskTopMenu.classList.remove('hide');
+    }
+  });
   const displayPendingSubscriptions = (
     course,
     url,
@@ -246,17 +251,19 @@ const Dashboard = props => {
       </nav>
       <header className={`${dashCss.header}`}>
         <div className={`${CoursesCss.avatarZone}`}>
-          <div
-            className={`avatar ${CoursesCss.avatarPic}`}
-            style={{
-              backgroundImage: user.url_avatar ? `url(${urlApi}${user.url_avatar.slice(1, user.url_avatar.length)})` : `url(${avatarImage})`,
-            }}
-          />
-          <h4 className={dashCss.welcome}>
-            {'Hi '}
-            {user.username}
-            !
-          </h4>
+          <div>
+            <div
+              className={`avatar ${CoursesCss.avatarPic}`}
+              style={{
+                backgroundImage: user.url_avatar ? `url(${urlApi}${user.url_avatar.slice(1, user.url_avatar.length)})` : `url(${avatarImage})`,
+              }}
+            />
+            <h4 className={dashCss.welcome}>
+              {'Hi '}
+              {user.username}
+              !
+            </h4>
+          </div>
         </div>
       </header>
       <main className={`${dashCss.main}`}>

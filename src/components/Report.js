@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,12 @@ const Report = props => {
     courses,
     setShowMenu,
   } = props;
+  useEffect(() => {
+    const deskTopMenu = document.querySelector('.desktopMenu');
+    if (deskTopMenu.classList.contains('hide')) {
+      deskTopMenu.classList.remove('hide');
+    }
+  });
   const getMetrics = courses => {
     let students = 0;
     let pendings = 0;

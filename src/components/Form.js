@@ -68,8 +68,8 @@ const Form = props => {
       'POST',
       `${url}${matcher === 'signup' ? 'signup' : 'login'}`,
       matcher === 'signup' ? dataSignUp : dataLogIn,
-      setTrueLoading,
-      setFalseLoading,
+      setTrueLoad,
+      setFalseLoad,
     );
     setUserName('');
     setEmail('');
@@ -109,7 +109,7 @@ const Form = props => {
         <div>
           {'Hello there! join our community and start '}
           {'enjoying fun courses. If you have an account please '}
-          <button type="button" onClick={() => changeHistory('login')}>Log in</button>
+          <button className="button-3" type="button" onClick={() => changeHistory('login')}>Log in</button>
         </div>
       );
     }
@@ -117,7 +117,7 @@ const Form = props => {
       <div>
         {'Hello there! it\'s time to learn with fun courses. '}
         {"If you don't have an account please "}
-        <button type="button" onClick={() => changeHistory('signup')}>Sign in</button>
+        <button className="button-3" type="button" onClick={() => changeHistory('signup')}>Sign up</button>
       </div>
     );
   };
@@ -169,7 +169,7 @@ const Form = props => {
           </div>
         )}
         <div className={`${formCss.buttonSubmit}`}>
-          <input type="submit" value="Submit" className="btn" />
+          <input type="submit" value="Submit" className="btn button-2" />
         </div>
       </form>
     </div>
