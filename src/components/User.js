@@ -150,7 +150,7 @@ const User = props => {
       <nav className="navMenu">
         <div>
           <Link to={location.state ? location.state.from.pathname : `${url}`}>
-            &#60;
+            <FontAwesomeIcon icon="chevron-left" />
           </Link>
         </div>
         <div>

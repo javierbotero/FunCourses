@@ -13,6 +13,7 @@ import {
   faBars as fasFaBars,
   faEllipsisV as fasFaEllipsisV,
   faChevronDown as fasFaChevronDown,
+  faChevronLeft as fasFaChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farFaHeart } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -55,6 +56,7 @@ library.add(
   fasFaBars,
   fasFaEllipsisV,
   fasFaChevronDown,
+  fasFaChevronLeft,
 );
 dom.watch();
 

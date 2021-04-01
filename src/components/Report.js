@@ -85,7 +85,7 @@ const Report = props => {
             state: { from: location },
           }}
           >
-            &#60;
+            <FontAwesomeIcon icon="chevron-left" />
           </Link>
         </div>
         <div>

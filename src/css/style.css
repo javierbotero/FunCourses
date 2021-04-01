@@ -29,7 +29,6 @@
 
 a {
   text-decoration: none;
-  color: #dddddd;
 }
 
 input {
@@ -39,12 +38,8 @@ input {
   text-align: center;
 }
 
-input[type=text] {
+input[type=text], input[type=file], input[type=date], input[type=submit], input[type=password]  {
   width: 80%
-}
-
-input[type=file], input[type=date], input[type=submit], input[type=password] {
-  width: 100%;
 }
 
 input[type=file]::file-selector-button {
@@ -176,6 +171,7 @@ textarea {
   justify-content: center;
   min-height: 100vh;
   padding: 0 10%;
+  position: relative;
 }
 
 .form div {
@@ -368,6 +364,11 @@ textarea {
 
 .desktopMenu {
   display: none;
+  color: rgb(76, 51, 90);
+}
+
+.desktopMenu ul li a {
+  color: rgb(76, 51, 90);
 }
 
 .error {
