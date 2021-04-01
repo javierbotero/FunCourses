@@ -8,10 +8,14 @@ const OPINIONS = [
   {
     body: 'The best place to to teach about fashion in a fun way',
     avatar: user1,
+    name: 'Belle',
+    field: 'Model',
   },
   {
-    body: 'The best place to to teach about fashion in a fun way',
+    body: 'Here I have taught architecture to a lot of people around the world',
     avatar: user2,
+    name: 'Jhon',
+    field: 'Architecture',
   },
 ];
 
