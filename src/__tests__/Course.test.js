@@ -14,82 +14,95 @@ describe('Tests for Course', () => {
   it('Checks that conctent of course is present', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Course
+          mainUrl={utils.func}
+          setShowMenu={utils.func}
           courses={utils.mockCourses}
+          picturesToDivs={utils.func}
           teacherCourses={utils.mockTeacherCourses}
           location={utils.mockLocation}
           url={utils.mockUrl}
           usersListToDiv={utils.mockUsersListToDiv}
           commentsToDivs={utils.mockCommentsToDivs}
           useAuth={utils.mockUseAuth}
-          isPresentInUserId={utils.mockIsPresentInUserId}
-          isPresentInId={utils.mockIsPresentInId}
-          handleLike={utils.mockHandleLike}
-          handleSubscription={utils.mockHandleSubscription}
-          objThunk={utils.mockObjThunk}
+          isPresentInUserId={utils.func}
+          isPresentInId={utils.func}
+          handleLike={utils.func}
+          handleSubscription={utils.func}
+          objThunk={utils.func}
           urlApi={utils.mockUrlApi}
           token={utils.mockToken}
-          tokenPayload={utils.mockTokenPayload}
-          userPayload={utils.mockUserPayload}
+          tokenPayload={utils.func}
+          userPayload={utils.func}
           id={utils.mockId}
-          setUserErr={utils.mockSetUserErr}
+          setUserErr={utils.func}
           match={utils.mockMatch}
         />
       </BrowserRouter>,
     );
-    expect(screen.getByText('Karate class')).toHaveTextContent('Karate class');
+    expect(screen.getAllByText('Karate class')[0]).toHaveTextContent('Karate class');
   });
-  it('Mkaes sure that mockHandleSubscription is being called when button Subscribe is clicked', () => {
+  it('Makes sure that func is being called when button Subscribe is clicked', () => {
+    const myFunc = jest.fn();
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Course
+          mainUrl={utils.func}
+          setShowMenu={utils.func}
           courses={utils.mockCourses}
+          picturesToDivs={utils.func}
           teacherCourses={utils.mockTeacherCourses}
           location={utils.mockLocation}
           url={utils.mockUrl}
           usersListToDiv={utils.mockUsersListToDiv}
           commentsToDivs={utils.mockCommentsToDivs}
           useAuth={utils.mockUseAuth}
-          isPresentInUserId={utils.mockIsPresentInUserId}
-          isPresentInId={utils.mockIsPresentInId}
-          handleLike={utils.mockHandleLike}
-          handleSubscription={utils.mockHandleSubscription}
-          objThunk={utils.mockObjThunk}
+          isPresentInUserId={utils.func}
+          isPresentInId={utils.func}
+          handleLike={utils.func}
+          handleSubscription={myFunc}
+          objThunk={utils.func}
           urlApi={utils.mockUrlApi}
           token={utils.mockToken}
-          tokenPayload={utils.mockTokenPayload}
-          userPayload={utils.mockUserPayload}
+          tokenPayload={utils.func}
+          userPayload={utils.func}
           id={utils.mockId}
-          setUserErr={utils.mockSetUserErr}
+          setUserErr={utils.func}
           match={utils.mockMatch}
         />
       </BrowserRouter>,
     );
     fireEvent.click(screen.getByText('Subscribe'));
-    expect(utils.mockHandleSubscription.mock.calls.length).toBe(1);
+    expect(myFunc.mock.calls.length).toBe(1);
   });
   it('Makes sure that mockUsersListToDiv is being called', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Course
+          mainUrl={utils.func}
+          setShowMenu={utils.func}
           courses={utils.mockCourses}
+          picturesToDivs={utils.func}
           teacherCourses={utils.mockTeacherCourses}
           location={utils.mockLocation}
           url={utils.mockUrl}
           usersListToDiv={utils.mockUsersListToDiv}
           commentsToDivs={utils.mockCommentsToDivs}
           useAuth={utils.mockUseAuth}
-          isPresentInUserId={utils.mockIsPresentInUserId}
-          isPresentInId={utils.mockIsPresentInId}
-          handleLike={utils.mockHandleLike}
-          handleSubscription={utils.mockHandleSubscription}
-          objThunk={utils.mockObjThunk}
+          isPresentInUserId={utils.func}
+          isPresentInId={utils.func}
+          handleLike={utils.func}
+          handleSubscription={utils.func}
+          objThunk={utils.func}
           urlApi={utils.mockUrlApi}
           token={utils.mockToken}
-          tokenPayload={utils.mockTokenPayload}
-          userPayload={utils.mockUserPayload}
+          tokenPayload={utils.func}
+          userPayload={utils.func}
           id={utils.mockId}
-          setUserErr={utils.mockSetUserErr}
+          setUserErr={utils.func}
           match={utils.mockMatch}
         />
       </BrowserRouter>,
@@ -99,36 +112,43 @@ describe('Tests for Course', () => {
   it('Checks that information of teacher is present', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Course
+          mainUrl={utils.func}
+          setShowMenu={utils.func}
           courses={utils.mockCourses}
+          picturesToDivs={utils.func}
           teacherCourses={utils.mockTeacherCourses}
           location={utils.mockLocation}
           url={utils.mockUrl}
           usersListToDiv={utils.mockUsersListToDiv}
           commentsToDivs={utils.mockCommentsToDivs}
           useAuth={utils.mockUseAuth}
-          isPresentInUserId={utils.mockIsPresentInUserId}
-          isPresentInId={utils.mockIsPresentInId}
-          handleLike={utils.mockHandleLike}
-          handleSubscription={utils.mockHandleSubscription}
-          objThunk={utils.mockObjThunk}
+          isPresentInUserId={utils.func}
+          isPresentInId={utils.func}
+          handleLike={utils.func}
+          handleSubscription={utils.func}
+          objThunk={utils.func}
           urlApi={utils.mockUrlApi}
           token={utils.mockToken}
-          tokenPayload={utils.mockTokenPayload}
-          userPayload={utils.mockUserPayload}
+          tokenPayload={utils.func}
+          userPayload={utils.func}
           id={utils.mockId}
-          setUserErr={utils.mockSetUserErr}
+          setUserErr={utils.func}
           match={utils.mockMatch}
         />
       </BrowserRouter>,
     );
-    expect(screen.getByText('Teacher: Adele')).toBeTruthy();
+    expect(screen.getByText('Adele')).toBeTruthy();
   });
   it('renders correctly', () => {
     const tree = renderer
       .create(
         <BrowserRouter>
           <Course
+            picturesToDivs={utils.func}
+            mainUrl={utils.func}
+            setShowMenu={utils.func}
             courses={utils.mockCourses}
             teacherCourses={utils.mockTeacherCourses}
             location={utils.mockLocation}
@@ -136,17 +156,17 @@ describe('Tests for Course', () => {
             usersListToDiv={utils.mockUsersListToDiv}
             commentsToDivs={utils.mockCommentsToDivs}
             useAuth={utils.mockUseAuth}
-            isPresentInUserId={utils.mockIsPresentInUserId}
-            isPresentInId={utils.mockIsPresentInId}
-            handleLike={utils.mockHandleLike}
-            handleSubscription={utils.mockHandleSubscription}
-            objThunk={utils.mockObjThunk}
+            isPresentInUserId={utils.func}
+            isPresentInId={utils.func}
+            handleLike={utils.func}
+            handleSubscription={utils.func}
+            objThunk={utils.func}
             urlApi={utils.mockUrlApi}
             token={utils.mockToken}
-            tokenPayload={utils.mockTokenPayload}
-            userPayload={utils.mockUserPayload}
+            tokenPayload={utils.func}
+            userPayload={utils.func}
             id={utils.mockId}
-            setUserErr={utils.mockSetUserErr}
+            setUserErr={utils.func}
             match={utils.mockMatch}
           />
         </BrowserRouter>,

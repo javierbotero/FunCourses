@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  fireEvent,
   render,
   screen,
 } from '@testing-library/react';
@@ -9,35 +8,43 @@ import renderer from 'react-test-renderer';
 import '@testing-library/jest-dom/extend-expect';
 import { Dashboard } from '../components/Dashboard';
 import * as util from '../test-util/test-util';
+import {
+  findCourses,
+  findCoursesFromCoursesId,
+} from '../helpers/helpers';
 
 describe('Tests for Dashboard', () => {
   it('Makes sure text Dashboard is in render', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Dashboard
+          findCourses={findCourses}
+          mainUrl={util.func}
+          setShowMenu={util.func}
           courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           usersListToDiv={util.mockUsersListToDiv}
-          handleUpdateSubscription={util.mockHandleUpdateSubscription}
-          handleDeleteSubscription={util.mockHandleDeleteSubscription}
-          objThunk={util.mockObjThunk}
-          tokenPayload={util.mockTokenPayload}
-          userPayload={util.mockUserPayload}
+          handleUpdateSubscription={util.func}
+          handleDeleteSubscription={util.func}
+          objThunk={util.func}
+          tokenPayload={util.func}
+          userPayload={util.func}
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
           useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
-          isPresentInUserId={util.mockIsPresentInUserId}
-          isPresentInId={util.mockIsPresentInId}
-          setUserErr={util.mockSetUserErr}
-          handleDelFriend={util.mockHandleDelFriend}
-          handleUpdFriend={util.mockHandleUpdFriend}
-          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
+          isPresentInUserId={util.func}
+          isPresentInId={util.func}
+          setUserErr={util.func}
+          handleDelFriend={util.func}
+          handleUpdFriend={util.func}
+          findCoursesFromCoursesId={findCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
@@ -46,30 +53,34 @@ describe('Tests for Dashboard', () => {
   it('Makes sure Karate class text in render', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Dashboard
+          findCourses={findCourses}
+          mainUrl={util.func}
+          setShowMenu={util.func}
           courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           usersListToDiv={util.mockUsersListToDiv}
-          handleUpdateSubscription={util.mockHandleUpdateSubscription}
-          handleDeleteSubscription={util.mockHandleDeleteSubscription}
-          objThunk={util.mockObjThunk}
-          tokenPayload={util.mockTokenPayload}
-          userPayload={util.mockUserPayload}
+          handleUpdateSubscription={util.func}
+          handleDeleteSubscription={util.func}
+          objThunk={util.func}
+          tokenPayload={util.func}
+          userPayload={util.func}
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
           useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
-          isPresentInUserId={util.mockIsPresentInUserId}
-          isPresentInId={util.mockIsPresentInId}
-          setUserErr={util.mockSetUserErr}
-          handleDelFriend={util.mockHandleDelFriend}
-          handleUpdFriend={util.mockHandleUpdFriend}
-          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
+          isPresentInUserId={util.func}
+          isPresentInId={util.func}
+          setUserErr={util.func}
+          handleDelFriend={util.func}
+          handleUpdFriend={util.func}
+          findCoursesFromCoursesId={findCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
@@ -78,30 +89,34 @@ describe('Tests for Dashboard', () => {
   it('Makes sure As a Teacher text in render', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Dashboard
+          findCourses={findCourses}
+          mainUrl={util.func}
+          setShowMenu={util.func}
           courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           usersListToDiv={util.mockUsersListToDiv}
-          handleUpdateSubscription={util.mockHandleUpdateSubscription}
-          handleDeleteSubscription={util.mockHandleDeleteSubscription}
-          objThunk={util.mockObjThunk}
-          tokenPayload={util.mockTokenPayload}
-          userPayload={util.mockUserPayload}
+          handleUpdateSubscription={util.func}
+          handleDeleteSubscription={util.func}
+          objThunk={util.func}
+          tokenPayload={util.func}
+          userPayload={util.func}
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
           useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
-          isPresentInUserId={util.mockIsPresentInUserId}
-          isPresentInId={util.mockIsPresentInId}
-          setUserErr={util.mockSetUserErr}
-          handleDelFriend={util.mockHandleDelFriend}
-          handleUpdFriend={util.mockHandleUpdFriend}
-          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
+          isPresentInUserId={util.func}
+          isPresentInId={util.func}
+          setUserErr={util.func}
+          handleDelFriend={util.func}
+          handleUpdFriend={util.func}
+          findCoursesFromCoursesId={findCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
@@ -110,94 +125,106 @@ describe('Tests for Dashboard', () => {
   it('Makes sure Enrollment Requests text in render', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Dashboard
+          findCourses={findCourses}
+          mainUrl={util.func}
+          setShowMenu={util.func}
           courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           usersListToDiv={util.mockUsersListToDiv}
-          handleUpdateSubscription={util.mockHandleUpdateSubscription}
-          handleDeleteSubscription={util.mockHandleDeleteSubscription}
-          objThunk={util.mockObjThunk}
-          tokenPayload={util.mockTokenPayload}
-          userPayload={util.mockUserPayload}
+          handleUpdateSubscription={util.func}
+          handleDeleteSubscription={util.func}
+          objThunk={util.func}
+          tokenPayload={util.func}
+          userPayload={util.func}
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
           useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
-          isPresentInUserId={util.mockIsPresentInUserId}
-          isPresentInId={util.mockIsPresentInId}
-          setUserErr={util.mockSetUserErr}
-          handleDelFriend={util.mockHandleDelFriend}
-          handleUpdFriend={util.mockHandleUpdFriend}
-          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
+          isPresentInUserId={util.func}
+          isPresentInId={util.func}
+          setUserErr={util.func}
+          handleDelFriend={util.func}
+          handleUpdFriend={util.func}
+          findCoursesFromCoursesId={findCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
-    expect(screen.getByText('Enrollment Requests')).toBeInTheDocument();
+    expect(screen.getByText('0 Enrollment Requests')).toBeInTheDocument();
   });
   it('Makes sure Accepted Students text in render', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Dashboard
+          findCourses={findCourses}
+          mainUrl={util.func}
+          setShowMenu={util.func}
           courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           usersListToDiv={util.mockUsersListToDiv}
-          handleUpdateSubscription={util.mockHandleUpdateSubscription}
-          handleDeleteSubscription={util.mockHandleDeleteSubscription}
-          objThunk={util.mockObjThunk}
-          tokenPayload={util.mockTokenPayload}
-          userPayload={util.mockUserPayload}
+          handleUpdateSubscription={util.func}
+          handleDeleteSubscription={util.func}
+          objThunk={util.func}
+          tokenPayload={util.func}
+          userPayload={util.func}
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
           useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
-          isPresentInUserId={util.mockIsPresentInUserId}
-          isPresentInId={util.mockIsPresentInId}
-          setUserErr={util.mockSetUserErr}
-          handleDelFriend={util.mockHandleDelFriend}
-          handleUpdFriend={util.mockHandleUpdFriend}
-          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
+          isPresentInUserId={util.func}
+          isPresentInId={util.func}
+          setUserErr={util.func}
+          handleDelFriend={util.func}
+          handleUpdFriend={util.func}
+          findCoursesFromCoursesId={findCoursesFromCoursesId}
         />
       </BrowserRouter>,
     );
-    expect(screen.getByText('Accepted Students')).toBeInTheDocument();
+    expect(screen.getByText('0 Accepted Students')).toBeInTheDocument();
   });
   it('Makes sure renders correctly', () => {
     const tree = renderer.create(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Dashboard
+          findCourses={findCourses}
+          mainUrl={util.func}
+          setShowMenu={util.func}
           courses={util.mockCourses}
           user={util.mockUser}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           usersListToDiv={util.mockUsersListToDiv}
-          handleUpdateSubscription={util.mockHandleUpdateSubscription}
-          handleDeleteSubscription={util.mockHandleDeleteSubscription}
-          objThunk={util.mockObjThunk}
-          tokenPayload={util.mockTokenPayload}
-          userPayload={util.mockUserPayload}
+          handleUpdateSubscription={util.func}
+          handleDeleteSubscription={util.func}
+          objThunk={util.func}
+          tokenPayload={util.func}
+          userPayload={util.func}
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
           useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
-          isPresentInUserId={util.mockIsPresentInUserId}
-          isPresentInId={util.mockIsPresentInId}
-          setUserErr={util.mockSetUserErr}
-          handleDelFriend={util.mockHandleDelFriend}
-          handleUpdFriend={util.mockHandleUpdFriend}
-          findCoursesFromCoursesId={util.mockFindCoursesFromCoursesId}
+          isPresentInUserId={util.func}
+          isPresentInId={util.func}
+          setUserErr={util.func}
+          handleDelFriend={util.func}
+          handleUpdFriend={util.func}
+          findCoursesFromCoursesId={findCoursesFromCoursesId}
         />
       </BrowserRouter>,
     ).toJSON();

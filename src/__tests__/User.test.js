@@ -13,52 +13,56 @@ describe('Tests for User', () => {
   it('prints Paco text', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <User
+          setShowMenu={util.func}
           courses={util.mockCourses}
           match={util.mockMatch}
           location={util.mockLocation}
           url={util.mockUrl}
           user={util.mockUser}
-          coursesToDivs={util.mockCoursesToDivs}
-          commentsToDivsWithCourse={util.mockCommentsToDivsWithCourse}
-          handleCreateFriendship={util.mockHandleCreateFriendship}
-          tokenPayload={util.mockTokenPayload}
-          userPayload={util.mockUserPayload}
+          coursesToDivs={util.func}
+          commentsToDivsWithCourse={util.func}
+          handleCreateFriendship={util.func}
+          tokenPayload={util.func}
+          userPayload={util.func}
           id={util.mockId}
           token={util.mockToken}
           useAuth={util.mockUseAuth}
-          objThunk={util.mockObjThunk}
+          objThunk={util.func}
           urlApi={util.mockUrlApi}
-          isFriendshipRequested={util.mockIsFriendshipRequested}
-          handleDelFriend={util.mockHandleDelFriend}
-          findCourses={util.mockFindCourses}
+          isFriendshipRequested={util.func}
+          handleDelFriend={util.func}
+          findCourses={util.func}
         />
       </BrowserRouter>,
     );
-    expect(screen.getByText('Paco')).toBeInTheDocument();
+    expect(screen.getAllByText('Paco')[0]).toBeInTheDocument();
   });
   it('prints Your are not friends yet text', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <User
+          setShowMenu={util.func}
           courses={util.mockCourses}
           match={util.mockMatch}
           location={util.mockLocation}
           url={util.mockUrl}
           user={util.mockUser}
-          coursesToDivs={util.mockCoursesToDivs}
-          commentsToDivsWithCourse={util.mockCommentsToDivsWithCourse}
-          handleCreateFriendship={util.mockHandleCreateFriendship}
-          tokenPayload={util.mockTokenPayload}
-          userPayload={util.mockUserPayload}
+          coursesToDivs={util.func}
+          commentsToDivsWithCourse={util.func}
+          handleCreateFriendship={util.func}
+          tokenPayload={util.func}
+          userPayload={util.func}
           id={util.mockId}
           token={util.mockToken}
           useAuth={util.mockUseAuth}
-          objThunk={util.mockObjThunk}
+          objThunk={util.func}
           urlApi={util.mockUrlApi}
-          isFriendshipRequested={util.mockIsFriendshipRequested}
-          handleDelFriend={util.mockHandleDelFriend}
-          findCourses={util.mockFindCourses}
+          isFriendshipRequested={util.func}
+          handleDelFriend={util.func}
+          findCourses={util.func}
         />
       </BrowserRouter>,
     );
@@ -67,25 +71,28 @@ describe('Tests for User', () => {
   it('Prints correctly', () => {
     const tree = renderer.create(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <User
+          setShowMenu={util.func}
+          setUserErr={util.func}
           courses={util.mockCourses}
           match={util.mockMatch}
           location={util.mockLocation}
           url={util.mockUrl}
           user={util.mockUser}
-          coursesToDivs={util.mockCoursesToDivs}
-          commentsToDivsWithCourse={util.mockCommentsToDivsWithCourse}
-          handleCreateFriendship={util.mockHandleCreateFriendship}
-          tokenPayload={util.mockTokenPayload}
-          userPayload={util.mockUserPayload}
+          coursesToDivs={util.func}
+          commentsToDivsWithCourse={util.func}
+          handleCreateFriendship={util.func}
+          tokenPayload={util.func}
+          userPayload={util.func}
           id={util.mockId}
           token={util.mockToken}
           useAuth={util.mockUseAuth}
-          objThunk={util.mockObjThunk}
+          objThunk={util.func}
           urlApi={util.mockUrlApi}
-          isFriendshipRequested={util.mockIsFriendshipRequested}
-          handleDelFriend={util.mockHandleDelFriend}
-          findCourses={util.mockFindCourses}
+          isFriendshipRequested={util.func}
+          handleDelFriend={util.func}
+          findCourses={util.func}
         />
       </BrowserRouter>,
     );

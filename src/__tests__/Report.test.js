@@ -8,13 +8,18 @@ import { BrowserRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import * as util from '../test-util/test-util';
 import Report from '../components/Report';
+import { findCourses } from '../helpers/helpers';
 
 describe('Tests for Report', () => {
   it('prints Hello Javier 4, these are metrics of your actions', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Report
+          setShowMenu={util.func}
+          findCourses={findCourses}
           location={util.mockLocation}
+          courses={util.mockCourses}
           url={util.mockUrl}
           user={util.mockUser}
         />
@@ -22,23 +27,31 @@ describe('Tests for Report', () => {
     );
     expect(screen.getByText('Hello Javier 4, these are metrics of your actions')).toBeInTheDocument();
   });
-  it('prints Courses created:', () => {
+  it('prints Total Students:', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Report
+          setShowMenu={util.func}
+          findCourses={findCourses}
           location={util.mockLocation}
+          courses={util.mockCourses}
           url={util.mockUrl}
           user={util.mockUser}
         />
       </BrowserRouter>,
     );
-    expect(screen.getByText('Courses created:')).toBeInTheDocument();
+    expect(screen.getByText('Total Students:')).toBeInTheDocument();
   });
   it('Prints correctly', () => {
     const tree = renderer.create(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Report
+          setShowMenu={util.func}
+          findCourses={findCourses}
           location={util.mockLocation}
+          courses={util.mockCourses}
           url={util.mockUrl}
           user={util.mockUser}
         />

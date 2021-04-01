@@ -19,6 +19,7 @@ const mockCourses = [
     status: 'Open',
     dates: '2021-03-25T00:00:00.000Z 2021-03-29T00:00:00.000Z ',
     price: 10,
+    images_url: [],
     created_at: '2021-03-07T17:56:22.487Z',
     updated_at: '2021-03-15T04:21:24.489Z',
     teacher: {
@@ -32,10 +33,25 @@ const mockCourses = [
     confirmed_students: [],
   },
 ];
+const mockHistory = {
+  action: 'PUSH',
+  block: jest.fn(),
+  createHref: jest.fn(),
+  go: jest.fn(),
+  listen: jest.fn(),
+  push: jest.fn(),
+  location: {
+    hash: '',
+    pathname: '',
+    search: '',
+  },
+  replace: jest.fn(),
+};
 const mockUser = {
   id: 7,
   status: 'Student',
   username: 'Javier 4',
+  url_avatar: 'api.com/users/1',
   courses_as_student: [],
   pending_courses_as_student: [],
   comments: [],
@@ -96,35 +112,13 @@ const mockUseAuth = (() => (
     authenticate: jest.fn(),
   }
 ));
-const mockIsPresentInUserId = jest.fn();
-const mockIsPresentInId = jest.fn();
-const mockHandleLike = jest.fn();
-const mockHandleSubscription = jest.fn();
-const mockObjThunk = jest.fn();
+const func = jest.fn();
 const mockUrlApi = 'url';
 const mockToken = 'token';
-const mockTokenPayload = jest.fn();
-const mockUserPayload = jest.fn();
 const mockId = 1;
-const mockSetUserErr = jest.fn();
-const mockCoursesToDivs = jest.fn();
-const mockHandleUpdateSubscription = jest.fn();
-const mockHandleDeleteSubscription = jest.fn();
-const mockHandleDelFriend = jest.fn();
-const mockHandleUpdFriend = jest.fn();
-const mockResetUser = jest.fn();
-const mockResetCourses = jest.fn();
-const mockInitCreator = jest.fn();
-const mockHandleApiRequest = jest.fn();
-const mockRemoveUserErr = jest.fn();
-const mockDispatchCourse = jest.fn();
-const mockCommentsToDivsWithCourse = jest.fn();
-const mockHandleCreateFriendship = jest.fn();
-const mockIsFriendshipRequested = jest.fn();
-const mockFindCourses = jest.fn();
-const mockFindCoursesFromCoursesId = jest.fn();
 
 export {
+  func,
   mockStore,
   fetchMock,
   mockMatch,
@@ -135,33 +129,10 @@ export {
   mockUsersListToDiv,
   mockCommentsToDivs,
   mockUseAuth,
-  mockIsPresentInUserId,
-  mockIsPresentInId,
-  mockHandleLike,
-  mockHandleSubscription,
-  mockObjThunk,
   mockUrlApi,
   mockToken,
-  mockTokenPayload,
-  mockUserPayload,
   mockId,
-  mockSetUserErr,
   mockUser,
-  mockCoursesToDivs,
-  mockHandleUpdateSubscription,
-  mockHandleDeleteSubscription,
-  mockHandleDelFriend,
-  mockHandleUpdFriend,
-  mockResetUser,
-  mockResetCourses,
-  mockInitCreator,
-  mockHandleApiRequest,
-  mockRemoveUserErr,
   URL,
-  mockDispatchCourse,
-  mockCommentsToDivsWithCourse,
-  mockHandleCreateFriendship,
-  mockIsFriendshipRequested,
-  mockFindCourses,
-  mockFindCoursesFromCoursesId,
+  mockHistory,
 };

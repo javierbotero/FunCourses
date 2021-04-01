@@ -14,14 +14,19 @@ describe('Tests for courses', () => {
   it('Makes sure Dasboard text is present in the document', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Courses
+          urlApi="urlApi"
+          setShowMenu={util.func}
+          username="Javier"
+          avatar="avatar"
           courses={util.mockCourses}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           useAuth={util.mockUseAuth}
-          resetUser={util.mockResetUser}
-          resetCourses={util.mockResetCourses}
+          resetUser={util.func}
+          resetCourses={util.func}
         />
       </BrowserRouter>,
     );
@@ -30,64 +35,85 @@ describe('Tests for courses', () => {
   it('Makes sure coursesToDivs method is called when render Courses', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Courses
+          urlApi="urlApi"
+          setShowMenu={util.func}
+          username="Javier"
+          avatar="avatar"
           courses={util.mockCourses}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           useAuth={util.mockUseAuth}
-          resetUser={util.mockResetUser}
-          resetCourses={util.mockResetCourses}
+          resetUser={util.func}
+          resetCourses={util.func}
         />
       </BrowserRouter>,
     );
-    expect(util.mockCoursesToDivs.mock.calls.length).toBe(1);
+    expect(util.func.mock.calls.length).toBe(1);
   });
   it('Renders Courses component', () => {
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Courses
+          urlApi="urlApi"
+          setShowMenu={util.func}
+          username="Javier"
+          avatar="avatar"
           courses={util.mockCourses}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           useAuth={util.mockUseAuth}
-          resetUser={util.mockResetUser}
-          resetCourses={util.mockResetCourses}
+          resetUser={util.func}
+          resetCourses={util.func}
         />
       </BrowserRouter>,
     );
-    expect(util.mockCoursesToDivs.mock.calls.length).toBe(1);
+    expect(util.func.mock.calls.length).toBe(1);
   });
   it('Renders Courses component', () => {
+    const myFunc = jest.fn();
     render(
       <BrowserRouter>
+        <div className="desktopMenu" />
         <Courses
+          urlApi="urlApi"
+          setShowMenu={util.func}
+          username="Javier"
+          avatar="avatar"
           courses={util.mockCourses}
           location={util.mockLocation}
           url={util.mockUrl}
-          coursesToDivs={util.mockCoursesToDivs}
+          coursesToDivs={util.func}
           useAuth={util.mockUseAuth}
-          resetUser={util.mockResetUser}
-          resetCourses={util.mockResetCourses}
+          resetUser={myFunc}
+          resetCourses={util.func}
         />
       </BrowserRouter>,
     );
     fireEvent.click(screen.getByRole('button', { name: /Log out/i }));
-    expect(util.mockResetUser.mock.calls.length).toBe(1);
+    expect(myFunc.mock.calls.length).toBe(1);
   });
   it('Renders Courses component', () => {
     const tree = renderer
       .create(
         <BrowserRouter>
+          <div className="desktopMenu" />
           <Courses
+            urlApi="urlApi"
+            setShowMenu={util.func}
+            username="Javier"
+            avatar="avatar"
             courses={util.mockCourses}
             location={util.mockLocation}
             url={util.mockUrl}
-            coursesToDivs={util.mockCoursesToDivs}
+            coursesToDivs={util.func}
             useAuth={util.mockUseAuth}
-            resetUser={util.mockResetUser}
-            resetCourses={util.mockResetCourses}
+            resetUser={util.func}
+            resetCourses={util.func}
           />
         </BrowserRouter>,
       ).toJSON();

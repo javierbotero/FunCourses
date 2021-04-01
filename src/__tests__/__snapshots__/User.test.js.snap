@@ -1,32 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tests for User Prints correctly 1`] = `
-<div>
-  <nav>
-    <ul>
-      <li>
+Array [
+  <div
+    className="desktopMenu"
+  />,
+  <div>
+    <nav
+      className="navMenu"
+    >
+      <div>
         <a
           href="/url"
           onClick={[Function]}
         >
-          &lt;
+          <i
+            className="fa chevron-left"
+          />
         </a>
-      </li>
-    </ul>
-  </nav>
-  <h3>
-    Paco
-  </h3>
-  <div>
-    <div>
-      Your are not friends yet
-    </div>
-    <button
-      onClick={[Function]}
-      type="button"
+      </div>
+      <div>
+        Paco
+      </div>
+      <button
+        className="removeButtonStyles"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fa ellipsis-v"
+        />
+      </button>
+    </nav>
+    <div
+      className="container"
     >
-      Add to friend
-    </button>
-  </div>
-</div>
+      <div
+        className="friendFalse"
+      >
+        <div
+          className="avatar avatar avatarNotFriend"
+          style={
+            Object {
+              "backgroundImage": "url(avatar.jpg)",
+            }
+          }
+        />
+        <h3
+          className="username"
+        >
+          Paco
+        </h3>
+        <div
+          className="notFriends"
+        >
+          Your are not friends yet
+        </div>
+        <button
+          className="button-3"
+          onClick={[Function]}
+          type="button"
+        >
+          Add to friend
+        </button>
+      </div>
+    </div>
+  </div>,
+]
 `;

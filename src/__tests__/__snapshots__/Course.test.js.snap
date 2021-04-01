@@ -2,90 +2,188 @@
 
 exports[`Tests for Course renders correctly 1`] = `
 <div>
-  <nav>
-    <ul>
-      <li>
-        <a
-          href="/url"
-          onClick={[Function]}
-        >
-          &lt;
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <div>
+  <nav
+    className="navMenu"
+  >
+    <div>
+      <a
+        href="/url"
+        onClick={[Function]}
+      >
+        <i
+          className="fa chevron-left"
+        />
+      </a>
+    </div>
     <div>
       Karate class
     </div>
-    <div>
-      <a
-        href="url/user/7"
-        onClick={[Function]}
-      >
-        Teacher:
-         Adele
-      </a>
-    </div>
-  </div>
-  <div>
-    Start:
-     3/24/2021
-    <br />
-    End:
-     3/28/2021
-  </div>
-  <div>
-    Nice Karate class
-  </div>
-  <div>
-    status:
-     Open
-  </div>
-  <div>
-    price:
-     $10
-  </div>
-  <div>
     <button
+      className="removeButtonStyles"
       onClick={[Function]}
       type="button"
     >
       <i
-        className="fa far,heart"
+        className="fa ellipsis-v"
       />
     </button>
-     0
-  </div>
+  </nav>
   <div>
-    <button
-      onClick={[Function]}
-      type="button"
+    <div
+      className="mainPic"
+      style={
+        Object {
+          "backgroundImage": "url(avatar.jpg)",
+        }
+      }
     >
-      
-      
-      Subscribe
-    </button>
-  </div>
-  <div>
-    <div>
-      <h4>
-        Students confirmed
-      </h4>
-      <div />
+      <div
+        className="degrade"
+      />
+      <div
+        className="infoTeacher"
+      >
+        <a
+          href="url/user/7"
+          onClick={[Function]}
+        >
+          <div
+            className="avatar"
+            style={
+              Object {
+                "backgroundImage": "url(avatar.jpg)",
+              }
+            }
+          />
+        </a>
+        <div
+          className="teacherDetails"
+        >
+          <div>
+             Adele
+          </div>
+          <div
+            className="likes"
+          >
+            <button
+              className="like"
+              onClick={[Function]}
+              type="button"
+            >
+              <i
+                className="fa far,heart"
+              />
+            </button>
+            <div>
+               0
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="price"
+      >
+        $ 
+        10
+      </div>
     </div>
-    <div>
-      <h4>
-        Students waiting for confirmation
-      </h4>
-      <div />
-    </div>
   </div>
-  <div>
-    <h4>
-      Comments
-    </h4>
-    <div />
+  <button
+    className="subscribe"
+    onClick={[Function]}
+    type="button"
+  >
+    
+    
+    Subscribe
+  </button>
+  <div
+    className="contentCourse"
+  >
+    <div
+      className="basicInfo"
+    >
+      <h3
+        className="title"
+      >
+        Karate class
+      </h3>
+      <div
+        className="dates"
+      >
+        Start:
+         3/24/2021
+        <br />
+        End:
+         3/28/2021
+      </div>
+      <div
+        className="content"
+      >
+        Nice Karate class
+      </div>
+      <div
+        className="status"
+      >
+        status:
+         Open
+      </div>
+      <a
+        aria-label="images"
+        className="jump1"
+        href="#images"
+      >
+        <i
+          className="fa chevron-down"
+        />
+      </a>
+    </div>
+    <div
+      className="public"
+    >
+      <div
+        className="pictures"
+        id="images"
+      >
+        <div
+          className="no-images"
+        >
+          No images
+        </div>
+      </div>
+      <div>
+        <div
+          className="interactions"
+        >
+          <h4>
+            Confirmed
+          </h4>
+          <div
+            className="students"
+          />
+        </div>
+        <div
+          className="interactions"
+        >
+          <h4>
+            Pendings
+          </h4>
+          <div
+            className="students"
+          />
+        </div>
+      </div>
+      <div
+        className="comments"
+      >
+        <h4
+          className="commentsTitle"
+        >
+          Comments
+        </h4>
+        <div />
+      </div>
+    </div>
   </div>
 </div>
 `;

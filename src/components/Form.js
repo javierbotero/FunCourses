@@ -129,7 +129,7 @@ const Form = props => {
     >
       <div className={`${formCss.layer} ${matcher === 'signup' ? formCss.signup : formCss.login}`} />
       <h3 className={`${formCss.index2} form-item`}>{matcher === 'signup' ? 'Sign Up' : 'Log in'}</h3>
-      <p className={`form-item ${formCss.index2}`}>{matcher === 'signup' ? infoSign(true) : infoSign()}</p>
+      <div className={`form-item ${formCss.index2}`}>{matcher === 'signudiv' ? infoSign(true) : infoSign()}</div>
       <form className={`form-item ${formCss.index2}`} onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">

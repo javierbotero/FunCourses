@@ -2,17 +2,38 @@
 
 exports[`Tests for Form Makes sure prints correctly 1`] = `
 <div
-  className="form login"
+  className="form positionImage"
+  style={
+    Object {
+      "backgroundImage": "url(fun2.jpg)",
+    }
+  }
 >
   <div
-    className="auth-title"
+    className="layer login"
+  />
+  <h3
+    className="index2 form-item"
   >
     Log in
+  </h3>
+  <div
+    className="form-item index2"
+  >
+    <div>
+      Hello there! it's time to learn with fun courses. 
+      If you don't have an account please 
+      <button
+        className="button-3"
+        onClick={[Function]}
+        type="button"
+      >
+        Sign up
+      </button>
+    </div>
   </div>
-  <p>
-    Hello there! it's time to learn with fun courses
-  </p>
   <form
+    className="form-item index2"
     onSubmit={[Function]}
   >
     <div>
@@ -47,9 +68,11 @@ exports[`Tests for Form Makes sure prints correctly 1`] = `
         />
       </label>
     </div>
-    <div>
+    <div
+      className="buttonSubmit"
+    >
       <input
-        className="btn"
+        className="btn button-2"
         type="submit"
         value="Submit"
       />

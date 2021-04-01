@@ -347,7 +347,7 @@ Report.propTypes = {
       user_id: PropTypes.number,
       course_id: PropTypes.number,
       body: PropTypes.string,
-    })).isRequired,
+    })),
     pendings: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
       user_id: PropTypes.number,

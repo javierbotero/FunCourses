@@ -257,7 +257,7 @@ FormCourse.propTypes = {
   setUserErr: PropTypes.func.isRequired,
   setTrueLoad: PropTypes.func.isRequired,
   setFalseLoad: PropTypes.func.isRequired,
-  url: PropTypes.func.isRequired,
+  url: PropTypes.string.isRequired,
   setShowMenu: PropTypes.func.isRequired,
 };
 
