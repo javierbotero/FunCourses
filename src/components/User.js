@@ -21,13 +21,14 @@ const User = props => {
     userPayload,
     id,
     token,
-    useAuth,
     urlApi,
     objThunk,
     isFriendshipRequested,
     handleDelFriend,
     findCourses,
     setShowMenu,
+    userId,
+    userPassword,
   } = props;
   useEffect(() => {
     const deskTopMenu = document.querySelector('.desktopMenu');
@@ -35,7 +36,6 @@ const User = props => {
       deskTopMenu.classList.remove('hide');
     }
   });
-  const objAuth = useAuth();
   const foundUser = (users, id) => users.find(u => u.id === id);
   const selectUser = (foundUser, user, match, location) => {
     const found = foundUser([...user.requests, ...user.pendings], parseInt(match.params.id, 10));
@@ -114,8 +114,8 @@ const User = props => {
                 userPayload,
                 id,
                 token,
-                objAuth.userId,
-                objAuth.userPassword,
+                userId,
+                userPassword,
                 urlApi,
                 objThunk,
                 {
@@ -129,8 +129,8 @@ const User = props => {
                 userPayload,
                 id,
                 token,
-                objAuth.userId,
-                objAuth.userPassword,
+                userId,
+                userPassword,
                 obj.id,
                 obj.username,
                 objThunk,
@@ -350,7 +350,8 @@ User.propTypes = {
   userPayload: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
-  useAuth: PropTypes.func.isRequired,
+  userId: PropTypes.func.isRequired,
+  userPassword: PropTypes.func.isRequired,
   objThunk: PropTypes.func.isRequired,
   urlApi: PropTypes.string.isRequired,
   isFriendshipRequested: PropTypes.func.isRequired,

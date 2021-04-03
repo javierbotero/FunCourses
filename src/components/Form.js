@@ -22,11 +22,11 @@ const Form = props => {
     handleApiRequest,
     match,
     setUserErr,
-    useAuth,
     removeUserErr,
     setTrueLoad,
     setFalseLoad,
     history,
+    authenticate,
   } = props;
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -34,9 +34,9 @@ const Form = props => {
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
   const [matcher, setMatcher] = useState(match.params.identifier);
-  const authObject = useAuth();
   const handleSubmit = async e => {
     e.preventDefault();
+    setTrueLoad();
     if (matcher === 'signup') {
       if (password.length < 5 || userName.length < 5 || email.length < 5 || password !== passConf) {
         setUserErr('Please fill the form correctly, Username and password should be more than 4 characters, password and confirmation must be equal');
@@ -62,13 +62,12 @@ const Form = props => {
       username: userName,
       password,
     };
-    authObject.authenticate(
+    authenticate(
       handleApiRequest,
       initCreator,
       'POST',
       `${url}${matcher === 'signup' ? 'signup' : 'login'}`,
       matcher === 'signup' ? dataSignUp : dataLogIn,
-      setTrueLoad,
       setFalseLoad,
     );
     setUserName('');
@@ -129,7 +128,7 @@ const Form = props => {
     >
       <div className={`${formCss.layer} ${matcher === 'signup' ? formCss.signup : formCss.login}`} />
       <h3 className={`${formCss.index2} form-item`}>{matcher === 'signup' ? 'Sign Up' : 'Log in'}</h3>
-      <div className={`form-item ${formCss.index2}`}>{matcher === 'signudiv' ? infoSign(true) : infoSign()}</div>
+      <div className={`form-item ${formCss.index2}`}>{matcher === 'signup' ? infoSign(true) : infoSign()}</div>
       <form className={`form-item ${formCss.index2}`} onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">
@@ -185,11 +184,11 @@ Form.propTypes = {
   handleApiRequest: PropTypes.func.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
   setUserErr: PropTypes.func.isRequired,
-  useAuth: PropTypes.func.isRequired,
   removeUserErr: PropTypes.func.isRequired,
   setTrueLoad: PropTypes.func.isRequired,
   setFalseLoad: PropTypes.func.isRequired,
   history: ReactRouterPropTypes.history.isRequired,
+  authenticate: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

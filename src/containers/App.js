@@ -24,7 +24,6 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import FormComponent from '../components/Form';
 import Landing from '../components/Landing';
-import { useAuth } from '../helpers/authHelpers';
 import Main from './Main';
 import {
   handleApiRequest,
@@ -39,6 +38,7 @@ import {
   mainUrl,
   picturesToDivs,
 } from '../helpers/helpers';
+import authenticate from '../helpers/authHelpers';
 import { removeCourseError, removeNotificationCourses } from '../reducers/courses';
 import {
   removeUserError,
@@ -72,7 +72,6 @@ const App = props => {
     userPayload,
     initCreator,
   } = props;
-  const authObject = useAuth();
   const dispatch = useDispatch();
   const courses = useSelector(state => state.courses.courses);
   const user = useSelector(state => state.user.user);
@@ -84,7 +83,9 @@ const App = props => {
   const notificationCourses = useSelector(state => state.courses.notification);
   const loading = useSelector(state => state.user.loading);
   const tokenData = tokenPayload(id, token);
-  const userData = userPayload(authObject.userId, authObject.userPassword);
+  const userId = useSelector(state => state.user.user.id);
+  const userPassword = useSelector(state => state.user.password);
+  const userData = userPayload(userId, userPassword);
   const dataThunkCourses = objThunk(
     url,
     'POST',
@@ -106,7 +107,7 @@ const App = props => {
     </div>
   );
   useEffect(() => {
-    if (authObject.userId && authObject.userPassword) {
+    if (userId && userPassword) {
       if (statusCourses === 'idle') {
         dispatch(getCourses(dataThunkCourses));
       }
@@ -140,7 +141,7 @@ const App = props => {
             exact
             path="/"
             render={({ location }) => {
-              if (authObject.userId && authObject.userPassword) {
+              if (userId && userPassword) {
                 return (
                   <Redirect
                     to={{
@@ -156,7 +157,7 @@ const App = props => {
           <Route
             path="/app"
             render={({ match, location }) => {
-              if (authObject.userId && authObject.userPassword) {
+              if (userId && userPassword) {
                 if (user.status) {
                   return (
                     <Main
@@ -180,10 +181,11 @@ const App = props => {
                       findCoursesFromCoursesId={findCoursesFromCoursesId}
                       mainUrl={mainUrl}
                       picturesToDivs={picturesToDivs}
+                      userId={userId}
+                      userPassword={userPassword}
                     />
                   );
                 }
-                return <div>We are loading...</div>;
               }
               return (
                 <Redirect
@@ -198,8 +200,8 @@ const App = props => {
           <Route
             exact
             path="/:identifier"
-            component={({ location, match, history }) => {
-              if (authObject.userId && authObject.userPassword) {
+            render={({ location, match, history }) => {
+              if (userId && userPassword) {
                 return (
                   <Redirect
                     to={{
@@ -219,8 +221,8 @@ const App = props => {
                     token={token}
                     url={url}
                     match={match}
-                    useAuth={useAuth}
                     history={history}
+                    authenticate={authenticate}
                   />
                 </div>
               );

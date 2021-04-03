@@ -15,7 +15,6 @@ const Course = props => {
     url,
     usersListToDiv,
     commentsToDivs,
-    useAuth,
     isPresentInUserId,
     isPresentInId,
     handleLike,
@@ -30,6 +29,8 @@ const Course = props => {
     mainUrl,
     picturesToDivs,
     setShowMenu,
+    userId,
+    userPassword,
   } = props;
   useEffect(() => {
     const deskTopMenu = document.querySelector('.desktopMenu');
@@ -37,7 +38,6 @@ const Course = props => {
       deskTopMenu.classList.remove('hide');
     }
   });
-  const objAuth = useAuth();
   const course = courses.find(c => c.id === parseInt(match.params.id, 10));
   const dates = course.dates.split(' ').slice(0, -1);
   const start = () => {
@@ -100,9 +100,9 @@ const Course = props => {
                 {` ${course.teacher.username}`}
               </div>
               <div className={styles.likes}>
-                <button className="like" type="button" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
+                <button className="like" type="button" onClick={() => handleLike(userId, course.id, isPresentInUserId, course.favorites)}>
                   <FontAwesomeIcon icon={
-                    isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
+                    isPresentInUserId(course.favorites, userId) ? 'heart' : ['far', 'heart']
                     }
                   />
                 </button>
@@ -127,8 +127,8 @@ const Course = props => {
             isPresentInUserId,
             isPresentInId,
             setUserErr,
-            objAuth.userId,
-            objAuth.userPassword,
+            userId,
+            userPassword,
             course.subscriptions,
             teacherCourses,
             course.pending_students,
@@ -143,9 +143,9 @@ const Course = props => {
             course.title,
           )}
         >
-          {isPresentInUserId(course.subscriptions, objAuth.userId) ? 'Unsubscribe' : ''}
-          {isPresentInId(course.pending_students, objAuth.userId) ? 'Cancel' : ''}
-          {!isPresentInUserId(course.subscriptions, objAuth.userId) && !isPresentInId(course.pending_students, objAuth.userId) ? 'Subscribe' : ''}
+          {isPresentInUserId(course.subscriptions, userId) ? 'Unsubscribe' : ''}
+          {isPresentInId(course.pending_students, userId) ? 'Cancel' : ''}
+          {!isPresentInUserId(course.subscriptions, userId) && !isPresentInId(course.pending_students, userId) ? 'Subscribe' : ''}
         </button>
       ) }
       <div className={styles.contentCourse}>
@@ -269,7 +269,6 @@ Course.propTypes = {
   url: PropTypes.string.isRequired,
   usersListToDiv: PropTypes.func.isRequired,
   commentsToDivs: PropTypes.func.isRequired,
-  useAuth: PropTypes.func.isRequired,
   isPresentInUserId: PropTypes.func.isRequired,
   isPresentInId: PropTypes.func.isRequired,
   handleLike: PropTypes.func.isRequired,
@@ -284,6 +283,8 @@ Course.propTypes = {
   mainUrl: PropTypes.func.isRequired,
   picturesToDivs: PropTypes.func.isRequired,
   setShowMenu: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  userPassword: PropTypes.string.isRequired,
 };
 
 export default Course;

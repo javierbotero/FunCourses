@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import '@testing-library/jest-dom/extend-expect';
 import * as util from '../test-util/test-util';
-import Courses from '../components/Courses';
+import { Courses } from '../components/Courses';
 
 describe('Tests for courses', () => {
   it('Makes sure Dasboard text is present in the document', () => {

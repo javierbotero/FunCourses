@@ -17,7 +17,7 @@ import styles from '../css/FormCourse.module.css';
 const FormCourse = props => {
   const {
     userId,
-    password,
+    userPassword,
     username,
     location,
     urlApi,
@@ -53,7 +53,7 @@ const FormCourse = props => {
   const handleSubmit = e => {
     e.preventDefault();
     const init = {
-      ...userPayload(userId, password),
+      ...userPayload(userId, userPassword),
       ...tokenPayload(id, token),
       main: mainPicture,
       images: pictures,
@@ -244,7 +244,7 @@ const FormCourse = props => {
 
 FormCourse.propTypes = {
   userId: PropTypes.number.isRequired,
-  password: PropTypes.string.isRequired,
+  userPassword: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   dispatchCourse: PropTypes.func.isRequired,

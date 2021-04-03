@@ -13,11 +13,14 @@ import {
 } from '../actions/interactions';
 
 const initialState = {
-  user: {},
+  user: {
+    id: parseInt(localStorage.getItem('currentUserIdFunCourses'), 10),
+  },
   status: 'idle',
   error: '',
   notification: '',
-  loading: true,
+  loading: false,
+  password: localStorage.getItem('currentUserPasswordFunCourses'),
 };
 
 const user = createSlice({
@@ -27,13 +30,23 @@ const user = createSlice({
     removeUserError: state => { state.error = ''; },
     setUserError: (state, action) => { state.error = action.payload; },
     resetStateUser: state => {
-      state.user = {};
+      state.user = {
+        id: parseInt(localStorage.getItem('currentUserIdFunCourses'), 10),
+      };
       state.status = 'idle';
       state.error = '';
+      state.notification = '';
+      state.loading = false;
+      state.password = localStorage.getItem('currentUserPasswordFunCourses');
     },
     removeNotificationUser: state => { state.notification = ''; },
     setTrueLoading: state => { state.loading = true; },
     setFalseLoading: state => { state.loading = false; },
+    setUserPassword: (state, action) => { state.password = action.payload; },
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+      state.status = 'Fullfilled';
+    },
   },
   extraReducers: {
     [getUser.pending]: state => { state.status = 'pending'; },
@@ -242,6 +255,8 @@ const {
   removeNotificationUser,
   setTrueLoading,
   setFalseLoading,
+  setUserPassword,
+  setUser,
 } = user.actions;
 
 export default user.reducer;
@@ -252,4 +267,6 @@ export {
   removeNotificationUser,
   setTrueLoading,
   setFalseLoading,
+  setUserPassword,
+  setUser,
 };

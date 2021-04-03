@@ -27,6 +27,7 @@ const courses = createSlice({
       state.courses = [];
       state.status = 'idle';
       state.error = '';
+      state.notification = '';
     },
     removeNotificationCourses: state => { state.notification = ''; },
   },

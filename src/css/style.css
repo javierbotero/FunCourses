@@ -403,6 +403,26 @@ textarea {
   border-radius: 5px;
 }
 
+.no-courses {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4333B3;
+  color: #dddddd;
+  width: 50vw;
+  height: 50vh;
+  margin: auto;
+  border-radius: 5px;
+}
+
+.here {
+  color: #4333B3;
+  padding: 3px 5px;
+  background-color: #E6F0FE;
+  border-radius: 5px;
+  margin: 0 5px;
+}
+
 @media screen and (min-width: 600px) {
   .form {
     padding: 0 30%;

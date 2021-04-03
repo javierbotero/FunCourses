@@ -12,6 +12,7 @@ const persistConfigCourses = {
 const persistConfigUser = {
   key: 'user',
   storage,
+  blacklist: ['loading'],
 };
 
 const persistedReducerCourses = persistReducer(persistConfigCourses, courses);

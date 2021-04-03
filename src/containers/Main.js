@@ -10,7 +10,6 @@ import ReactRouterPropTypes from 'react-router-prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Course from '../components/Course';
 import User from '../components/User';
-import { useAuth } from '../helpers/authHelpers';
 import { resetStateCourses } from '../reducers/courses';
 import { resetStateUser, setUserError } from '../reducers/user';
 import Courses from '../components/Courses';
@@ -61,14 +60,15 @@ const Main = props => {
     findCoursesFromCoursesId,
     mainUrl,
     picturesToDivs,
+    userId,
+    userPassword,
   } = props;
   const { path, url } = match;
   const [showMenu, setShowMenu] = useState(false);
-  const objAuth = useAuth();
   const handleLike = (userId, courseId, cb, favorites) => {
     const init = {
       ...tokenPayload(id, token),
-      ...userPayload(userId, objAuth.userPassword),
+      ...userPayload(userId, userPassword),
     };
     const favorite = cb(favorites, userId);
     if (favorite) {
@@ -231,48 +231,64 @@ const Main = props => {
     payload.friendship = friendship;
     updFriend(payload);
   };
-  const coursesToDivs = (courses, url, location, access = false) => courses.map(course => (
-    <div key={course.id} className="course-container">
-      <div
-        className="course"
-        style={{
-          backgroundImage: `url(${mainUrl(course)})`,
-        }}
-      />
-      <div className="info-section">
-        <div className="info-course">
-          <div className="linkCourse">
-            <div>{course.title}</div>
-            <Link to={{
-              pathname: `${url}/course/${course.id}`,
-              state: { from: location },
+  const coursesToDivs = (courses, url, location, access = false) => {
+    if (courses.length > 0) {
+      return courses.map(course => (
+        <div key={course.id} className="course-container">
+          <div
+            className="course"
+            style={{
+              backgroundImage: `url(${mainUrl(course)})`,
             }}
-            >
-              <div className="button-4">
-                More Info
+          />
+          <div className="info-section">
+            <div className="info-course">
+              <div className="linkCourse">
+                <div>{course.title}</div>
+                <Link to={{
+                  pathname: `${url}/course/${course.id}`,
+                  state: { from: location },
+                }}
+                >
+                  <div className="button-4">
+                    More Info
+                  </div>
+                </Link>
               </div>
-            </Link>
-          </div>
-          <div className="likes">
-            <button type="button" className="like" onClick={() => handleLike(objAuth.userId, course.id, isPresentInUserId, course.favorites)}>
-              <FontAwesomeIcon icon={
-                isPresentInUserId(course.favorites, objAuth.userId) ? 'heart' : ['far', 'heart']
-                }
-              />
-            </button>
-            <div className="numberLikes">{` ${course.favorites.length}`}</div>
+              <div className="likes">
+                <button type="button" className="like" onClick={() => handleLike(userId, course.id, isPresentInUserId, course.favorites)}>
+                  <FontAwesomeIcon icon={
+                    isPresentInUserId(course.favorites, userId) ? 'heart' : ['far', 'heart']
+                    }
+                  />
+                </button>
+                <div className="numberLikes">{` ${course.favorites.length}`}</div>
+              </div>
+            </div>
+            {
+              access && (
+                <div>
+                  <a className="button-2" href={`${course.link}`}>Join Class</a>
+                </div>
+              )
+            }
           </div>
         </div>
-        {
-          access && (
-            <div>
-              <a className="button-2" href={`${course.link}`}>Join Class</a>
-            </div>
-          )
-        }
+      ));
+    }
+    return (
+      <div className="no-courses">
+        {'No courses yet, if you want create one '}
+        <Link to={{
+          pathname: `${url}/create`,
+        }}
+        >
+          <span className="here">here</span>
+        </Link>
+        !
       </div>
-    </div>
-  ));
+    );
+  };
 
   return (
     <div>
@@ -373,7 +389,6 @@ const Main = props => {
             url={url}
             urlApi={urlApi}
             location={location}
-            useAuth={useAuth}
             resetUser={resetUser}
             resetCourses={resetCourses}
             isPresentInUserId={isPresentInUserId}
@@ -392,7 +407,6 @@ const Main = props => {
               url={url}
               usersListToDiv={usersListToDiv}
               commentsToDivs={commentsToDivs}
-              useAuth={useAuth}
               isPresentInUserId={isPresentInUserId}
               isPresentInId={isPresentInId}
               setUserErr={setUserErr}
@@ -407,6 +421,8 @@ const Main = props => {
               mainUrl={mainUrl}
               picturesToDivs={picturesToDivs}
               setShowMenu={setShowMenu}
+              userId={userId}
+              userPassword={userPassword}
             />
           )}
         />
@@ -427,13 +443,14 @@ const Main = props => {
               userPayload={userPayload}
               id={id}
               token={token}
-              useAuth={useAuth}
               objThunk={objThunk}
               urlApi={urlApi}
               isFriendshipRequested={isFriendshipRequested}
               handleDelFriend={handleDelFriend}
               findCourses={findCourses}
               setShowMenu={setShowMenu}
+              userId={userId}
+              userPassword={userPassword}
             />
           )}
         />
@@ -456,7 +473,6 @@ const Main = props => {
               urlApi={urlApi}
               id={id}
               token={token}
-              useAuth={useAuth}
               teacherCourses={user.courses}
               commentsToDivs={commentsToDivs}
               isPresentInUserId={isPresentInUserId}
@@ -468,6 +484,8 @@ const Main = props => {
               findCourses={findCourses}
               mainUrl={mainUrl}
               setShowMenu={setShowMenu}
+              userId={userId}
+              userPassword={userPassword}
             />
           )}
         />
@@ -477,8 +495,8 @@ const Main = props => {
           render={({ location }) => (
             <FormCourseComponent
               location={location}
-              userId={objAuth.userId}
-              password={objAuth.userPassword}
+              userId={userId}
+              userPassword={userPassword}
               id={id}
               token={token}
               username={user.username}
@@ -642,7 +660,7 @@ Main.propTypes = {
   objThunk: PropTypes.func.isRequired,
   userPayload: PropTypes.func.isRequired,
   tokenPayload: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
   urlApi: PropTypes.string.isRequired,
   sendLike: PropTypes.func.isRequired,
@@ -664,6 +682,8 @@ Main.propTypes = {
   findCoursesFromCoursesId: PropTypes.func.isRequired,
   mainUrl: PropTypes.func.isRequired,
   picturesToDivs: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  userPassword: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({

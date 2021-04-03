@@ -1,8 +1,15 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactRouterPropTypes from 'react-router-prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  resetStateUser,
+} from '../reducers/user';
+import {
+  resetStateCourses,
+} from '../reducers/courses';
 import CoursesCss from '../css/Courses.module.css';
 import avatarImage from '../assets/images/avatar.jpg';
 
@@ -12,7 +19,6 @@ const Courses = props => {
     coursesToDivs,
     location,
     url,
-    useAuth,
     resetUser,
     resetCourses,
     avatar,
@@ -49,12 +55,11 @@ const Courses = props => {
       div.removeEventListener('scroll', popUpMenu);
     };
   }, [desktopMenu]);
-  const authObject = useAuth();
   const logout = () => {
     localStorage.removeItem('currentUserIdFunCourses');
     localStorage.removeItem('currentUserPasswordFunCourses');
-    authObject.setUserId(null);
-    authObject.setUserPassword(null);
+    resetUser();
+    resetCourses();
     resetUser();
     resetCourses();
   };
@@ -155,7 +160,6 @@ Courses.propTypes = {
   coursesToDivs: PropTypes.func.isRequired,
   location: ReactRouterPropTypes.location.isRequired,
   url: PropTypes.string.isRequired,
-  useAuth: PropTypes.func.isRequired,
   resetUser: PropTypes.func.isRequired,
   resetCourses: PropTypes.func.isRequired,
   avatar: PropTypes.string.isRequired,
@@ -164,4 +168,10 @@ Courses.propTypes = {
   setShowMenu: PropTypes.func.isRequired,
 };
 
-export default Courses;
+const mapDispatchToProps = dispatch => ({
+  resetUser: () => dispatch(resetStateUser()),
+  resetCourses: () => dispatch(resetStateCourses()),
+});
+
+export default connect(null, mapDispatchToProps)(Courses);
+export { Courses };

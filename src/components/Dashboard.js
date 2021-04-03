@@ -23,7 +23,6 @@ const Dashboard = props => {
     urlApi,
     id,
     token,
-    useAuth,
     handleDeleteSubscription,
     isPresentInUserId,
     handleDelFriend,
@@ -32,8 +31,9 @@ const Dashboard = props => {
     findCourses,
     mainUrl,
     setShowMenu,
+    userId,
+    userPassword,
   } = props;
-  const objAuth = useAuth();
   useEffect(() => {
     const deskTopMenu = document.querySelector('.desktopMenu');
     if (deskTopMenu.classList.contains('hide')) {
@@ -83,8 +83,8 @@ const Dashboard = props => {
               urlApi,
               id,
               token,
-              objAuth.userId,
-              objAuth.userPassword,
+              userId,
+              userPassword,
             )}
           >
             Accept
@@ -97,8 +97,8 @@ const Dashboard = props => {
               token,
               urlApi,
               objThunk,
-              objAuth.userId,
-              objAuth.userPassword,
+              userId,
+              userPassword,
               course.id,
               student.id,
               course.pendings,
@@ -177,8 +177,8 @@ const Dashboard = props => {
                 userPayload,
                 id,
                 token,
-                objAuth.userId,
-                objAuth.userPassword,
+                userId,
+                userPassword,
                 urlApi,
                 objThunk,
                 {
@@ -200,8 +200,8 @@ const Dashboard = props => {
               userPayload,
               id,
               token,
-              objAuth.userId,
-              objAuth.userPassword,
+              userId,
+              userPassword,
               urlApi,
               objThunk,
               {
@@ -488,7 +488,6 @@ Dashboard.propTypes = {
   urlApi: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   token: PropTypes.string.isRequired,
-  useAuth: PropTypes.func.isRequired,
   handleDeleteSubscription: PropTypes.func.isRequired,
   isPresentInUserId: PropTypes.func.isRequired,
   handleDelFriend: PropTypes.func.isRequired,
@@ -497,6 +496,8 @@ Dashboard.propTypes = {
   findCourses: PropTypes.func.isRequired,
   mainUrl: PropTypes.func.isRequired,
   setShowMenu: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  userPassword: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -20,7 +20,6 @@
 .coursesMenu {
   flex: 0 0 50%;
   height: 100%;
-  margin: auto;
   width: 50vw;
   display: flex;
   flex-direction: column;
