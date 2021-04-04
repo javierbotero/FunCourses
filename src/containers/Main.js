@@ -12,7 +12,7 @@ import Course from '../components/Course';
 import User from '../components/User';
 import { resetStateCourses } from '../reducers/courses';
 import { resetStateUser, setUserError } from '../reducers/user';
-import Courses from '../components/Courses';
+import CoursesComponent from '../components/Courses';
 import DashboardComponent from '../components/Dashboard';
 import FormCourseComponent from '../components/FormCourse';
 import Report from '../components/Report';
@@ -381,7 +381,7 @@ const Main = props => {
       </ul>
       <Switch>
         <Route exact path={`${path}`}>
-          <Courses
+          <CoursesComponent
             coursesToDivs={coursesToDivs}
             avatar={user.url_avatar}
             username={user.username}

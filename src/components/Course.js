@@ -283,8 +283,13 @@ Course.propTypes = {
   mainUrl: PropTypes.func.isRequired,
   picturesToDivs: PropTypes.func.isRequired,
   setShowMenu: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
-  userPassword: PropTypes.string.isRequired,
+  userId: PropTypes.number,
+  userPassword: PropTypes.string,
+};
+
+Course.defaultProps = {
+  userId: NaN,
+  userPassword: '',
 };
 
 export default Course;

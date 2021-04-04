@@ -21,19 +21,19 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: #FFFFFF;
-  border-bottom: 1em solid #E6F0FE;
-  border: 10px solid #E6F0FE;
+  background-color: #fff;
+  border-bottom: 1em solid #e6f0fe;
+  border: 10px solid #e6f0fe;
   text-align: center;
 }
 
 .report {
-  background-color: #E6F0FE;
+  background-color: #e6f0fe;
   padding: 4em 1em 1em 1em;
 }
 
 .header {
-  background-color: #FFFFFF;
+  background-color: #fff;
   padding: 1em;
   margin-bottom: 1em;
   border-radius: 5px;

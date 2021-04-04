@@ -15,6 +15,8 @@ describe('Tests for User', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <User
+          userPassword={util.userPassword}
+          userId={util.mockId}
           setShowMenu={util.func}
           courses={util.mockCourses}
           match={util.mockMatch}
@@ -28,7 +30,6 @@ describe('Tests for User', () => {
           userPayload={util.func}
           id={util.mockId}
           token={util.mockToken}
-          useAuth={util.mockUseAuth}
           objThunk={util.func}
           urlApi={util.mockUrlApi}
           isFriendshipRequested={util.func}
@@ -44,6 +45,8 @@ describe('Tests for User', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <User
+          userPassword={util.userPassword}
+          userId={util.mockId}
           setShowMenu={util.func}
           courses={util.mockCourses}
           match={util.mockMatch}
@@ -57,7 +60,6 @@ describe('Tests for User', () => {
           userPayload={util.func}
           id={util.mockId}
           token={util.mockToken}
-          useAuth={util.mockUseAuth}
           objThunk={util.func}
           urlApi={util.mockUrlApi}
           isFriendshipRequested={util.func}
@@ -73,6 +75,8 @@ describe('Tests for User', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <User
+          userPassword={util.userPassword}
+          userId={util.mockId}
           setShowMenu={util.func}
           setUserErr={util.func}
           courses={util.mockCourses}
@@ -87,7 +91,6 @@ describe('Tests for User', () => {
           userPayload={util.func}
           id={util.mockId}
           token={util.mockToken}
-          useAuth={util.mockUseAuth}
           objThunk={util.func}
           urlApi={util.mockUrlApi}
           isFriendshipRequested={util.func}

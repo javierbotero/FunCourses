@@ -1,5 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import courses from '../reducers/courses';
 import user from '../reducers/user';
@@ -23,6 +32,18 @@ const store = configureStore({
     courses: persistedReducerCourses,
     user: persistedReducerUser,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [
+        FLUSH,
+        REHYDRATE,
+        PAUSE,
+        PERSIST,
+        PURGE,
+        REGISTER,
+      ],
+    },
+  }),
 });
 
 const persistor = persistStore(store);

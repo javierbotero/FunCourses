@@ -180,7 +180,7 @@ Form.propTypes = {
   tokenPayload: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
   token: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   handleApiRequest: PropTypes.func.isRequired,
   match: ReactRouterPropTypes.match.isRequired,
   setUserErr: PropTypes.func.isRequired,

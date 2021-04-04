@@ -19,6 +19,8 @@ describe('Tests for Dashboard', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <Dashboard
+          userPassword={util.userPassword}
+          userId={util.mockId}
           findCourses={findCourses}
           mainUrl={util.func}
           setShowMenu={util.func}
@@ -36,7 +38,6 @@ describe('Tests for Dashboard', () => {
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
-          useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
           isPresentInUserId={util.func}
@@ -55,6 +56,8 @@ describe('Tests for Dashboard', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <Dashboard
+          userPassword={util.userPassword}
+          userId={util.mockId}
           findCourses={findCourses}
           mainUrl={util.func}
           setShowMenu={util.func}
@@ -72,7 +75,6 @@ describe('Tests for Dashboard', () => {
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
-          useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
           isPresentInUserId={util.func}
@@ -91,6 +93,8 @@ describe('Tests for Dashboard', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <Dashboard
+          userPassword={util.userPassword}
+          userId={util.mockId}
           findCourses={findCourses}
           mainUrl={util.func}
           setShowMenu={util.func}
@@ -108,7 +112,6 @@ describe('Tests for Dashboard', () => {
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
-          useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
           isPresentInUserId={util.func}
@@ -127,6 +130,8 @@ describe('Tests for Dashboard', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <Dashboard
+          userPassword={util.userPassword}
+          userId={util.mockId}
           findCourses={findCourses}
           mainUrl={util.func}
           setShowMenu={util.func}
@@ -144,7 +149,6 @@ describe('Tests for Dashboard', () => {
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
-          useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
           isPresentInUserId={util.func}
@@ -163,6 +167,8 @@ describe('Tests for Dashboard', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <Dashboard
+          userPassword={util.userPassword}
+          userId={util.mockId}
           findCourses={findCourses}
           mainUrl={util.func}
           setShowMenu={util.func}
@@ -180,7 +186,6 @@ describe('Tests for Dashboard', () => {
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
-          useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
           isPresentInUserId={util.func}
@@ -199,6 +204,8 @@ describe('Tests for Dashboard', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <Dashboard
+          userPassword={util.userPassword}
+          userId={util.mockId}
           findCourses={findCourses}
           mainUrl={util.func}
           setShowMenu={util.func}
@@ -216,7 +223,6 @@ describe('Tests for Dashboard', () => {
           urlApi={util.mockUrlApi}
           id={util.mockId}
           token={util.mockToken}
-          useAuth={util.mockUseAuth}
           teacherCourses={util.mockUser.courses}
           commentsToDivs={util.mockCommentsToDivs}
           isPresentInUserId={util.func}

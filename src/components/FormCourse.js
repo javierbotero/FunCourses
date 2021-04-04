@@ -139,7 +139,6 @@ const FormCourse = props => {
           className="removeButtonStyles"
           type="button"
           onClick={() => {
-            console.log('fired button menu dots');
             setShowMenu(true);
           }}
         >

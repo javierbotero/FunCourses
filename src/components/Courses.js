@@ -60,8 +60,6 @@ const Courses = props => {
     localStorage.removeItem('currentUserPasswordFunCourses');
     resetUser();
     resetCourses();
-    resetUser();
-    resetCourses();
   };
 
   return (

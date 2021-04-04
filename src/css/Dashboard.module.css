@@ -11,7 +11,7 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  background-color: #FFFFFF;
+  background-color: #fff;
   padding: 0 1em;
   text-align: center;
 }
@@ -46,9 +46,9 @@
 
 .interactions {
   flex: 3 0 15vh;
-  background-color: #FFFFFF;
-  border-top: 1em solid #FFFFFF;
-  border-bottom: 1em solid #FFFFFF;
+  background-color: #fff;
+  border-top: 1em solid #fff;
+  border-bottom: 1em solid #fff;
   width: 90vw;
   margin: 0 auto;
 }
@@ -79,7 +79,7 @@
 }
 
 .teacherCourse {
-  background-color: #E6F0FE;
+  background-color: #e6f0fe;
   border: 5px solid white;
   border-radius: 5px;
   width: 90vw;
@@ -148,8 +148,4 @@
     width: 25vw;
     flex: 1 0 25vw;
   }
-}
-
-@media screen and (min-height: 350px) {
-  
 }

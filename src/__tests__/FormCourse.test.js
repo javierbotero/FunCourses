@@ -16,6 +16,7 @@ describe('Tests FormCourse', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <FormCourse
+          userPassword={util.userPassword}
           setFalseLoad={util.func}
           location={util.mockLocation}
           setShowMenu={util.func}
@@ -43,6 +44,7 @@ describe('Tests FormCourse', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <FormCourse
+          userPassword={util.userPassword}
           setFalseLoad={util.func}
           location={util.mockLocation}
           setShowMenu={util.func}
@@ -71,6 +73,7 @@ describe('Tests FormCourse', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <FormCourse
+          userPassword={util.userPassword}
           setFalseLoad={util.func}
           location={util.mockLocation}
           setShowMenu={util.func}
@@ -98,6 +101,7 @@ describe('Tests FormCourse', () => {
       <BrowserRouter>
         <div className="desktopMenu" />
         <FormCourse
+          userPassword={util.userPassword}
           setFalseLoad={util.func}
           location={util.mockLocation}
           setShowMenu={util.func}

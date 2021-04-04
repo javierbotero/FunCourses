@@ -45,14 +45,18 @@
 }
 
 .loginMenu li {
-  padding-left: 0;
   display: flex;
   align-items: center;
   padding: 5px 1em;
 }
 
+.infoPicFooter h4,
+.infoPicFooter a {
+  z-index: 10;
+}
+
 .loginMenu li a {
-  color: #FFFFFF;
+  color: #fff;
 }
 
 .navHeader {
@@ -80,7 +84,7 @@
 }
 
 .colorHeader {
-  color: #FFFFFF;
+  color: #fff;
   position: relative;
 }
 
@@ -103,12 +107,13 @@
   padding-bottom: 6em;
 }
 
-.infoHeader .wrapperStartFree a, .footerStartFree {
-  background-color: #F5531F;
+.infoHeader .wrapperStartFree a,
+.footerStartFree {
+  background-color: #f5531f;
   height: 2.5em;
   padding: 10px 3em;
   border-radius: 20px;
-  color: #FFFFFF;
+  color: #fff;
 }
 
 .wrapperStartFree {
@@ -134,11 +139,7 @@
 }
 
 .infoPicFooter {
-  color: #FFFFFF;
-}
-
-.infoPicFooter h4, .infoPicFooter a {
-  z-index: 10;
+  color: #fff;
 }
 
 .infoPicFooter h4 {
@@ -153,7 +154,7 @@
 .footerLogos svg {
   font-size: 1.5em;
   margin: 0 5px;
-  color: #4F1D9F;
+  color: #4f1d9f;
 }
 
 .textInfo {
@@ -206,6 +207,7 @@
   .navHeader {
     flex-direction: row;
   }
+
   .loginMenu li {
     padding: 0 8px;
   }
@@ -225,7 +227,8 @@
     min-height: 40em;
   }
 
-  .headerPhrase, .wrapperStartFree {
+  .headerPhrase,
+  .wrapperStartFree {
     padding-top: 4em;
   }
 

@@ -24,7 +24,6 @@ describe('Tests for courses', () => {
           location={util.mockLocation}
           url={util.mockUrl}
           coursesToDivs={util.func}
-          useAuth={util.mockUseAuth}
           resetUser={util.func}
           resetCourses={util.func}
         />
@@ -45,7 +44,6 @@ describe('Tests for courses', () => {
           location={util.mockLocation}
           url={util.mockUrl}
           coursesToDivs={util.func}
-          useAuth={util.mockUseAuth}
           resetUser={util.func}
           resetCourses={util.func}
         />
@@ -66,7 +64,6 @@ describe('Tests for courses', () => {
           location={util.mockLocation}
           url={util.mockUrl}
           coursesToDivs={util.func}
-          useAuth={util.mockUseAuth}
           resetUser={util.func}
           resetCourses={util.func}
         />
@@ -88,7 +85,6 @@ describe('Tests for courses', () => {
           location={util.mockLocation}
           url={util.mockUrl}
           coursesToDivs={util.func}
-          useAuth={util.mockUseAuth}
           resetUser={myFunc}
           resetCourses={util.func}
         />
@@ -111,7 +107,6 @@ describe('Tests for courses', () => {
             location={util.mockLocation}
             url={util.mockUrl}
             coursesToDivs={util.func}
-            useAuth={util.mockUseAuth}
             resetUser={util.func}
             resetCourses={util.func}
           />

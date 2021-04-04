@@ -18,7 +18,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  color: #FFFFFF;
+  color: #fff;
   position: relative;
 }
 
@@ -66,8 +66,8 @@
   border: 0;
   position: fixed;
   bottom: 0;
-  background-color: #F5531F;
-  color: #FFFFFF;
+  background-color: #f5531f;
+  color: #fff;
 }
 
 .basicInfo {
@@ -125,7 +125,7 @@
 }
 
 .contentCourse {
-  width: 100ww;
+  width: 100vw;
 }
 
 @media screen and (min-width: 600px) {

@@ -103,15 +103,7 @@ const mockLocation = {
 const mockUrl = 'url';
 const mockUsersListToDiv = jest.fn();
 const mockCommentsToDivs = jest.fn();
-const mockUseAuth = (() => (
-  {
-    userPassword: 'Javier',
-    userId: 1,
-    setUserId: jest.fn(),
-    setUserPassword: jest.fn(),
-    authenticate: jest.fn(),
-  }
-));
+const userPassword = '12345';
 const func = jest.fn();
 const mockUrlApi = 'url';
 const mockToken = 'token';
@@ -128,11 +120,11 @@ export {
   mockUrl,
   mockUsersListToDiv,
   mockCommentsToDivs,
-  mockUseAuth,
   mockUrlApi,
   mockToken,
   mockId,
   mockUser,
   URL,
   mockHistory,
+  userPassword,
 };

@@ -24,7 +24,6 @@ const authenticate = (
             'currentUserPasswordFunCourses',
             'user' in data ? data.user.password : data.password,
           );
-          console.log('res: ', res, 'data: ', data);
           store.dispatch(setUser(res));
           store.dispatch(setUserPassword('user' in data ? data.user.password : data.password));
           store.dispatch(removeUserError());
@@ -35,6 +34,7 @@ const authenticate = (
         }
         return res;
       })
+        .catch(err => err)
     ))
     .catch(err => {
       store.dispatch(setUserError(`Something went wrong. ${err}`));
