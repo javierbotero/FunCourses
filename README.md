@@ -16,6 +16,7 @@ This app is a Courses web app. The user can create courses and subscribe to cour
 - CSS
 - Node
 - npm
+- Rails
 
 ## Getting start
 
