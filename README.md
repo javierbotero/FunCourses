@@ -4,7 +4,7 @@ This app is a Courses web app. The user can create courses and subscribe to cour
 
 ## Live Preview
 
-[Fun Courses App]()
+[Fun Courses App](https://funcourses.netlify.app/)
 
 ![Screenshot Bookstore](./src/assets/images/pic.png)
 
@@ -23,7 +23,7 @@ To start with the project:
 
 1. Install npm in your machine.
 
-2. Clone [this repository](https://github.com/javierbotero/dog-clothes-catalogue.git)
+2. Clone [this repository](https://github.com/javierbotero/FunCourses.git)
 
 3. cd inside the project
 
@@ -34,7 +34,7 @@ To start with the project:
 ```
 in the terminal to install the dependencies.
 
-5. Go to [Fun Courses API](https://financialmodelingprep.com/developer/docs/) and follow the instructions to get your token and id.
+5. Go to [Fun Courses API](https://github.com/javierbotero/APIfuncourses) and follow the instructions to get your token and id.
 
 6. Make the following environment variables locally:
   - REACT_APP_FUN_COURSES=your-token
