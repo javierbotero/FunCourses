@@ -32,7 +32,7 @@ const Form = props => {
   const [password, setPassword] = useState('');
   const [passConf, setPassConf] = useState('');
   const [email, setEmail] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState({});
   const [matcher, setMatcher] = useState(match.params.identifier);
   const handleSubmit = async e => {
     e.preventDefault();

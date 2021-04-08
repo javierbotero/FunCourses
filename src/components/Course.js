@@ -73,7 +73,7 @@ const Course = props => {
       <div>
         <div
           style={{
-            backgroundImage: course.main_image_url ? `url(${urlApi}${mainUrl(course)})` : `url(${avatar})`,
+            backgroundImage: course.main_image_url ? `url(${mainUrl(course)})` : `url(${avatar})`,
           }}
           className={`${styles.mainPic}`}
         >

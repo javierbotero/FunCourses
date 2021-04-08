@@ -114,10 +114,10 @@ const mainUrl = c => {
   }
   return fun2;
 };
-const picturesToDivs = (images, urlApi, cssClases) => images.map(img => (
+const picturesToDivs = (images, urlApi, cssClasses) => images.map(img => (
   <div
     key={img.slice(img.length - 30, img.length)}
-    className={cssClases}
+    className={cssClasses}
     style={{
       backgroundImage: `url(${urlApi}${img})`,
     }}

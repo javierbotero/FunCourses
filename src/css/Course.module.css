@@ -56,8 +56,11 @@
 }
 
 .picture {
-  width: 30%;
-  height: 100%;
+  width: 70vw;
+  height: 70vw;
+  margin: 10px;
+  background-position: center;
+  background-size: contain;
 }
 
 .subscribe {
@@ -133,10 +136,24 @@
     width: 80vw;
     margin: auto;
   }
+
+  .picture {
+    width: 20vw;
+    height: 20vw;
+    margin: 5px;
+    display: inline-block;
+  }
 }
 
 @media screen and (min-width: 1000px) {
   .contentCourse {
     width: 70vw;
+  }
+
+  .picture {
+    width: 30vw;
+    height: 30vw;
+    margin: 5px;
+    display: inline-block;
   }
 }
