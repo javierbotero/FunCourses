@@ -47,7 +47,7 @@ const FormCourse = props => {
   const [provider, setProvider] = useState('zoom');
   const [link, setLink] = useState('');
   const [status, setStatus] = useState('Closed');
-  const [mainPicture, setMainPicture] = useState('');
+  const [mainPicture, setMainPicture] = useState({});
   const [pictures, setPictures] = useState([]);
 
   const handleSubmit = e => {
