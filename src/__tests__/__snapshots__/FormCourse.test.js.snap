@@ -104,10 +104,10 @@ Array [
             </div>
             <input
               id="dateStart"
-              max="4/3/2021"
+              max="4/8/2021"
               onChange={[Function]}
               type="date"
-              value="4/3/2021"
+              value="4/8/2021"
             />
           </label>
           <label
@@ -118,10 +118,10 @@ Array [
             </div>
             <input
               id="dateEnd"
-              min="4/3/2021"
+              min="4/8/2021"
               onChange={[Function]}
               type="date"
-              value="4/3/2021"
+              value="4/8/2021"
             />
           </label>
         </div>
