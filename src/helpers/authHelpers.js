@@ -17,8 +17,8 @@ const authenticate = (
   handleApiRequest(initCreator, verb, url, data)
     .then(resp => (
       resp.json().then(res => {
+        setFalseLoadCb();
         if (res.user) {
-          setFalseLoadCb();
           localStorage.setItem('currentUserIdFunCourses', res.user.id);
           localStorage.setItem(
             'currentUserPasswordFunCourses',
