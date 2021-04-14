@@ -1,0 +1,63 @@
+/*
+
+  orange: #F5531F
+  fuchsia: #4F1D9F
+  purple: #4333B3
+  white: #FFFFFF
+  light-fuchsia: #E6F0FE
+  orange2: #E04534
+
+*/
+
+.container {
+  padding: 3em 1em 1em 1em;
+  text-align: center;
+}
+
+.friendFalse {
+  text-align: center;
+}
+
+.notFriends {
+  height: 10em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e6f0fe;
+  width: 80vw;
+  margin: 1em auto;
+  border-radius: 5px;
+}
+
+.username {
+  padding: 1em 0;
+}
+
+.courses {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 2em 0 1em 0;
+  text-align: center;
+}
+
+.interactions {
+  padding-top: 1em;
+}
+
+.comments {
+  padding: 1em 0;
+}
+
+.titleCourses {
+  padding: 2em 0 1em 0;
+}
+
+.avatar {
+  margin: auto;
+}
+
+.avatarNotFriend {
+  margin-top: 5em;
+}

@@ -1,0 +1,250 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for Report Prints correctly 1`] = `
+Array [
+  <div
+    className="desktopMenu"
+  />,
+  <div>
+    <nav
+      className="navMenu"
+    >
+      <div>
+        <a
+          href="url"
+          onClick={[Function]}
+        >
+          <i
+            className="fa chevron-left"
+          />
+        </a>
+      </div>
+      <div>
+        Report
+      </div>
+      <button
+        className="removeButtonStyles"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fa ellipsis-v"
+        />
+      </button>
+    </nav>
+    <div
+      className="report"
+    >
+      <header
+        className="header header"
+      >
+        <div>
+          Hello 
+          Javier 4
+          , these are metrics of your actions
+        </div>
+      </header>
+      <main
+        className="main"
+      >
+        <div
+          className="field"
+        >
+          <div>
+            Courses opened in April
+          </div>
+          <div>
+            <div
+              className="book-child records"
+            >
+              <svg
+                style={
+                  Object {
+                    "height": 80,
+                    "width": 80,
+                  }
+                }
+              >
+                <defs>
+                  <radialGradient
+                    cx="50%"
+                    cy="50%"
+                    id="gradient"
+                    r="70%"
+                  >
+                    <stop
+                      offset="60%"
+                      stopColor="#4333B3"
+                    />
+                    <stop
+                      offset="110%"
+                      stopColor="#E04534"
+                    />
+                  </radialGradient>
+                </defs>
+                <circle
+                  cx={40}
+                  cy={40}
+                  r={28}
+                  stroke="#e8e8e8"
+                  style={
+                    Object {
+                      "fill": "transparent",
+                      "strokeWidth": 6,
+                    }
+                  }
+                />
+                <circle
+                  cx={40}
+                  cy={40}
+                  r={28}
+                  stroke="url(#gradient)"
+                  style={
+                    Object {
+                      "fill": "transparent",
+                      "strokeDasharray": "175.92918860102841 175.92918860102841",
+                      "strokeDashoffset": 175.92918860102841,
+                      "strokeWidth": 6,
+                      "transform": "rotate(-90deg)",
+                      "transformOrigin": "center",
+                    }
+                  }
+                />
+              </svg>
+            </div>
+            0
+          </div>
+        </div>
+        <div
+          className="field"
+        >
+          <div>
+            Taking courses in April
+          </div>
+          <div>
+            <div
+              className="book-child records"
+            >
+              <svg
+                style={
+                  Object {
+                    "height": 80,
+                    "width": 80,
+                  }
+                }
+              >
+                <defs>
+                  <radialGradient
+                    cx="50%"
+                    cy="50%"
+                    id="gradient"
+                    r="70%"
+                  >
+                    <stop
+                      offset="60%"
+                      stopColor="#4333B3"
+                    />
+                    <stop
+                      offset="110%"
+                      stopColor="#E04534"
+                    />
+                  </radialGradient>
+                </defs>
+                <circle
+                  cx={40}
+                  cy={40}
+                  r={28}
+                  stroke="#e8e8e8"
+                  style={
+                    Object {
+                      "fill": "transparent",
+                      "strokeWidth": 6,
+                    }
+                  }
+                />
+                <circle
+                  cx={40}
+                  cy={40}
+                  r={28}
+                  stroke="url(#gradient)"
+                  style={
+                    Object {
+                      "fill": "transparent",
+                      "strokeDasharray": "175.92918860102841 175.92918860102841",
+                      "strokeDashoffset": 175.92918860102841,
+                      "strokeWidth": 6,
+                      "transform": "rotate(-90deg)",
+                      "transformOrigin": "center",
+                    }
+                  }
+                />
+              </svg>
+            </div>
+            0
+          </div>
+        </div>
+        <div
+          className="field"
+        >
+          <div>
+            Total Students: 
+          </div>
+          <div>
+            0
+          </div>
+        </div>
+        <div
+          className="field"
+        >
+          <div>
+            Total students waiting for confirmation: 
+          </div>
+          <div>
+            0
+          </div>
+        </div>
+        <div
+          className="field"
+        >
+          <div>
+            Total favorites received: 
+          </div>
+          <div>
+            0
+          </div>
+        </div>
+        <div
+          className="field"
+        >
+          <div>
+            Total friends: 
+          </div>
+          <div>
+            0
+          </div>
+        </div>
+        <div
+          className="field"
+        >
+          <div>
+            Your comments: 
+          </div>
+          <div>
+            0
+          </div>
+        </div>
+        <div
+          className="field"
+        >
+          <div>
+            Your favorites: 
+          </div>
+          <div>
+            0
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>,
+]
+`;

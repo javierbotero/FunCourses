@@ -1,0 +1,151 @@
+/*
+
+  orange: #F5531F
+  fuchsia: #4F1D9F
+  purple: #4333B3
+  white: #FFFFFF
+  light-fuchsia: #E6F0FE
+
+*/
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 0 1em;
+  text-align: center;
+}
+
+.header {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 45vh;
+  padding-top: 4em;
+}
+
+.welcome {
+  padding-top: 1em;
+}
+
+.main {
+  flex: 1 1 100%;
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.aside {
+  flex: 1 1 100%;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.interactions {
+  flex: 3 0 15vh;
+  background-color: #fff;
+  border-top: 1em solid #fff;
+  border-bottom: 1em solid #fff;
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.scrollUsers {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-top: 1em;
+}
+
+.request {
+  flex: 1 0 150px;
+  text-align: center;
+  margin: 0 10px;
+}
+
+.acceptance {
+  display: flex;
+  justify-content: space-around;
+}
+
+.acceptance button {
+  margin: 0 5px;
+}
+
+.teacherCourse {
+  background-color: #e6f0fe;
+  border: 5px solid white;
+  border-radius: 5px;
+  width: 90vw;
+  flex: 1 0 90vw;
+}
+
+.headerCourse {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.sectionCourse {
+  padding: 1em 0;
+  min-height: 6em;
+}
+
+.metricsCourses {
+  padding-top: 1em;
+}
+
+.studentCourses {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-top: 10px;
+}
+
+.studentCourses .course-container {
+  height: 400px;
+}
+
+.titleCourse {
+  padding: 1em 0;
+}
+
+.username {
+  padding: 5px 0;
+}
+
+.requests {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 600px) {
+  .teacherCourse {
+    width: 60vw;
+    flex: 1 0 60vw;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .teacherCourse {
+    width: 40vw;
+    flex: 1 0 40vw;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .teacherCourse {
+    width: 25vw;
+    flex: 1 0 25vw;
+  }
+}

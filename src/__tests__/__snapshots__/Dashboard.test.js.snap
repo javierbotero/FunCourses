@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for Dashboard Makes sure renders correctly 1`] = `
+Array [
+  <div
+    className="desktopMenu"
+  />,
+  <div
+    className="container"
+  >
+    <nav
+      className="navMenu"
+    >
+      <div>
+        <a
+          href="url"
+          onClick={[Function]}
+        >
+          <i
+            className="fa chevron-left"
+          />
+        </a>
+      </div>
+      <div>
+        Dashboard
+      </div>
+      <button
+        className="removeButtonStyles"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fa ellipsis-v"
+        />
+      </button>
+    </nav>
+    <header
+      className="header"
+    >
+      <div
+        className="avatarZone"
+      >
+        <div>
+          <div
+            className="avatar avatarPic"
+            style={
+              Object {
+                "backgroundImage": "url(urlpi.com/users/1)",
+              }
+            }
+          />
+          <h4
+            className="welcome"
+          >
+            Hi 
+            Javier 4
+            !
+          </h4>
+        </div>
+      </div>
+    </header>
+    <main
+      className="main"
+    >
+      <h3>
+        Courses
+      </h3>
+      <section
+        className="interactions"
+      >
+        <h4>
+          As a Student
+        </h4>
+        <div
+          className="studentCourses"
+        />
+      </section>
+      <section
+        className="interactions"
+      >
+        <h4>
+          As a Teacher
+        </h4>
+        <div
+          className="teacher"
+        >
+          <div
+            className="teacherCourse"
+          >
+            <header
+              className="headerCourse"
+            >
+              <div
+                className="course"
+                style={
+                  Object {
+                    "backgroundImage": "url(undefined)",
+                  }
+                }
+              />
+              <h4
+                className="titleCourse"
+              >
+                Karate class
+              </h4>
+              <a
+                className="join button-2"
+              >
+                Join Class
+              </a>
+            </header>
+            <section
+              className="sectionCourse"
+            >
+              <h4>
+                0
+                 Enrollment Requests
+              </h4>
+              <div
+                className="scrollUsers"
+              />
+            </section>
+            <section
+              className="sectionCourse"
+            >
+              <h4>
+                0
+                 Accepted Students
+              </h4>
+              <div
+                className="scrollUsers"
+              />
+            </section>
+          </div>
+        </div>
+      </section>
+      <section
+        className="interactions"
+      >
+        <h4>
+          Favorites
+        </h4>
+        <div
+          className="teacher"
+        />
+      </section>
+    </main>
+    <aside
+      className="aside"
+    >
+      <h3>
+        Friendship Requests
+      </h3>
+      <section
+        className="interactions"
+      >
+        <div
+          className="requests"
+        />
+      </section>
+    </aside>
+  </div>,
+]
+`;

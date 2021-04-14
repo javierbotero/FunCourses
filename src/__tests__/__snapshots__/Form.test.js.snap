@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for Form Makes sure prints correctly 1`] = `
+<div
+  className="form positionImage"
+  style={
+    Object {
+      "backgroundImage": "url(fun2.jpg)",
+    }
+  }
+>
+  <div
+    className="layer login"
+  />
+  <h3
+    className="index2 form-item"
+  >
+    Log in
+  </h3>
+  <div
+    className="form-item index2"
+  >
+    <div>
+      Hello there! it's time to learn with fun courses. 
+      If you don't have an account please 
+      <button
+        className="button-3"
+        onClick={[Function]}
+        type="button"
+      >
+        Sign up
+      </button>
+    </div>
+  </div>
+  <form
+    className="form-item index2"
+    onSubmit={[Function]}
+  >
+    <div>
+      <label
+        htmlFor="username"
+      >
+        <div>
+          Username
+        </div>
+        <input
+          id="username"
+          onChange={[Function]}
+          placeholder="User"
+          type="text"
+          value=""
+        />
+      </label>
+    </div>
+    <div>
+      <label
+        htmlFor="password"
+      >
+        <div>
+          Password
+        </div>
+        <input
+          id="password"
+          onChange={[Function]}
+          placeholder="password"
+          type="password"
+          value=""
+        />
+      </label>
+    </div>
+    <div
+      className="buttonSubmit"
+    >
+      <input
+        className="btn button-2"
+        type="submit"
+        value="Submit"
+      />
+    </div>
+  </form>
+</div>
+`;

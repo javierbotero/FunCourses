@@ -1,0 +1,52 @@
+/*
+
+  orange: #F5531F
+  fuchsia: #4F1D9F
+  purple: #4333B3
+  white: #FFFFFF
+  light-fuchsia: #E6F0FE
+  orange2: #E04534
+
+*/
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.field {
+  flex: 1 0 40vw;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1em solid #e6f0fe;
+  border: 10px solid #e6f0fe;
+  text-align: center;
+}
+
+.report {
+  background-color: #e6f0fe;
+  padding: 4em 1em 1em 1em;
+}
+
+.header {
+  background-color: #fff;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 1000px) {
+  .field {
+    flex: 1 0 30vw;
+    height: 30vh;
+  }
+
+  .main {
+    width: 90vw;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,159 @@
+/*
+
+  orange: #F5531F
+  fuchsia: #4F1D9F
+  purple: #4333B3
+  white: #FFFFFF
+  light-fuchsia: #E6F0FE
+  orange2: #E04534
+
+*/
+
+.mainPic {
+  width: 100%;
+  height: 60vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  color: #fff;
+  position: relative;
+}
+
+.infoTeacher {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  z-index: 2;
+}
+
+.price {
+  z-index: 2;
+  font-size: 1.5em;
+  padding: 0 1.5em 1.5em 0;
+}
+
+.degrade {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(transparent 80%, rgba(0, 0, 0, 0.6) 90%);
+  z-index: 1;
+}
+
+.teacherDetails {
+  padding-left: 1em;
+}
+
+.likes {
+  display: flex;
+}
+
+.pictures {
+  width: 100%;
+}
+
+.picture {
+  width: 70vw;
+  height: 70vw;
+  margin: 10px;
+  background-position: center;
+  background-size: contain;
+}
+
+.subscribe {
+  width: 100%;
+  padding: 1em;
+  border: 0;
+  position: fixed;
+  bottom: 0;
+  background-color: #f5531f;
+  color: #fff;
+}
+
+.basicInfo {
+  min-height: 40vh;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.title {
+  flex: 1 0 15%;
+}
+
+.dates {
+  flex: 1 0 15%;
+}
+
+.content {
+  flex: 5 0 40%;
+}
+
+.status {
+  flex: 1 0 15%;
+}
+
+.jump1 {
+  flex: 1 0 15%;
+  padding-bottom: 1em;
+  text-align: center;
+}
+
+.students {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.public {
+  padding: 1em;
+  text-align: center;
+}
+
+.interactions {
+  text-align: center;
+}
+
+.comments {
+  padding: 2em 0;
+}
+
+.commentsTitle {
+  padding-bottom: 1em;
+}
+
+.contentCourse {
+  width: 100vw;
+}
+
+@media screen and (min-width: 600px) {
+  .contentCourse {
+    width: 80vw;
+    margin: auto;
+  }
+
+  .picture {
+    width: 20vw;
+    height: 20vw;
+    margin: 5px;
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .contentCourse {
+    width: 70vw;
+  }
+
+  .picture {
+    width: 30vw;
+    height: 30vw;
+    margin: 5px;
+    display: inline-block;
+  }
+}

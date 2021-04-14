@@ -1,0 +1,98 @@
+/*
+
+  orange: #F5531F
+  fuchsia: #4F1D9F
+  purple: #4333B3
+  white: #FFFFFF
+  light-fuchsia: #E6F0FE
+  gray: #313131
+
+*/
+
+.courses {
+  display: flex;
+  height: 100vh;
+  position: static;
+  overflow-x: auto;
+  background-color: #fff;
+}
+
+.coursesMenu {
+  flex: 0 0 50%;
+  height: 100%;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2em 2em 3em 2em;
+  background-color: #e6f0fe;
+  color: #313131;
+}
+
+.coursesMenu a {
+  color: #313131;
+}
+
+.coursesItems {
+  display: flex;
+  border-left: 2em solid #fff;
+}
+
+.avatarZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 2 0 auto;
+  padding-top: 0;
+}
+
+.menu {
+  flex: 5 0 auto;
+}
+
+.btn {
+  flex: 0 0 auto;
+  background-color: transparent;
+  border: 0;
+  text-align: initial;
+}
+
+.menu li {
+  padding: 1em 0;
+}
+
+.avatarPic {
+  margin: 1em auto;
+}
+
+.username {
+  text-align: center;
+}
+
+@media screen and (min-width: 600px) {
+  .coursesMenu {
+    flex: 0 0 30vw;
+    width: 30vw;
+    padding: 0 2em;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .coursesMenu {
+    flex: 0 0 20vw;
+    width: 20vw;
+    padding: 0 2em;
+  }
+}
+
+@media screen and (min-height: 600px) {
+  .coursesItems {
+    height: 80vh;
+    margin: auto;
+  }
+
+  .coursesMenu {
+    padding: 4em 2em 6em 2em;
+  }
+}

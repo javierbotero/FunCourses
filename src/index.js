@@ -1,17 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from './store/store';
+import App from './containers/App';
+import { getCourses, getUser } from './actions/retrievals';
+import {
+  initCreator,
+  objThunk,
+  tokenPayload,
+  userPayload,
+} from './helpers/helpers';
+import {
+  URL,
+  TOKEN,
+  ID,
+} from './constants/constants';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <App
+        getCourses={getCourses}
+        getUser={getUser}
+        objThunk={objThunk}
+        token={TOKEN}
+        id={ID}
+        url={URL}
+        tokenPayload={tokenPayload}
+        userPayload={userPayload}
+        initCreator={initCreator}
+      />
+    </PersistGate>
+  </Provider>,
+  document.getElementById('root'),
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

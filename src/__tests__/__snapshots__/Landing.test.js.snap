@@ -1,0 +1,252 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for Landing Prints correctly 1`] = `
+<div
+  className="info-landing"
+>
+  <header
+    className="positionImage colorHeader"
+    style={
+      Object {
+        "backgroundImage": "url(fun1.jpeg)",
+      }
+    }
+  >
+    <div
+      className="degrade"
+    />
+    <div
+      className="infoHeader containers"
+    >
+      <nav
+        className="navHeader"
+      >
+        <div
+          className="logo"
+        >
+          FUN Courses
+        </div>
+        <ul
+          className="loginMenu"
+        >
+          <li>
+            <a
+              href="/login"
+              onClick={[Function]}
+            >
+              Log in
+            </a>
+          </li>
+          <li
+            className="signupWrapper"
+          >
+            <a
+              href="/signup"
+              onClick={[Function]}
+            >
+              <div>
+                Sign up
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <h4
+        className="headerPhrase"
+      >
+        Find a course of any theme
+      </h4>
+      <p
+        className="headerPar"
+      >
+        The best courses for you about any topic you can think of, taught by professionals.
+      </p>
+      <div
+        className="wrapperStartFree"
+      >
+        <a
+          href="/signin"
+          onClick={[Function]}
+        >
+          Start Free
+        </a>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section
+      className="bg-white"
+    >
+      <div>
+        <h3
+          className="titleMain"
+        >
+          Interesting courses from reliable teachers
+        </h3>
+        <div
+          className="textInfo containers flexContainers"
+        >
+          <div
+            className="textInfo"
+          >
+            <h4>
+              All stats at your fingerprints
+            </h4>
+            <p>
+              All the information about the number of students, your courses, comments and interactions will be available to you to measure your performance.
+            </p>
+          </div>
+          <div
+            className="picInfo positionImage"
+            style={
+              Object {
+                "backgroundImage": "url(stats.jpg)",
+              }
+            }
+          />
+        </div>
+      </div>
+    </section>
+    <section
+      className="containers bg-purple flexContainers"
+    >
+      <div
+        className="picInfo positionImage"
+        style={
+          Object {
+            "backgroundImage": "url(architecture.jpg)",
+          }
+        }
+      />
+      <div
+        className="textInfo"
+      >
+        <div>
+          <h4>
+            Talk with professionals
+          </h4>
+          <p>
+            The best professionals around the world will be reachable through live courses. take the opportunity to enhance your skills in any matter.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section
+      className="containers verticalCenter bg-white"
+    >
+      <div
+        className="testimoniesIntro"
+      >
+        PEOPLE ARE ALREADY TAKING FUN COURSES
+      </div>
+      <div
+        className="testimoniesSaying"
+      >
+        Look what these are saying
+      </div>
+      <div
+        className="flexContainers opinionsPeople"
+      >
+        <div
+          className="opinions"
+        >
+          <div
+            className="opinionPic positionImage"
+            style={
+              Object {
+                "backgroundImage": "url(user1.jpg)",
+              }
+            }
+          />
+          <h4>
+            Belle
+          </h4>
+          <h5>
+            Model
+          </h5>
+          <div>
+            The best place to to teach about fashion in a fun way
+          </div>
+        </div>
+        <div
+          className="opinions"
+        >
+          <div
+            className="opinionPic positionImage"
+            style={
+              Object {
+                "backgroundImage": "url(user2.jpeg)",
+              }
+            }
+          />
+          <h4>
+            Jhon
+          </h4>
+          <h5>
+            Architecture
+          </h5>
+          <div>
+            Here I have taught architecture to a lot of people around the world
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer
+    className="footerLook bg-white"
+  >
+    <div
+      className="socialImage positionImage infoPicFooter"
+      style={
+        Object {
+          "backgroundImage": "url(fun1.jpeg)",
+        }
+      }
+    >
+      <div
+        className="degrade"
+      />
+      <h4>
+        Learn everything at home
+      </h4>
+      <a
+        href="/signin"
+        onClick={[Function]}
+      >
+        <div
+          className="footerStartFree"
+        >
+          Start free
+        </div>
+      </a>
+    </div>
+    <div
+      className="verticalCenter socialMedia"
+    >
+      <div>
+        <div
+          className="logo"
+        >
+          FUN Courses
+        </div>
+      </div>
+      <div
+        className="footerLogos"
+      >
+        <i
+          className="fa fab,linkedin"
+        />
+        <i
+          className="fa fab,facebook"
+        />
+        <i
+          className="fa fab,twitter-square"
+        />
+        <i
+          className="fa fab,instagram-square"
+        />
+      </div>
+    </div>
+  </footer>
+</div>
+`;

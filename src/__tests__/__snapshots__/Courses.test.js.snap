@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for courses Renders Courses component 1`] = `
+Array [
+  <div
+    className="desktopMenu"
+  />,
+  <div
+    className="courses scrollContainer"
+  >
+    <nav
+      className="navMenu hide"
+    >
+      <button
+        className="removeButtonStyles"
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fa bars"
+        />
+      </button>
+    </nav>
+    <header
+      className="coursesMenu"
+    >
+      <div
+        className="avatarZone"
+      >
+        <div
+          className="avatar avatarPic"
+          style={
+            Object {
+              "backgroundImage": "url(urlApivatar)",
+            }
+          }
+        />
+        <h4
+          className="username"
+        >
+          Javier
+        </h4>
+      </div>
+      <ul
+        className="menu"
+      >
+        <li>
+          <a
+            href="url/dashboard"
+            onClick={[Function]}
+          >
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a
+            href="url/create"
+            onClick={[Function]}
+          >
+            Create
+          </a>
+        </li>
+        <li>
+          <a
+            href="url/report"
+            onClick={[Function]}
+          >
+            Report
+          </a>
+        </li>
+      </ul>
+      <button
+        className="btn"
+        onClick={[Function]}
+        type="button"
+      >
+        Log out
+      </button>
+    </header>
+    <div
+      className="coursesItems"
+    />
+  </div>,
+]
+`;
